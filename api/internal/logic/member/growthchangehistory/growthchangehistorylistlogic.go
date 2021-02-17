@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGrowthChangeHistoryReq) (*types.ListGrowthChangeHistoryResp, error) {
-	resp, err := l.svcCtx.Ums.GrowthChangeHistoryList(l.ctx, &umsclient.GrowthChangeHistoryListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.GrowthChangeHistoryList(
+		l.ctx, &umsclient.GrowthChangeHistoryListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,16 +44,18 @@ func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGro
 	var list []*types.ListtGrowthChangeHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtGrowthChangeHistoryData{
-			Id:          item.Id,
-			MemberId:    item.MemberId,
-			CreateTime:  item.CreateTime,
-			ChangeType:  item.ChangeType,
-			ChangeCount: item.ChangeCount,
-			OperateMan:  item.OperateMan,
-			OperateNote: item.OperateNote,
-			SourceType:  item.SourceType,
-		})
+		list = append(
+			list, &types.ListtGrowthChangeHistoryData{
+				Id:          item.Id,
+				MemberId:    item.MemberId,
+				CreateTime:  item.CreateTime,
+				ChangeType:  item.ChangeType,
+				ChangeCount: item.ChangeCount,
+				OperateMan:  item.OperateMan,
+				OperateNote: item.OperateNote,
+				SourceType:  item.SourceType,
+			},
+		)
 	}
 
 	return &types.ListGrowthChangeHistoryResp{

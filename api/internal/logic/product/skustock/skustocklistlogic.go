@@ -3,9 +3,10 @@ package logic
 import (
 	"context"
 	"fmt"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/pms/pmsclient"
+	"go-zero-admin/service/pms/pmsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,10 +26,12 @@ func NewSkuStockListLogic(ctx context.Context, svcCtx *svc.ServiceContext) SkuSt
 }
 
 func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.ListSkuStockResp, error) {
-	resp, err := l.svcCtx.Pms.SkuStockList(l.ctx, &pmsclient.SkuStockListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Pms.SkuStockList(
+		l.ctx, &pmsclient.SkuStockListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -40,19 +43,21 @@ func (l *SkuStockListLogic) SkuStockList(req types.ListSkuStockReq) (*types.List
 	var list []*types.ListtSkuStockData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtSkuStockData{
-			Id:             item.Id,
-			ProductId:      item.ProductId,
-			SkuCode:        item.SkuCode,
-			Price:          float64(item.Price),
-			Stock:          item.Stock,
-			LowStock:       item.LowStock,
-			Pic:            item.Pic,
-			Sale:           item.Sale,
-			PromotionPrice: float64(item.PromotionPrice),
-			LockStock:      item.LockStock,
-			SpData:         item.SpData,
-		})
+		list = append(
+			list, &types.ListtSkuStockData{
+				Id:             item.Id,
+				ProductId:      item.ProductId,
+				SkuCode:        item.SkuCode,
+				Price:          float64(item.Price),
+				Stock:          item.Stock,
+				LowStock:       item.LowStock,
+				Pic:            item.Pic,
+				Sale:           item.Sale,
+				PromotionPrice: float64(item.PromotionPrice),
+				LockStock:      item.LockStock,
+				SpData:         item.SpData,
+			},
+		)
 	}
 
 	return &types.ListSkuStockResp{

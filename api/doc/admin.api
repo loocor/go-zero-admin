@@ -19,7 +19,7 @@ import "pms/product.api"
 import "pms/product_brand.api"
 import "pms/product_category.api"
 import "pms/product_comment.api"
-import "pms/product_feight_template.api"
+import "pms/product_freight_template.api"
 import "pms/product_member_price.api"
 import "pms/product_sku_stock.api"
 
@@ -47,8 +47,8 @@ import "ums/member_tag.api"
 import "ums/member_task.api"
 
 info(
-	title: "go zero admin"
-	desc: "go zero admin"
-	author: "koobe"
-	email: "koobe.liu@uaf.com.cn"
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
 )

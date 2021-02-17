@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListMemberStatisticsInfoReq) (*types.ListMemberStatisticsInfoResp, error) {
-	resp, err := l.svcCtx.Ums.MemberStatisticsInfoList(l.ctx, &umsclient.MemberStatisticsInfoListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberStatisticsInfoList(
+		l.ctx, &umsclient.MemberStatisticsInfoListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,24 +44,26 @@ func (l *MemberStatisticsInfoListLogic) MemberStatisticsInfoList(req types.ListM
 	var list []*types.ListtMemberStatisticsInfoData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberStatisticsInfoData{
-			Id:                  item.Id,
-			MemberId:            item.MemberId,
-			ConsumeAmount:       float64(item.ConsumeAmount),
-			OrderCount:          item.OrderCount,
-			CouponCount:         item.CouponCount,
-			CommentCount:        item.CommentCount,
-			ReturnOrderCount:    item.ReturnOrderCount,
-			LoginCount:          item.LoginCount,
-			AttendCount:         item.AttendCount,
-			FansCount:           item.FansCount,
-			CollectProductCount: item.CollectProductCount,
-			CollectSubjectCount: item.CollectSubjectCount,
-			CollectTopicCount:   item.CollectTopicCount,
-			CollectCommentCount: item.CollectCommentCount,
-			InviteFriendCount:   item.InviteFriendCount,
-			RecentOrderTime:     item.RecentOrderTime,
-		})
+		list = append(
+			list, &types.ListtMemberStatisticsInfoData{
+				Id:                  item.Id,
+				MemberId:            item.MemberId,
+				ConsumeAmount:       float64(item.ConsumeAmount),
+				OrderCount:          item.OrderCount,
+				CouponCount:         item.CouponCount,
+				CommentCount:        item.CommentCount,
+				ReturnOrderCount:    item.ReturnOrderCount,
+				LoginCount:          item.LoginCount,
+				AttendCount:         item.AttendCount,
+				FansCount:           item.FansCount,
+				CollectProductCount: item.CollectProductCount,
+				CollectSubjectCount: item.CollectSubjectCount,
+				CollectTopicCount:   item.CollectTopicCount,
+				CollectCommentCount: item.CollectCommentCount,
+				InviteFriendCount:   item.InviteFriendCount,
+				RecentOrderTime:     item.RecentOrderTime,
+			},
+		)
 	}
 
 	return &types.ListMemberStatisticsInfoResp{

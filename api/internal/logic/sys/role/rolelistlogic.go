@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/sys/sysclient"
+	"go-zero-admin/service/sys/sysclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,10 +25,12 @@ func NewRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleListL
 }
 
 func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, error) {
-	resp, err := l.svcCtx.Sys.RoleList(l.ctx, &sysclient.RoleListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sys.RoleList(
+		l.ctx, &sysclient.RoleListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -36,16 +39,18 @@ func (l *RoleListLogic) RoleList(req types.ListRoleReq) (*types.ListRoleResp, er
 	var list []*types.ListRoleData
 
 	for _, role := range resp.List {
-		list = append(list, &types.ListRoleData{
-			Id:             role.Id,
-			Name:           role.Name,
-			Remark:         role.Remark,
-			CreateBy:       role.CreateBy,
-			CreateTime:     role.CreateTime,
-			LastUpdateBy:   role.LastUpdateBy,
-			LastUpdateTime: role.LastUpdateTime,
-			DelFlag:        role.DelFlag,
-		})
+		list = append(
+			list, &types.ListRoleData{
+				Id:             role.Id,
+				Name:           role.Name,
+				Remark:         role.Remark,
+				CreateBy:       role.CreateBy,
+				CreateTime:     role.CreateTime,
+				LastUpdateBy:   role.LastUpdateBy,
+				LastUpdateTime: role.LastUpdateTime,
+				DelFlag:        role.DelFlag,
+			},
+		)
 	}
 
 	return &types.ListRoleResp{

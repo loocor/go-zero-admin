@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,11 +26,13 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) U
 }
 
 func (l *UpdateUserStatusLogic) UpdateUserStatus(req types.UserStatusReq) (*types.UserStatusResp, error) {
-	_, _ = l.svcCtx.Sys.UpdateUserStatus(l.ctx, &sysclient.UserStatusReq{
-		Id:           req.Id,
-		Status:       req.Status,
-		LastUpdateBy: "admin",
-	})
+	_, _ = l.svcCtx.Sys.UpdateUserStatus(
+		l.ctx, &sysclient.UserStatusReq{
+			Id:           req.Id,
+			Status:       req.Status,
+			LastUpdateBy: "admin", // todo 从 token 里面拿
+		},
+	)
 
 	return &types.UserStatusResp{}, nil
 }

@@ -3,8 +3,9 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/oms/omsclient"
 	"time"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -27,10 +28,12 @@ func NewOperateHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistoryReq) (*types.ListOperateHistoryResp, error) {
-	resp, err := l.svcCtx.Oms.OrderOperateHistoryList(l.ctx, &omsclient.OrderOperateHistoryListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Oms.OrderOperateHistoryList(
+		l.ctx, &omsclient.OrderOperateHistoryListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -43,14 +46,16 @@ func (l *OperateHistoryListLogic) OperateHistoryList(req types.ListOperateHistor
 
 	for _, item := range resp.List {
 		CreateTime, _ := time.Parse("2006-01-02 15:04:05", item.CreateTime)
-		list = append(list, &types.ListtOperateHistoryData{
-			Id:          item.Id,
-			OrderId:     item.OrderId,
-			OperateMan:  item.OperateMan,
-			CreateTime:  CreateTime,
-			OrderStatus: item.OrderStatus,
-			Note:        item.Note,
-		})
+		list = append(
+			list, &types.ListtOperateHistoryData{
+				Id:          item.Id,
+				OrderId:     item.OrderId,
+				OperateMan:  item.OperateMan,
+				CreateTime:  CreateTime,
+				OrderStatus: item.OrderStatus,
+				Note:        item.Note,
+			},
+		)
 	}
 
 	return &types.ListOperateHistoryResp{

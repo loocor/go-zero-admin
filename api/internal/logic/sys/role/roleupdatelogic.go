@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,13 +26,14 @@ func NewRoleUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleUpd
 }
 
 func (l *RoleUpdateLogic) RoleUpdate(req types.UpdateRoleReq) (*types.UpdateRoleResp, error) {
-	_, err := l.svcCtx.Sys.RoleUpdate(l.ctx, &sysclient.RoleUpdateReq{
-		Id:     req.Id,
-		Name:   req.Name,
-		Remark: req.Remark,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
-	})
+	_, err := l.svcCtx.Sys.RoleUpdate(
+		l.ctx, &sysclient.RoleUpdateReq{
+			Id:           req.Id,
+			Name:         req.Name,
+			Remark:       req.Remark,
+			LastUpdateBy: "admin", // todo 从token里面拿
+		},
+	)
 
 	if err != nil {
 		return nil, err

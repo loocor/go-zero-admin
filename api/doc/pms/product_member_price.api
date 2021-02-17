@@ -7,24 +7,28 @@ info(
 
 type (
     addMemberPriceReq struct {
-        ProductId       int64   `json:"product_id"`
-        MemberLevelId   int64   `json:"member_level_id"`
-        MemberPrice     float64 `json:"member_price"` // 会员价格
-        MemberLevelName string  `json:"member_level_name"`
+        ProductId int64 `json:"product_id"`
+        MemberLevelId int64 `json:"member_level_id"`
+        MemberPrice float64 `json:"member_price"` // 会员价格
+        MemberLevelName string `json:"member_level_name"`
     }
+
     addMemberPriceResp struct {
     }
+
     ListMemberPriceReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
+
     ListtMemberPriceData struct {
-        Id              int64   `json:"id"`
-        ProductId       int64   `json:"product_id"`
-        MemberLevelId   int64   `json:"member_level_id"`
-        MemberPrice     float64 `json:"member_price"` // 会员价格
-        MemberLevelName string  `json:"member_level_name"`
+        Id int64 `json:"id"`
+        ProductId int64 `json:"product_id"`
+        MemberLevelId int64 `json:"member_level_id"`
+        MemberPrice float64 `json:"member_price"` // 会员价格
+        MemberLevelName string `json:"member_level_name"`
     }
+
     ListMemberPriceResp struct {
         Current int64 `json:"current"`
         Data []*ListtMemberPriceData `json:"data"`
@@ -32,18 +36,22 @@ type (
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
+
     UpdateMemberPriceReq struct {
-        Id              int64   `json:"id"`
-        ProductId       int64   `json:"product_id"`
-        MemberLevelId   int64   `json:"member_level_id"`
-        MemberPrice     float64 `json:"member_price"` // 会员价格
-        MemberLevelName string  `json:"member_level_name"`
+        Id int64 `json:"id"`
+        ProductId int64 `json:"product_id"`
+        MemberLevelId int64 `json:"member_level_id"`
+        MemberPrice float64 `json:"member_price"` // 会员价格
+        MemberLevelName string `json:"member_level_name"`
     }
+
     UpdateMemberPriceResp struct {
     }
+
     DeleteMemberPriceReq struct {
         Id int64 `json:"id"`
     }
+
     DeleteMemberPriceResp struct {
     }
 )

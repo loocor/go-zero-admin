@@ -11,29 +11,33 @@ type (
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序（升序）
+        Sort int64 `json:"sort"`                           // 排序 (升序)
         Remarks string `json:"remarks"`                    // 备注信息
     }
+
     addConfigResp struct {
     }
+
     ListConfigReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
+
     ListConfigData struct {
         Id int64 `json:"id"`                               // 编号
         Value string `json:"value"`                        // 数据值
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序（升序）
+        Sort int64 `json:"sort"`                           // 排序 (升序)
         CreateBy string `json:"create_by"`                 // 创建人
         CreateTime string `json:"create_time"`             // 创建时间
         LastUpdateBy string `json:"last_update_by"`        // 更新人
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
         Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"del_flag"`                    // 是否删除 -1: 已删除 0: 正常
     }
+
     ListConfigResp struct {
         Current int64 `json:"current"`
         Data []*ListConfigData `json:"data"`
@@ -41,20 +45,24 @@ type (
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
+
     UpdateConfigReq struct {
         Id int64 `json:"id"`                               // 编号
         Value string `json:"value"`                        // 数据值
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序（升序）
+        Sort int64 `json:"sort"`                           // 排序 (升序)
         Remarks string `json:"remarks"`                    // 备注信息
     }
+
     UpdateConfigResp struct {
     }
+
     DeleteConfigReq struct {
         Id int64 `json:"id"`
     }
+
     DeleteConfigResp struct {
     }
 )

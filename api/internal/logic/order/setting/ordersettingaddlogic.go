@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,13 +26,15 @@ func NewOrderSettingAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Or
 }
 
 func (l *OrderSettingAddLogic) OrderSettingAdd(req types.AddOrderSettingReq) (*types.AddOrderSettingResp, error) {
-	_, err := l.svcCtx.Oms.OrderSettingAdd(l.ctx, &omsclient.OrderSettingAddReq{
-		FlashOrderOvertime:  req.FlashOrderOvertime,
-		NormalOrderOvertime: req.NormalOrderOvertime,
-		ConfirmOvertime:     req.ConfirmOvertime,
-		FinishOvertime:      req.FinishOvertime,
-		CommentOvertime:     req.CommentOvertime,
-	})
+	_, err := l.svcCtx.Oms.OrderSettingAdd(
+		l.ctx, &omsclient.OrderSettingAddReq{
+			FlashOrderOvertime:  req.FlashOrderOvertime,
+			NormalOrderOvertime: req.NormalOrderOvertime,
+			ConfirmOvertime:     req.ConfirmOvertime,
+			FinishOvertime:      req.FinishOvertime,
+			CommentOvertime:     req.CommentOvertime,
+		},
+	)
 
 	if err != nil {
 		return nil, err

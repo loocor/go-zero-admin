@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLogReq) (*types.ListMemberLoginLogResp, error) {
-	resp, err := l.svcCtx.Ums.MemberLoginLogList(l.ctx, &umsclient.MemberLoginLogListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberLoginLogList(
+		l.ctx, &umsclient.MemberLoginLogListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,15 +44,17 @@ func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLo
 	var list []*types.ListtMemberLoginLogData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberLoginLogData{
-			Id:         item.Id,
-			MemberId:   item.MemberId,
-			CreateTime: item.CreateTime,
-			Ip:         item.Ip,
-			City:       item.City,
-			LoginType:  item.LoginType,
-			Province:   item.Province,
-		})
+		list = append(
+			list, &types.ListtMemberLoginLogData{
+				Id:         item.Id,
+				MemberId:   item.MemberId,
+				CreateTime: item.CreateTime,
+				Ip:         item.Ip,
+				City:       item.City,
+				LoginType:  item.LoginType,
+				Province:   item.Province,
+			},
+		)
 	}
 
 	return &types.ListMemberLoginLogResp{

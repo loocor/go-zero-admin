@@ -7,23 +7,27 @@ info(
 
 type (
     addReturnResonReq struct {
-        Name       string    `json:"name"` // 退货类型
-        Sort       int64     `json:"sort"`
-        Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
+        Name string `json:"name"`         // 退货类型
+        Sort int64 `json:"sort"`          // 排序
+        Status int64 `json:"status"`      // 状态: 0->不启用; 1->启用
     }
+
     addReturnResonResp struct {
     }
+
     ListReturnResonReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
+
     ListtReturnResonData struct {
-        Id         int64     `json:"id"`
-        Name       string    `json:"name"` // 退货类型
-        Sort       int64     `json:"sort"`
-        Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
+        Id int64 `json:"id"`
+        Name string `json:"name"`              // 退货类型
+        Sort int64 `json:"sort"`               // 排序
+        Status int64 `json:"status"`           // 状态: 0->不启用; 1->启用
         CreateTime string `json:"create_time"` // 添加时间
     }
+
     ListReturnResonResp struct {
         Current int64 `json:"current"`
         Data []*ListtReturnResonData `json:"data"`
@@ -31,17 +35,21 @@ type (
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
+
     UpdateReturnResonReq struct {
-        Id         int64     `json:"id"`
-        Name       string    `json:"name"` // 退货类型
-        Sort       int64     `json:"sort"`
-        Status     int64     `json:"status"`      // 状态：0->不启用；1->启用
+        Id int64 `json:"id"`
+        Name string `json:"name"`         // 退货类型
+        Sort int64 `json:"sort"`          // 排序
+        Status int64 `json:"status"`      // 状态: 0->不启用; 1->启用
     }
+
     UpdateReturnResonResp struct {
     }
+
     DeleteReturnResonReq struct {
         Id int64 `json:"id"`
     }
+
     DeleteReturnResonResp struct {
     }
 )

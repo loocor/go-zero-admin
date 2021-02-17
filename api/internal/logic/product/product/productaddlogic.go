@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,49 +26,51 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Product
 }
 
 func (l *ProductAddLogic) ProductAdd(req types.AddProductReq) (*types.AddProductResp, error) {
-	_, err := l.svcCtx.Pms.ProductAdd(l.ctx, &pmsclient.ProductAddReq{
-		BrandId:                    req.BrandId,
-		ProductCategoryId:          req.ProductCategoryId,
-		FeightTemplateId:           req.FeightTemplateId,
-		ProductAttributeCategoryId: req.ProductAttributeCategoryId,
-		Name:                       req.Name,
-		Pic:                        req.Pic,
-		ProductSn:                  req.ProductSn,
-		DeleteStatus:               req.DeleteStatus,
-		PublishStatus:              req.PublishStatus,
-		NewStatus:                  req.NewStatus,
-		RecommandStatus:            req.RecommandStatus,
-		VerifyStatus:               req.VerifyStatus,
-		Sort:                       req.Sort,
-		Sale:                       req.Sale,
-		Price:                      req.Price,
-		PromotionPrice:             req.PromotionPrice,
-		GiftGrowth:                 req.GiftGrowth,
-		GiftPoint:                  req.GiftPoint,
-		UsePointLimit:              req.UsePointLimit,
-		SubTitle:                   req.SubTitle,
-		Description:                req.Description,
-		OriginalPrice:              req.OriginalPrice,
-		Stock:                      req.Stock,
-		LowStock:                   req.LowStock,
-		Unit:                       req.Unit,
-		Weight:                     req.Weight,
-		PreviewStatus:              req.PreviewStatus,
-		ServiceIds:                 req.ServiceIds,
-		Keywords:                   req.Keywords,
-		Note:                       req.Note,
-		AlbumPics:                  req.AlbumPics,
-		DetailTitle:                req.DetailTitle,
-		DetailDesc:                 req.DetailDesc,
-		DetailHtml:                 req.DetailHtml,
-		DetailMobileHtml:           req.DetailMobileHtml,
-		PromotionStartTime:         req.PromotionStartTime,
-		PromotionEndTime:           req.PromotionEndTime,
-		PromotionPerLimit:          req.PromotionPerLimit,
-		PromotionType:              req.PromotionType,
-		BrandName:                  req.BrandName,
-		ProductCategoryName:        req.ProductCategoryName,
-	})
+	_, err := l.svcCtx.Pms.ProductAdd(
+		l.ctx, &pmsclient.ProductAddReq{
+			BrandId:                    req.BrandId,
+			ProductCategoryId:          req.ProductCategoryId,
+			FreightTemplateId:          req.FreightTemplateId,
+			ProductAttributeCategoryId: req.ProductAttributeCategoryId,
+			Name:                       req.Name,
+			Pic:                        req.Pic,
+			ProductSn:                  req.ProductSn,
+			DeleteStatus:               req.DeleteStatus,
+			PublishStatus:              req.PublishStatus,
+			NewStatus:                  req.NewStatus,
+			RecommendStatus:            req.RecommendStatus,
+			VerifyStatus:               req.VerifyStatus,
+			Sort:                       req.Sort,
+			Sale:                       req.Sale,
+			Price:                      req.Price,
+			PromotionPrice:             req.PromotionPrice,
+			GiftGrowth:                 req.GiftGrowth,
+			GiftPoint:                  req.GiftPoint,
+			UsePointLimit:              req.UsePointLimit,
+			SubTitle:                   req.SubTitle,
+			Description:                req.Description,
+			OriginalPrice:              req.OriginalPrice,
+			Stock:                      req.Stock,
+			LowStock:                   req.LowStock,
+			Unit:                       req.Unit,
+			Weight:                     req.Weight,
+			PreviewStatus:              req.PreviewStatus,
+			ServiceIds:                 req.ServiceIds,
+			Keywords:                   req.Keywords,
+			Note:                       req.Note,
+			AlbumPics:                  req.AlbumPics,
+			DetailTitle:                req.DetailTitle,
+			DetailDesc:                 req.DetailDesc,
+			DetailHtml:                 req.DetailHtml,
+			DetailMobileHtml:           req.DetailMobileHtml,
+			PromotionStartTime:         req.PromotionStartTime,
+			PromotionEndTime:           req.PromotionEndTime,
+			PromotionPerLimit:          req.PromotionPerLimit,
+			PromotionType:              req.PromotionType,
+			BrandName:                  req.BrandName,
+			ProductCategoryName:        req.ProductCategoryName,
+		},
+	)
 
 	if err != nil {
 		return nil, err

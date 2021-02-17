@@ -2,35 +2,35 @@ Name: admin-api
 Host: 0.0.0.0
 Port: 8888
 
-#系统
+# 系统
 SysRpc:
   Etcd:
     Hosts:
       - localhost:2379
     Key: sys.rpc
 
-#会员
+# 会员
 UmsRpc:
   Etcd:
     Hosts:
       - localhost:2379
     Key: ums.rpc
 
-#商品
+# 商品
 PmsRpc:
   Etcd:
     Hosts:
       - localhost:2379
     Key: pms.rpc
 
-#订单
+# 订单
 OmsRpc:
   Etcd:
     Hosts:
       - localhost:2379
     Key: oms.rpc
 
-#营销
+# 营销
 SmsRpc:
   Etcd:
     Hosts:

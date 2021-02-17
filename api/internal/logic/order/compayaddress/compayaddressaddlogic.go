@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,17 +26,19 @@ func NewCompayAddressAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) C
 }
 
 func (l *CompayAddressAddLogic) CompayAddressAdd(req types.AddCompayAddressReq) (*types.AddCompayAddressResp, error) {
-	_, err := l.svcCtx.Oms.CompanyAddressAdd(l.ctx, &omsclient.CompanyAddressAddReq{
-		AddressName:   req.AddressName,
-		SendStatus:    req.SendStatus,
-		ReceiveStatus: req.ReceiveStatus,
-		Name:          req.Name,
-		Phone:         req.Phone,
-		Province:      req.Province,
-		City:          req.City,
-		Region:        req.Region,
-		DetailAddress: req.DetailAddress,
-	})
+	_, err := l.svcCtx.Oms.CompanyAddressAdd(
+		l.ctx, &omsclient.CompanyAddressAddReq{
+			AddressName:   req.AddressName,
+			SendStatus:    req.SendStatus,
+			ReceiveStatus: req.ReceiveStatus,
+			Name:          req.Name,
+			Phone:         req.Phone,
+			Province:      req.Province,
+			City:          req.City,
+			Region:        req.Region,
+			DetailAddress: req.DetailAddress,
+		},
+	)
 
 	if err != nil {
 		return nil, err

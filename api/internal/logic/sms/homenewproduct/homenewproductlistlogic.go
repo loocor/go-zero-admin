@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProductReq) (*types.ListHomeNewProductResp, error) {
-	resp, err := l.svcCtx.Sms.HomeNewProductList(l.ctx, &smsclient.HomeNewProductListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.HomeNewProductList(
+		l.ctx, &smsclient.HomeNewProductListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,13 +45,15 @@ func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProduc
 	var list []*types.ListtHomeNewProductData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeNewProductData{
-			Id:              item.Id,
-			ProductId:       item.ProductId,
-			ProductName:     item.ProductName,
-			RecommendStatus: item.RecommendStatus,
-			Sort:            item.Sort,
-		})
+		list = append(
+			list, &types.ListtHomeNewProductData{
+				Id:              item.Id,
+				ProductId:       item.ProductId,
+				ProductName:     item.ProductName,
+				RecommendStatus: item.RecommendStatus,
+				Sort:            item.Sort,
+			},
+		)
 	}
 
 	return &types.ListHomeNewProductResp{

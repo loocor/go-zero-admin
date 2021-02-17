@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressReq) (*types.ListMemberAddressResp, error) {
-	resp, err := l.svcCtx.Ums.MemberReceiveAddressList(l.ctx, &umsclient.MemberReceiveAddressListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberReceiveAddressList(
+		l.ctx, &umsclient.MemberReceiveAddressListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,18 +44,20 @@ func (l *MemberAddressListLogic) MemberAddressList(req types.ListMemberAddressRe
 	var list []*types.ListtMemberAddressData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberAddressData{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
-			Name:          item.Name,
-			PhoneNumber:   item.PhoneNumber,
-			DefaultStatus: item.DefaultStatus,
-			PostCode:      item.PostCode,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
-		})
+		list = append(
+			list, &types.ListtMemberAddressData{
+				Id:            item.Id,
+				MemberId:      item.MemberId,
+				Name:          item.Name,
+				PhoneNumber:   item.PhoneNumber,
+				DefaultStatus: item.DefaultStatus,
+				PostCode:      item.PostCode,
+				Province:      item.Province,
+				City:          item.City,
+				Region:        item.Region,
+				DetailAddress: item.DetailAddress,
+			},
+		)
 	}
 
 	return &types.ListMemberAddressResp{

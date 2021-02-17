@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewConfigDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 }
 
 func (l *ConfigDeleteLogic) ConfigDelete(req types.DeleteConfigReq) (*types.DeleteConfigResp, error) {
-	_, err := l.svcCtx.Sys.DeptDelete(l.ctx, &sysclient.DeptDeleteReq{
-		Id: req.Id,
-	})
+	_, err := l.svcCtx.Sys.DeptDelete(
+		l.ctx, &sysclient.DeptDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	if err != nil {
 		return nil, err

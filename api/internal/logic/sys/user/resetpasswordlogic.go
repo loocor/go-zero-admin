@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,10 +26,12 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) ReSe
 }
 
 func (l *ReSetPasswordLogic) ReSetPassword(req types.ReSetPasswordReq) (*types.ReSetPasswordResp, error) {
-	_, _ = l.svcCtx.Sys.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
-		Id:           req.Id,
-		LastUpdateBy: "admin",
-	})
+	_, _ = l.svcCtx.Sys.ReSetPassword(
+		l.ctx, &sysclient.ReSetPasswordReq{
+			Id:           req.Id,
+			LastUpdateBy: "admin",
+		},
+	)
 
 	return &types.ReSetPasswordResp{}, nil
 }

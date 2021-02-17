@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 }
 
 func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*types.ListMemberLevelResp, error) {
-	resp, err := l.svcCtx.Ums.MemberLevelList(l.ctx, &umsclient.MemberLevelListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberLevelList(
+		l.ctx, &umsclient.MemberLevelListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,21 +44,23 @@ func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*t
 	var list []*types.ListtMemberLevelData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberLevelData{
-			Id:                    item.Id,
-			Name:                  item.Name,
-			GrowthPoint:           item.GrowthPoint,
-			DefaultStatus:         item.DefaultStatus,
-			FreeFreightPoint:      float64(item.FreeFreightPoint),
-			CommentGrowthPoint:    item.CommentGrowthPoint,
-			PriviledgeFreeFreight: item.PriviledgeFreeFreight,
-			PriviledgeSignIn:      item.PriviledgeSignIn,
-			PriviledgeComment:     item.PriviledgeComment,
-			PriviledgePromotion:   item.PriviledgePromotion,
-			PriviledgeMemberPrice: item.PriviledgeMemberPrice,
-			PriviledgeBirthday:    item.PriviledgeBirthday,
-			Note:                  item.Note,
-		})
+		list = append(
+			list, &types.ListtMemberLevelData{
+				Id:                    item.Id,
+				Name:                  item.Name,
+				GrowthPoint:           item.GrowthPoint,
+				DefaultStatus:         item.DefaultStatus,
+				FreeFreightPoint:      float64(item.FreeFreightPoint),
+				CommentGrowthPoint:    item.CommentGrowthPoint,
+				PriviledgeFreeFreight: item.PriviledgeFreeFreight,
+				PriviledgeSignIn:      item.PriviledgeSignIn,
+				PriviledgeComment:     item.PriviledgeComment,
+				PriviledgePromotion:   item.PriviledgePromotion,
+				PriviledgeMemberPrice: item.PriviledgeMemberPrice,
+				PriviledgeBirthday:    item.PriviledgeBirthday,
+				Note:                  item.Note,
+			},
+		)
 	}
 
 	return &types.ListMemberLevelResp{

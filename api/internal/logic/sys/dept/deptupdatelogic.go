@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,14 +26,15 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptUpd
 }
 
 func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
-	_, err := l.svcCtx.Sys.DeptUpdate(l.ctx, &sysclient.DeptUpdateReq{
-		Id:       req.Id,
-		Name:     req.Name,
-		ParentId: req.ParentId,
-		OrderNum: req.OrderNum,
-		//todo 从token里面拿
-		LastUpdateBy: "admin",
-	})
+	_, err := l.svcCtx.Sys.DeptUpdate(
+		l.ctx, &sysclient.DeptUpdateReq{
+			Id:           req.Id,
+			Name:         req.Name,
+			ParentId:     req.ParentId,
+			OrderNum:     req.OrderNum,
+			LastUpdateBy: "admin", // todo 从 token 里面拿
+		},
+	)
 
 	if err != nil {
 		return nil, err

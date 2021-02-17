@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,14 +25,19 @@ func NewIntegrationConsumeSettingUpdateLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(req types.UpdateIntegrationConsumeSettingReq) (*types.UpdateIntegrationConsumeSettingResp, error) {
-	_, err := l.svcCtx.Ums.IntegrationConsumeSettingUpdate(l.ctx, &umsclient.IntegrationConsumeSettingUpdateReq{
-		Id:                 req.Id,
-		DeductionPerAmount: req.DeductionPerAmount,
-		MaxPercentPerOrder: req.MaxPercentPerOrder,
-		UseUnit:            req.UseUnit,
-		CouponStatus:       req.CouponStatus,
-	})
+func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(req types.UpdateIntegrationConsumeSettingReq) (
+	*types.UpdateIntegrationConsumeSettingResp,
+	error,
+) {
+	_, err := l.svcCtx.Ums.IntegrationConsumeSettingUpdate(
+		l.ctx, &umsclient.IntegrationConsumeSettingUpdateReq{
+			Id:                 req.Id,
+			DeductionPerAmount: req.DeductionPerAmount,
+			MaxPercentPerOrder: req.MaxPercentPerOrder,
+			UseUnit:            req.UseUnit,
+			CouponStatus:       req.CouponStatus,
+		},
+	)
 
 	if err != nil {
 		return nil, err

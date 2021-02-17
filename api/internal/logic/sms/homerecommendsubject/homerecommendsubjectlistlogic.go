@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewHomeRecommendSubjectListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListHomeRecommendSubjectReq) (*types.ListHomeRecommendSubjectResp, error) {
-	resp, err := l.svcCtx.Sms.HomeRecommendSubjectList(l.ctx, &smsclient.HomeRecommendSubjectListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.HomeRecommendSubjectList(
+		l.ctx, &smsclient.HomeRecommendSubjectListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,13 +45,15 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req types.ListH
 	var list []*types.ListtHomeRecommendSubjectData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeRecommendSubjectData{
-			Id:              item.Id,
-			SubjectId:       item.SubjectId,
-			SubjectName:     item.SubjectName,
-			RecommendStatus: item.RecommendStatus,
-			Sort:            item.Sort,
-		})
+		list = append(
+			list, &types.ListtHomeRecommendSubjectData{
+				Id:              item.Id,
+				SubjectId:       item.SubjectId,
+				SubjectName:     item.SubjectName,
+				RecommendStatus: item.RecommendStatus,
+				Sort:            item.Sort,
+			},
+		)
 	}
 
 	return &types.ListHomeRecommendSubjectResp{

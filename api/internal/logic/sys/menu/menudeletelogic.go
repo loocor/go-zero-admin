@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewMenuDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuDel
 }
 
 func (l *MenuDeleteLogic) MenuDelete(req types.DeleteMenuReq) (*types.DeleteMenuResp, error) {
-	_, err := l.svcCtx.Sys.MenuDelete(l.ctx, &sysclient.MenuDeleteReq{
-		Id: req.Id,
-	})
+	_, err := l.svcCtx.Sys.MenuDelete(
+		l.ctx, &sysclient.MenuDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	if err != nil {
 		return nil, err

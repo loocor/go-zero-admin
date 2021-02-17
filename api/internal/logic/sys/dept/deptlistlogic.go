@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/sys/sysclient"
+	"go-zero-admin/service/sys/sysclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,10 +25,12 @@ func NewDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptListL
 }
 
 func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, error) {
-	resp, err := l.svcCtx.Sys.DeptList(l.ctx, &sysclient.DeptListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sys.DeptList(
+		l.ctx, &sysclient.DeptListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -36,17 +39,19 @@ func (l *DeptListLogic) DeptList(req types.ListDeptReq) (*types.ListDeptResp, er
 	var list []*types.ListDeptData
 
 	for _, dept := range resp.List {
-		list = append(list, &types.ListDeptData{
-			Id:             dept.Id,
-			Name:           dept.Name,
-			ParentId:       dept.ParentId,
-			OrderNum:       dept.OrderNum,
-			CreateBy:       dept.CreateBy,
-			CreateTime:     dept.CreateTime,
-			LastUpdateBy:   dept.LastUpdateBy,
-			LastUpdateTime: dept.LastUpdateTime,
-			DelFlag:        dept.DelFlag,
-		})
+		list = append(
+			list, &types.ListDeptData{
+				Id:             dept.Id,
+				Name:           dept.Name,
+				ParentId:       dept.ParentId,
+				OrderNum:       dept.OrderNum,
+				CreateBy:       dept.CreateBy,
+				CreateTime:     dept.CreateTime,
+				LastUpdateBy:   dept.LastUpdateBy,
+				LastUpdateTime: dept.LastUpdateTime,
+				DelFlag:        dept.DelFlag,
+			},
+		)
 	}
 
 	return &types.ListDeptResp{

@@ -2,12 +2,13 @@ package svc
 
 import (
 	"github.com/tal-tech/go-zero/zrpc"
+
 	"go-zero-admin/api/internal/config"
-	"go-zero-admin/rpc/oms/omsclient"
-	"go-zero-admin/rpc/pms/pmsclient"
-	"go-zero-admin/rpc/sms/smsclient"
-	"go-zero-admin/rpc/sys/sysclient"
-	"go-zero-admin/rpc/ums/umsclient"
+	"go-zero-admin/service/oms/omsclient"
+	"go-zero-admin/service/pms/pmsclient"
+	"go-zero-admin/service/sms/smsclient"
+	"go-zero-admin/service/sys/sysclient"
+	"go-zero-admin/service/ums/umsclient"
 )
 
 type ServiceContext struct {

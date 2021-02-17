@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/sys/sysclient"
+	"go-zero-admin/service/sys/sysclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,10 +25,12 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserListL
 }
 
 func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, error) {
-	resp, err := l.svcCtx.Sys.UserList(l.ctx, &sysclient.UserListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sys.UserList(
+		l.ctx, &sysclient.UserListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -36,21 +39,23 @@ func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, er
 	var list []*types.ListUserData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListUserData{
-			Id:             item.Id,
-			Name:           item.Name,
-			NickName:       item.NickName,
-			Password:       item.Password,
-			Salt:           item.Salt,
-			Email:          item.Email,
-			Mobile:         item.Mobile,
-			DeptId:         item.DeptId,
-			CreateBy:       item.CreateBy,
-			CreateTime:     item.CreateTime,
-			LastUpdateBy:   item.LastUpdateBy,
-			LastUpdateTime: item.LastUpdateTime,
-			DelFlag:        item.DelFlag,
-		})
+		list = append(
+			list, &types.ListUserData{
+				Id:             item.Id,
+				Name:           item.Name,
+				NickName:       item.NickName,
+				Password:       item.Password,
+				Salt:           item.Salt,
+				Email:          item.Email,
+				Mobile:         item.Mobile,
+				DeptId:         item.DeptId,
+				CreateBy:       item.CreateBy,
+				CreateTime:     item.CreateTime,
+				LastUpdateBy:   item.LastUpdateBy,
+				LastUpdateTime: item.LastUpdateTime,
+				DelFlag:        item.DelFlag,
+			},
+		)
 	}
 
 	return &types.ListUserResp{

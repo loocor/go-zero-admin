@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ho
 }
 
 func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
-	_, _ = l.svcCtx.Sms.HomeBrandDelete(l.ctx, &smsclient.HomeBrandDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Sms.HomeBrandDelete(
+		l.ctx, &smsclient.HomeBrandDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteHomeBrandResp{}, nil
 }

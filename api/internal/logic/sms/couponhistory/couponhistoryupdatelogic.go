@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,19 +26,21 @@ func NewCouponHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 func (l *CouponHistoryUpdateLogic) CouponHistoryUpdate(req types.UpdateCouponHistoryReq) (*types.UpdateCouponHistoryResp, error) {
-	_, err := l.svcCtx.Sms.CouponHistoryUpdate(l.ctx, &smsclient.CouponHistoryUpdateReq{
-		Id:             req.Id,
-		CouponId:       req.CouponId,
-		MemberId:       req.MemberId,
-		CouponCode:     req.CouponCode,
-		MemberNickname: req.MemberNickname,
-		GetType:        req.GetType,
-		CreateTime:     req.CreateTime,
-		UseStatus:      req.UseStatus,
-		UseTime:        req.UseTime,
-		OrderId:        req.OrderId,
-		OrderSn:        req.OrderSn,
-	})
+	_, err := l.svcCtx.Sms.CouponHistoryUpdate(
+		l.ctx, &smsclient.CouponHistoryUpdateReq{
+			Id:             req.Id,
+			CouponId:       req.CouponId,
+			MemberId:       req.MemberId,
+			CouponCode:     req.CouponCode,
+			MemberNickname: req.MemberNickname,
+			GetType:        req.GetType,
+			CreateTime:     req.CreateTime,
+			UseStatus:      req.UseStatus,
+			UseTime:        req.UseTime,
+			OrderId:        req.OrderId,
+			OrderSn:        req.OrderSn,
+		},
+	)
 
 	if err != nil {
 		return nil, err

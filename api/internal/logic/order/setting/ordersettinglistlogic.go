@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceContext) O
 }
 
 func (l *OrderSettingListLogic) OrderSettingList(req types.ListOrderSettingReq) (*types.ListOrderSettingResp, error) {
-	resp, err := l.svcCtx.Oms.OrderSettingList(l.ctx, &omsclient.OrderSettingListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Oms.OrderSettingList(
+		l.ctx, &omsclient.OrderSettingListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,14 +44,16 @@ func (l *OrderSettingListLogic) OrderSettingList(req types.ListOrderSettingReq) 
 	var list []*types.ListtOrderSettingData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtOrderSettingData{
-			Id:                  item.Id,
-			FlashOrderOvertime:  item.FlashOrderOvertime,
-			NormalOrderOvertime: item.NormalOrderOvertime,
-			ConfirmOvertime:     item.ConfirmOvertime,
-			FinishOvertime:      item.FinishOvertime,
-			CommentOvertime:     item.CommentOvertime,
-		})
+		list = append(
+			list, &types.ListtOrderSettingData{
+				Id:                  item.Id,
+				FlashOrderOvertime:  item.FlashOrderOvertime,
+				NormalOrderOvertime: item.NormalOrderOvertime,
+				ConfirmOvertime:     item.ConfirmOvertime,
+				FinishOvertime:      item.FinishOvertime,
+				CommentOvertime:     item.CommentOvertime,
+			},
+		)
 	}
 
 	return &types.ListOrderSettingResp{

@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,27 +26,29 @@ func NewMemberUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 }
 
 func (l *MemberUpdateLogic) MemberUpdate(req types.UpdateMemberReq) (*types.UpdateMemberResp, error) {
-	_, err := l.svcCtx.Ums.MemberUpdate(l.ctx, &umsclient.MemberUpdateReq{
-		Id:                    req.Id,
-		MemberLevelId:         req.MemberLevelId,
-		Username:              req.Username,
-		Password:              req.Password,
-		Nickname:              req.Nickname,
-		Phone:                 req.Phone,
-		Status:                req.Status,
-		CreateTime:            req.CreateTime,
-		Icon:                  req.Icon,
-		Gender:                req.Gender,
-		Birthday:              req.Birthday,
-		City:                  req.City,
-		Job:                   req.Job,
-		PersonalizedSignature: req.PersonalizedSignature,
-		SourceType:            req.SourceType,
-		Integration:           req.Integration,
-		Growth:                req.Growth,
-		LuckeyCount:           req.LuckeyCount,
-		HistoryIntegration:    req.HistoryIntegration,
-	})
+	_, err := l.svcCtx.Ums.MemberUpdate(
+		l.ctx, &umsclient.MemberUpdateReq{
+			Id:                    req.Id,
+			MemberLevelId:         req.MemberLevelId,
+			Username:              req.Username,
+			Password:              req.Password,
+			Nickname:              req.Nickname,
+			Phone:                 req.Phone,
+			Status:                req.Status,
+			CreateTime:            req.CreateTime,
+			Icon:                  req.Icon,
+			Gender:                req.Gender,
+			Birthday:              req.Birthday,
+			City:                  req.City,
+			Job:                   req.Job,
+			PersonalizedSignature: req.PersonalizedSignature,
+			SourceType:            req.SourceType,
+			Integration:           req.Integration,
+			Growth:                req.Growth,
+			LuckyCount:            req.LuckyCount,
+			HistoryIntegration:    req.HistoryIntegration,
+		},
+	)
 
 	if err != nil {
 		return nil, err

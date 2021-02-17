@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewFlashPromotionLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPromotionLogReq) (*types.ListFlashPromotionLogResp, error) {
-	resp, err := l.svcCtx.Sms.FlashPromotionLogList(l.ctx, &smsclient.FlashPromotionLogListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.FlashPromotionLogList(
+		l.ctx, &smsclient.FlashPromotionLogListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,15 +45,17 @@ func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPr
 	var list []*types.ListtFlashPromotionLogData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtFlashPromotionLogData{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
-			ProductId:     item.ProductId,
-			MemberPhone:   item.MemberPhone,
-			ProductName:   item.ProductName,
-			SubscribeTime: item.SubscribeTime,
-			SendTime:      item.SendTime,
-		})
+		list = append(
+			list, &types.ListtFlashPromotionLogData{
+				Id:            item.Id,
+				MemberId:      item.MemberId,
+				ProductId:     item.ProductId,
+				MemberPhone:   item.MemberPhone,
+				ProductName:   item.ProductName,
+				SubscribeTime: item.SubscribeTime,
+				SendTime:      item.SendTime,
+			},
+		)
 	}
 
 	return &types.ListFlashPromotionLogResp{

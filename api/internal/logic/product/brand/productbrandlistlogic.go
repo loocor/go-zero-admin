@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewProductBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) P
 }
 
 func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) (*types.ListProductBrandResp, error) {
-	resp, err := l.svcCtx.Pms.BrandList(l.ctx, &pmsclient.BrandListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Pms.BrandList(
+		l.ctx, &pmsclient.BrandListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,19 +44,21 @@ func (l *ProductBrandListLogic) ProductBrandList(req types.ListProductBrandReq) 
 	var list []*types.ListtProductBrandData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtProductBrandData{
-			Id:                  item.Id,
-			Name:                item.Name,
-			FirstLetter:         item.FirstLetter,
-			Sort:                item.Sort,
-			FactoryStatus:       item.FactoryStatus,
-			ShowStatus:          item.ShowStatus,
-			ProductCount:        item.ProductCount,
-			ProductCommentCount: item.ProductCommentCount,
-			Logo:                item.Logo,
-			BigPic:              item.BigPic,
-			BrandStory:          item.BrandStory,
-		})
+		list = append(
+			list, &types.ListtProductBrandData{
+				Id:                  item.Id,
+				Name:                item.Name,
+				FirstLetter:         item.FirstLetter,
+				Sort:                item.Sort,
+				FactoryStatus:       item.FactoryStatus,
+				ShowStatus:          item.ShowStatus,
+				ProductCount:        item.ProductCount,
+				ProductCommentCount: item.ProductCommentCount,
+				Logo:                item.Logo,
+				BigPic:              item.BigPic,
+				BrandStory:          item.BrandStory,
+			},
+		)
 	}
 
 	return &types.ListProductBrandResp{

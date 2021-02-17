@@ -1,0 +1,83 @@
+info(
+    title: "go zero admin"
+    desc: "go zero admin"
+    author: "koobe"
+    email: "koobe.liu@uaf.com.cn"
+)
+
+type (
+    addFreightTemplateReq struct {
+        Name string `json:"name"`
+        ChargeType int64 `json:"charge_type"`     // 计费类型:0->按重量; 1->按件数
+        FirstWeight float64 `json:"first_weight"` // 首重kg
+        FirstFee float64 `json:"first_fee"`       // 首费 (元)
+        ContinueWeight float64 `json:"continue_weight"`
+        ContinueFee float64 `json:"continue_fee"`
+        Dest string `json:"dest"`                 // 目的地 (省、市)
+    }
+
+    addFreightTemplateResp struct {
+    }
+
+    ListFreightTemplateReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
+    }
+
+    ListtFreightTemplateData struct {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        ChargeType int64 `json:"charge_type"`     // 计费类型:0->按重量; 1->按件数
+        FirstWeight float64 `json:"first_weight"` // 首重kg
+        FirstFee float64 `json:"first_fee"`       // 首费 (元)
+        ContinueWeight float64 `json:"continue_weight"`
+        ContinueFee float64 `json:"continue_fee"`
+        Dest string `json:"dest"`                 // 目的地 (省、市)
+    }
+
+    ListFreightTemplateResp struct {
+        Current int64 `json:"current"`
+        Data []*ListtFreightTemplateData `json:"data"`
+        PageSize int64 `json:"pageSize"`
+        Success bool `json:"success"`
+        Total int64 `json:"total"`
+    }
+
+    UpdateFreightTemplateReq struct {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        ChargeType int64 `json:"charge_type"`     // 计费类型:0->按重量; 1->按件数
+        FirstWeight float64 `json:"first_weight"` // 首重kg
+        FirstFee float64 `json:"first_fee"`       // 首费 (元)
+        ContinueWeight float64 `json:"continue_weight"`
+        ContinueFee float64 `json:"continue_fee"`
+        Dest string `json:"dest"`                 // 目的地 (省、市)
+    }
+
+    UpdateFreightTemplateResp struct {
+    }
+
+    DeleteFreightTemplateReq struct {
+        Id int64 `json:"id"`
+    }
+
+    DeleteFreightTemplateResp struct {
+    }
+)
+
+@server(
+    group: product/freighttemplate
+)
+service admin-api {
+    @handler FreightTemplateAdd
+    post /api/product/freighttemplate/add (addFreightTemplateReq) returns (addFreightTemplateResp)
+
+    @handler FreightTemplateList
+    get /api/product/freighttemplate/list (ListFreightTemplateReq) returns (ListFreightTemplateResp)
+
+    @handler FreightTemplateUpdate
+    post /api/product/freighttemplate/update (UpdateFreightTemplateReq) returns (UpdateFreightTemplateResp)
+
+    @handler FreightTemplateDelete
+    post /api/product/freighttemplate/delete (DeleteFreightTemplateReq) returns (DeleteFreightTemplateResp)
+}

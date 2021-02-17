@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CartI
 }
 
 func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.ListCartItemResp, error) {
-	resp, err := l.svcCtx.Oms.CartItemList(l.ctx, &omsclient.CartItemListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Oms.CartItemList(
+		l.ctx, &omsclient.CartItemListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,26 +44,28 @@ func (l *CartItemListLogic) CartItemList(req types.ListCartItemReq) (*types.List
 	var list []*types.ListtCartItemData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtCartItemData{
-			Id:                item.Id,
-			ProductId:         item.ProductId,
-			ProductSkuId:      item.ProductSkuId,
-			MemberId:          item.MemberId,
-			Quantity:          item.Quantity,
-			Price:             float64(item.Price),
-			ProductPic:        item.ProductPic,
-			ProductName:       item.ProductName,
-			ProductSubTitle:   item.ProductSubTitle,
-			ProductSkuCode:    item.ProductSkuCode,
-			MemberNickname:    item.MemberNickname,
-			CreateDate:        item.CreateDate,
-			ModifyDate:        item.ModifyDate,
-			DeleteStatus:      item.DeleteStatus,
-			ProductCategoryId: item.ProductCategoryId,
-			ProductBrand:      item.ProductBrand,
-			ProductSn:         item.ProductSn,
-			ProductAttr:       item.ProductAttr,
-		})
+		list = append(
+			list, &types.ListtCartItemData{
+				Id:                item.Id,
+				ProductId:         item.ProductId,
+				ProductSkuId:      item.ProductSkuId,
+				MemberId:          item.MemberId,
+				Quantity:          item.Quantity,
+				Price:             float64(item.Price),
+				ProductPic:        item.ProductPic,
+				ProductName:       item.ProductName,
+				ProductSubTitle:   item.ProductSubTitle,
+				ProductSkuCode:    item.ProductSkuCode,
+				MemberNickname:    item.MemberNickname,
+				CreateDate:        item.CreateDate,
+				ModifyDate:        item.ModifyDate,
+				DeleteStatus:      item.DeleteStatus,
+				ProductCategoryId: item.ProductCategoryId,
+				ProductBrand:      item.ProductBrand,
+				ProductSn:         item.ProductSn,
+				ProductAttr:       item.ProductAttr,
+			},
+		)
 	}
 
 	return &types.ListCartItemResp{

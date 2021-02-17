@@ -10,6 +10,7 @@ type (
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
+
     ListSysLogData struct {
         Id int64 `json:"id"`                               // 编号
         UserName string `json:"user_name"`                 // 用户名
@@ -23,6 +24,7 @@ type (
         LastUpdateBy string `json:"last_update_by"`        // 更新人
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
     }
+
     ListSysLogResp struct {
         Current int64 `json:"current"`
         Data []*ListSysLogData `json:"data"`
@@ -30,9 +32,11 @@ type (
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
+
     DeleteSysLogReq struct {
         Id int64 `json:"id"`
     }
+
     DeleteSysLogResp struct {
     }
 )

@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Mem
 }
 
 func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*types.ListMemberTaskResp, error) {
-	resp, err := l.svcCtx.Ums.MemberTaskList(l.ctx, &umsclient.MemberTaskListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberTaskList(
+		l.ctx, &umsclient.MemberTaskListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,13 +44,15 @@ func (l *MemberTaskListLogic) MemberTaskList(req types.ListMemberTaskReq) (*type
 	var list []*types.ListtMemberTaskData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberTaskData{
-			Id:           item.Id,
-			Name:         item.Name,
-			Growth:       item.Growth,
-			Intergration: item.Intergration,
-			Type:         item.Type,
-		})
+		list = append(
+			list, &types.ListtMemberTaskData{
+				Id:          item.Id,
+				Name:        item.Name,
+				Growth:      item.Growth,
+				Integration: item.Integration,
+				Type:        item.Type,
+			},
+		)
 	}
 
 	return &types.ListMemberTaskResp{

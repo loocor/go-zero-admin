@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Prod
 }
 
 func (l *ProductDeleteLogic) ProductDelete(req types.DeleteProductReq) (*types.DeleteProductResp, error) {
-	_, _ = l.svcCtx.Pms.ProductDelete(l.ctx, &pmsclient.ProductDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Pms.ProductDelete(
+		l.ctx, &pmsclient.ProductDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteProductResp{}, nil
 }

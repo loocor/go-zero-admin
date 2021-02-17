@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewFlashPromotionLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *FlashPromotionLogDeleteLogic) FlashPromotionLogDelete(req types.DeleteFlashPromotionLogReq) (*types.DeleteFlashPromotionLogResp, error) {
-	_, _ = l.svcCtx.Sms.FlashPromotionLogDelete(l.ctx, &smsclient.FlashPromotionLogDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Sms.FlashPromotionLogDelete(
+		l.ctx, &smsclient.FlashPromotionLogDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteFlashPromotionLogResp{}, nil
 }

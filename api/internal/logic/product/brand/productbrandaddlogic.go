@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,18 +26,20 @@ func NewProductBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Pr
 }
 
 func (l *ProductBrandAddLogic) ProductBrandAdd(req types.AddProductBrandReq) (*types.AddProductBrandResp, error) {
-	_, err := l.svcCtx.Pms.BrandAdd(l.ctx, &pmsclient.BrandAddReq{
-		Name:                req.Name,
-		FirstLetter:         req.FirstLetter,
-		Sort:                req.Sort,
-		FactoryStatus:       req.FactoryStatus,
-		ShowStatus:          req.ShowStatus,
-		ProductCount:        req.ProductCount,
-		ProductCommentCount: req.ProductCommentCount,
-		Logo:                req.Logo,
-		BigPic:              req.BigPic,
-		BrandStory:          req.BrandStory,
-	})
+	_, err := l.svcCtx.Pms.BrandAdd(
+		l.ctx, &pmsclient.BrandAddReq{
+			Name:                req.Name,
+			FirstLetter:         req.FirstLetter,
+			Sort:                req.Sort,
+			FactoryStatus:       req.FactoryStatus,
+			ShowStatus:          req.ShowStatus,
+			ProductCount:        req.ProductCount,
+			ProductCommentCount: req.ProductCommentCount,
+			Logo:                req.Logo,
+			BigPic:              req.BigPic,
+			BrandStory:          req.BrandStory,
+		},
+	)
 
 	if err != nil {
 		return nil, err

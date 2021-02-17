@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,13 +26,15 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req types.AddFlashPromotionSessionReq) (*types.AddFlashPromotionSessionResp, error) {
-	_, err := l.svcCtx.Sms.FlashPromotionSessionAdd(l.ctx, &smsclient.FlashPromotionSessionAddReq{
-		Name:       req.Name,
-		StartTime:  req.StartTime,
-		EndTime:    req.EndTime,
-		Status:     req.Status,
-		CreateTime: req.CreateTime,
-	})
+	_, err := l.svcCtx.Sms.FlashPromotionSessionAdd(
+		l.ctx, &smsclient.FlashPromotionSessionAddReq{
+			Name:       req.Name,
+			StartTime:  req.StartTime,
+			EndTime:    req.EndTime,
+			Status:     req.Status,
+			CreateTime: req.CreateTime,
+		},
+	)
 
 	if err != nil {
 		return nil, err

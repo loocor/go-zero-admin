@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/oms/omsclient"
+	"go-zero-admin/service/oms/omsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,9 +25,11 @@ func NewReturnResonDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *ReturnResonDeleteLogic) ReturnResonDelete(req types.DeleteReturnResonReq) (*types.DeleteReturnResonResp, error) {
-	_, _ = l.svcCtx.Oms.OrderReturnReasonDelete(l.ctx, &omsclient.OrderReturnReasonDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Oms.OrderReturnReasonDelete(
+		l.ctx, &omsclient.OrderReturnReasonDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteReturnResonResp{}, nil
 }

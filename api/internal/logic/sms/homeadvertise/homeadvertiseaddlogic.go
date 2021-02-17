@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,19 +26,21 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) H
 }
 
 func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req types.AddHomeAdvertiseReq) (*types.AddHomeAdvertiseResp, error) {
-	_, err := l.svcCtx.Sms.HomeAdvertiseAdd(l.ctx, &smsclient.HomeAdvertiseAddReq{
-		Name:       req.Name,
-		Type:       req.Type,
-		Pic:        req.Pic,
-		StartTime:  req.StartTime,
-		EndTime:    req.EndTime,
-		Status:     req.Status,
-		ClickCount: req.ClickCount,
-		OrderCount: req.OrderCount,
-		Url:        req.Url,
-		Note:       req.Note,
-		Sort:       req.Sort,
-	})
+	_, err := l.svcCtx.Sms.HomeAdvertiseAdd(
+		l.ctx, &smsclient.HomeAdvertiseAddReq{
+			Name:       req.Name,
+			Type:       req.Type,
+			Pic:        req.Pic,
+			StartTime:  req.StartTime,
+			EndTime:    req.EndTime,
+			Status:     req.Status,
+			ClickCount: req.ClickCount,
+			OrderCount: req.OrderCount,
+			Url:        req.Url,
+			Note:       req.Note,
+			Sort:       req.Sort,
+		},
+	)
 
 	if err != nil {
 		return nil, err

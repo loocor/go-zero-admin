@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewHomeNewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNewProductReq) (*types.DeleteHomeNewProductResp, error) {
-	_, _ = l.svcCtx.Sms.HomeNewProductDelete(l.ctx, &smsclient.HomeNewProductDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Sms.HomeNewProductDelete(
+		l.ctx, &smsclient.HomeNewProductDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteHomeNewProductResp{}, nil
 }

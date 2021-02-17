@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewProductCommentListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *ProductCommentListLogic) ProductCommentList(req types.ListProductCommentReq) (*types.ListProductCommentResp, error) {
-	resp, err := l.svcCtx.Pms.CommentList(l.ctx, &pmsclient.CommentListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Pms.CommentList(
+		l.ctx, &pmsclient.CommentListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,23 +44,25 @@ func (l *ProductCommentListLogic) ProductCommentList(req types.ListProductCommen
 	var list []*types.ListtProductCommentData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtProductCommentData{
-			Id:               item.Id,
-			ProductId:        item.ProductId,
-			MemberNickName:   item.MemberNickName,
-			ProductName:      item.ProductName,
-			Star:             item.Star,
-			MemberIp:         item.MemberIp,
-			CreateTime:       item.CreateTime,
-			ShowStatus:       item.ShowStatus,
-			ProductAttribute: item.ProductAttribute,
-			CollectCouont:    item.CollectCouont,
-			ReadCount:        item.ReadCount,
-			Content:          item.Content,
-			Pics:             item.Pics,
-			MemberIcon:       item.MemberIcon,
-			ReplayCount:      item.ReplayCount,
-		})
+		list = append(
+			list, &types.ListtProductCommentData{
+				Id:               item.Id,
+				ProductId:        item.ProductId,
+				MemberNickName:   item.MemberNickName,
+				ProductName:      item.ProductName,
+				Star:             item.Star,
+				MemberIp:         item.MemberIp,
+				CreateTime:       item.CreateTime,
+				ShowStatus:       item.ShowStatus,
+				ProductAttribute: item.ProductAttribute,
+				CollectCount:     item.CollectCount,
+				ReadCount:        item.ReadCount,
+				Content:          item.Content,
+				Pics:             item.Pics,
+				MemberIcon:       item.MemberIcon,
+				ReplayCount:      item.ReplayCount,
+			},
+		)
 	}
 
 	return &types.ListProductCommentResp{

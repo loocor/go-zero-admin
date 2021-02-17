@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,10 +25,15 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
-func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req types.DeleteIntegrationChangeHistoryReq) (*types.DeleteIntegrationChangeHistoryResp, error) {
-	_, _ = l.svcCtx.Ums.IntegrationChangeHistoryDelete(l.ctx, &umsclient.IntegrationChangeHistoryDeleteReq{
-		Id: req.Id,
-	})
+func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req types.DeleteIntegrationChangeHistoryReq) (
+	*types.DeleteIntegrationChangeHistoryResp,
+	error,
+) {
+	_, _ = l.svcCtx.Ums.IntegrationChangeHistoryDelete(
+		l.ctx, &umsclient.IntegrationChangeHistoryDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteIntegrationChangeHistoryResp{}, nil
 }

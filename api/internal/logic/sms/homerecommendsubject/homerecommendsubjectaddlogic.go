@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,12 +26,14 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHomeRecommendSubjectReq) (*types.AddHomeRecommendSubjectResp, error) {
-	_, err := l.svcCtx.Sms.HomeRecommendSubjectAdd(l.ctx, &smsclient.HomeRecommendSubjectAddReq{
-		SubjectId:       req.SubjectId,
-		SubjectName:     req.SubjectName,
-		RecommendStatus: req.RecommendStatus,
-		Sort:            req.Sort,
-	})
+	_, err := l.svcCtx.Sms.HomeRecommendSubjectAdd(
+		l.ctx, &smsclient.HomeRecommendSubjectAddReq{
+			SubjectId:       req.SubjectId,
+			SubjectName:     req.SubjectName,
+			RecommendStatus: req.RecommendStatus,
+			Sort:            req.Sort,
+		},
+	)
 
 	if err != nil {
 		return nil, err

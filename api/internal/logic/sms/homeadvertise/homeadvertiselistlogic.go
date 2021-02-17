@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseReq) (*types.ListHomeAdvertiseResp, error) {
-	resp, err := l.svcCtx.Sms.HomeAdvertiseList(l.ctx, &smsclient.HomeAdvertiseListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.HomeAdvertiseList(
+		l.ctx, &smsclient.HomeAdvertiseListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,20 +45,22 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseRe
 	var list []*types.ListtHomeAdvertiseData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeAdvertiseData{
-			Id:         item.Id,
-			Name:       item.Name,
-			Type:       item.Type,
-			Pic:        item.Pic,
-			StartTime:  item.StartTime,
-			EndTime:    item.EndTime,
-			Status:     item.Status,
-			ClickCount: item.ClickCount,
-			OrderCount: item.OrderCount,
-			Url:        item.Url,
-			Note:       item.Note,
-			Sort:       item.Sort,
-		})
+		list = append(
+			list, &types.ListtHomeAdvertiseData{
+				Id:         item.Id,
+				Name:       item.Name,
+				Type:       item.Type,
+				Pic:        item.Pic,
+				StartTime:  item.StartTime,
+				EndTime:    item.EndTime,
+				Status:     item.Status,
+				ClickCount: item.ClickCount,
+				OrderCount: item.OrderCount,
+				Url:        item.Url,
+				Note:       item.Note,
+				Sort:       item.Sort,
+			},
+		)
 	}
 
 	return &types.ListHomeAdvertiseResp{

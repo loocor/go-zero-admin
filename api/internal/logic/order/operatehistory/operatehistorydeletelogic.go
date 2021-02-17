@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/oms/omsclient"
+	"go-zero-admin/service/oms/omsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,9 +25,11 @@ func NewOperateHistoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OperateHistoryDeleteLogic) OperateHistoryDelete(req types.DeleteOperateHistoryReq) (*types.DeleteOperateHistoryResp, error) {
-	_, _ = l.svcCtx.Oms.OrderOperateHistoryDelete(l.ctx, &omsclient.OrderOperateHistoryDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Oms.OrderOperateHistoryDelete(
+		l.ctx, &omsclient.OrderOperateHistoryDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteOperateHistoryResp{}, nil
 }

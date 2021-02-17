@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewCompayAddressListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressReq) (*types.ListCompayAddressResp, error) {
-	resp, err := l.svcCtx.Oms.CompanyAddressList(l.ctx, &omsclient.CompanyAddressListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Oms.CompanyAddressList(
+		l.ctx, &omsclient.CompanyAddressListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,18 +44,20 @@ func (l *CompayAddressListLogic) CompayAddressList(req types.ListCompayAddressRe
 	var list []*types.ListtCompayAddressData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtCompayAddressData{
-			Id:            item.Id,
-			AddressName:   item.AddressName,
-			SendStatus:    item.SendStatus,
-			ReceiveStatus: item.ReceiveStatus,
-			Name:          item.Name,
-			Phone:         item.Phone,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
-		})
+		list = append(
+			list, &types.ListtCompayAddressData{
+				Id:            item.Id,
+				AddressName:   item.AddressName,
+				SendStatus:    item.SendStatus,
+				ReceiveStatus: item.ReceiveStatus,
+				Name:          item.Name,
+				Phone:         item.Phone,
+				Province:      item.Province,
+				City:          item.City,
+				Region:        item.Region,
+				DetailAddress: item.DetailAddress,
+			},
+		)
 	}
 
 	return &types.ListCompayAddressResp{

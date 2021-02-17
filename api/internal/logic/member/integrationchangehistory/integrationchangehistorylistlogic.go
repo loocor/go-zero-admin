@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,11 +26,16 @@ func NewIntegrationChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(req types.ListIntegrationChangeHistoryReq) (*types.ListIntegrationChangeHistoryResp, error) {
-	resp, err := l.svcCtx.Ums.IntegrationChangeHistoryList(l.ctx, &umsclient.IntegrationChangeHistoryListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(req types.ListIntegrationChangeHistoryReq) (
+	*types.ListIntegrationChangeHistoryResp,
+	error,
+) {
+	resp, err := l.svcCtx.Ums.IntegrationChangeHistoryList(
+		l.ctx, &umsclient.IntegrationChangeHistoryListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,16 +47,18 @@ func (l *IntegrationChangeHistoryListLogic) IntegrationChangeHistoryList(req typ
 	var list []*types.ListtIntegrationChangeHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtIntegrationChangeHistoryData{
-			Id:          item.Id,
-			MemberId:    item.MemberId,
-			CreateTime:  item.CreateTime,
-			ChangeType:  item.ChangeType,
-			ChangeCount: item.ChangeCount,
-			OperateMan:  item.OperateMan,
-			OperateNote: item.OperateNote,
-			SourceType:  item.SourceType,
-		})
+		list = append(
+			list, &types.ListtIntegrationChangeHistoryData{
+				Id:          item.Id,
+				MemberId:    item.MemberId,
+				CreateTime:  item.CreateTime,
+				ChangeType:  item.ChangeType,
+				ChangeCount: item.ChangeCount,
+				OperateMan:  item.OperateMan,
+				OperateNote: item.OperateNote,
+				SourceType:  item.SourceType,
+			},
+		)
 	}
 
 	return &types.ListIntegrationChangeHistoryResp{

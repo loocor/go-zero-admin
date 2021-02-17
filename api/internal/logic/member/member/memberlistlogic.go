@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,10 +26,12 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MemberL
 }
 
 func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMemberResp, error) {
-	resp, err := l.svcCtx.Ums.MemberList(l.ctx, &umsclient.MemberListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberList(
+		l.ctx, &umsclient.MemberListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -37,27 +40,29 @@ func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMember
 	var list []*types.ListtMemberData
 
 	for _, member := range resp.List {
-		list = append(list, &types.ListtMemberData{
-			Id:                    member.Id,
-			MemberLevelId:         member.MemberLevelId,
-			Username:              member.Username,
-			Password:              member.Password,
-			Nickname:              member.Nickname,
-			Phone:                 member.Phone,
-			Status:                member.Status,
-			CreateTime:            member.CreateTime,
-			Icon:                  member.Icon,
-			Gender:                member.Gender,
-			Birthday:              member.Birthday,
-			City:                  member.City,
-			Job:                   member.Job,
-			PersonalizedSignature: member.PersonalizedSignature,
-			SourceType:            member.SourceType,
-			Integration:           member.Integration,
-			Growth:                member.Growth,
-			LuckeyCount:           member.LuckeyCount,
-			HistoryIntegration:    member.HistoryIntegration,
-		})
+		list = append(
+			list, &types.ListtMemberData{
+				Id:                    member.Id,
+				MemberLevelId:         member.MemberLevelId,
+				Username:              member.Username,
+				Password:              member.Password,
+				Nickname:              member.Nickname,
+				Phone:                 member.Phone,
+				Status:                member.Status,
+				CreateTime:            member.CreateTime,
+				Icon:                  member.Icon,
+				Gender:                member.Gender,
+				Birthday:              member.Birthday,
+				City:                  member.City,
+				Job:                   member.Job,
+				PersonalizedSignature: member.PersonalizedSignature,
+				SourceType:            member.SourceType,
+				Integration:           member.Integration,
+				Growth:                member.Growth,
+				LuckyCount:            member.LuckyCount,
+				HistoryIntegration:    member.HistoryIntegration,
+			},
+		)
 	}
 
 	return &types.ListMemberResp{

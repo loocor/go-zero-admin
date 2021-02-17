@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberPriceListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 }
 
 func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*types.ListMemberPriceResp, error) {
-	resp, err := l.svcCtx.Pms.MemberPriceList(l.ctx, &pmsclient.MemberPriceListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Pms.MemberPriceList(
+		l.ctx, &pmsclient.MemberPriceListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,13 +44,15 @@ func (l *MemberPriceListLogic) MemberPriceList(req types.ListMemberPriceReq) (*t
 	var list []*types.ListtMemberPriceData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberPriceData{
-			Id:              item.Id,
-			ProductId:       item.ProductId,
-			MemberLevelId:   item.MemberLevelId,
-			MemberPrice:     float64(item.MemberPrice),
-			MemberLevelName: item.MemberLevelName,
-		})
+		list = append(
+			list, &types.ListtMemberPriceData{
+				Id:              item.Id,
+				ProductId:       item.ProductId,
+				MemberLevelId:   item.MemberLevelId,
+				MemberPrice:     float64(item.MemberPrice),
+				MemberLevelName: item.MemberLevelName,
+			},
+		)
 	}
 
 	return &types.ListMemberPriceResp{

@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,11 +26,13 @@ func NewReturnResonAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Ret
 }
 
 func (l *ReturnResonAddLogic) ReturnResonAdd(req types.AddReturnResonReq) (*types.AddReturnResonResp, error) {
-	_, err := l.svcCtx.Oms.OrderReturnReasonAdd(l.ctx, &omsclient.OrderReturnReasonAddReq{
-		Name:   req.Name,
-		Sort:   req.Sort,
-		Status: req.Status,
-	})
+	_, err := l.svcCtx.Oms.OrderReturnReasonAdd(
+		l.ctx, &omsclient.OrderReturnReasonAddReq{
+			Name:   req.Name,
+			Sort:   req.Sort,
+			Status: req.Status,
+		},
+	)
 
 	if err != nil {
 		return nil, err

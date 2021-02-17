@@ -25,7 +25,7 @@ import (
 	productbrand "go-zero-admin/api/internal/handler/product/brand"
 	productcategory "go-zero-admin/api/internal/handler/product/category"
 	productcomment "go-zero-admin/api/internal/handler/product/comment"
-	productfeighttemplate "go-zero-admin/api/internal/handler/product/feighttemplate"
+	productfreighttemplate "go-zero-admin/api/internal/handler/product/freighttemplate"
 	productmemberprice "go-zero-admin/api/internal/handler/product/memberprice"
 	productproduct "go-zero-admin/api/internal/handler/product/product"
 	productskustock "go-zero-admin/api/internal/handler/product/skustock"
@@ -546,23 +546,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/product/feighttemplate/add",
-				Handler: productfeighttemplate.FeightTemplateAddHandler(serverCtx),
+				Path:    "/api/product/freighttemplate/add",
+				Handler: productfreighttemplate.FreightTemplateAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/product/feighttemplate/list",
-				Handler: productfeighttemplate.FeightTemplateListHandler(serverCtx),
+				Path:    "/api/product/freighttemplate/list",
+				Handler: productfreighttemplate.FreightTemplateListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/product/feighttemplate/update",
-				Handler: productfeighttemplate.FeightTemplateUpdateHandler(serverCtx),
+				Path:    "/api/product/freighttemplate/update",
+				Handler: productfreighttemplate.FreightTemplateUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/product/feighttemplate/delete",
-				Handler: productfeighttemplate.FeightTemplateDeleteHandler(serverCtx),
+				Path:    "/api/product/freighttemplate/delete",
+				Handler: productfreighttemplate.FreightTemplateDeleteHandler(serverCtx),
 			},
 		},
 	)

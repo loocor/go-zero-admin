@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryReq) (*types.ListCouponHistoryResp, error) {
-	resp, err := l.svcCtx.Sms.CouponHistoryList(l.ctx, &smsclient.CouponHistoryListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.CouponHistoryList(
+		l.ctx, &smsclient.CouponHistoryListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,19 +45,21 @@ func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryRe
 	var list []*types.ListtCouponHistoryData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtCouponHistoryData{
-			Id:             item.Id,
-			CouponId:       item.CouponId,
-			MemberId:       item.MemberId,
-			CouponCode:     item.CouponCode,
-			MemberNickname: item.MemberNickname,
-			GetType:        item.GetType,
-			CreateTime:     item.CreateTime,
-			UseStatus:      item.UseStatus,
-			UseTime:        item.UseTime,
-			OrderId:        item.OrderId,
-			OrderSn:        item.OrderSn,
-		})
+		list = append(
+			list, &types.ListtCouponHistoryData{
+				Id:             item.Id,
+				CouponId:       item.CouponId,
+				MemberId:       item.MemberId,
+				CouponCode:     item.CouponCode,
+				MemberNickname: item.MemberNickname,
+				GetType:        item.GetType,
+				CreateTime:     item.CreateTime,
+				UseStatus:      item.UseStatus,
+				UseTime:        item.UseTime,
+				OrderId:        item.OrderId,
+				OrderSn:        item.OrderSn,
+			},
+		)
 	}
 
 	return &types.ListCouponHistoryResp{

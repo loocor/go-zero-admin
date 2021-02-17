@@ -3,10 +3,11 @@ package logic
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/sms/smsclient"
-	"time"
+	"go-zero-admin/service/sms/smsclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,10 +27,12 @@ func NewCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) CouponL
 }
 
 func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCouponResp, error) {
-	resp, err := l.svcCtx.Sms.CouponList(l.ctx, &smsclient.CouponListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.CouponList(
+		l.ctx, &smsclient.CouponListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -44,26 +47,28 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 	for _, item := range resp.List {
 		StartTime, _ := time.Parse("2006-01-02 15:04:05", item.StartTime)
 		EndTime, _ := time.Parse("2006-01-02 15:04:05", item.EndTime)
-		list = append(list, &types.ListtCouponData{
-			Id:           item.Id,
-			Type:         item.Type,
-			Name:         item.Name,
-			Platform:     item.Platform,
-			Count:        item.Count,
-			Amount:       item.Amount,
-			PerLimit:     item.PerLimit,
-			MinPoint:     item.MinPoint,
-			StartTime:    StartTime,
-			EndTime:      EndTime,
-			UseType:      item.UseType,
-			Note:         item.Note,
-			PublishCount: item.PublishCount,
-			UseCount:     item.UseCount,
-			ReceiveCount: item.ReceiveCount,
-			EnableTime:   item.EnableTime,
-			Code:         item.Code,
-			MemberLevel:  item.MemberLevel,
-		})
+		list = append(
+			list, &types.ListtCouponData{
+				Id:           item.Id,
+				Type:         item.Type,
+				Name:         item.Name,
+				Platform:     item.Platform,
+				Count:        item.Count,
+				Amount:       item.Amount,
+				PerLimit:     item.PerLimit,
+				MinPoint:     item.MinPoint,
+				StartTime:    StartTime,
+				EndTime:      EndTime,
+				UseType:      item.UseType,
+				Note:         item.Note,
+				PublishCount: item.PublishCount,
+				UseCount:     item.UseCount,
+				ReceiveCount: item.ReceiveCount,
+				EnableTime:   item.EnableTime,
+				Code:         item.Code,
+				MemberLevel:  item.MemberLevel,
+			},
+		)
 	}
 
 	return &types.ListCouponResp{

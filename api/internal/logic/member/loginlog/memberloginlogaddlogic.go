@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,14 +26,16 @@ func NewMemberLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(req types.AddMemberLoginLogReq) (*types.AddMemberLoginLogResp, error) {
-	_, err := l.svcCtx.Ums.MemberLoginLogAdd(l.ctx, &umsclient.MemberLoginLogAddReq{
-		MemberId:   req.MemberId,
-		CreateTime: req.CreateTime,
-		Ip:         req.Ip,
-		City:       req.City,
-		LoginType:  req.LoginType,
-		Province:   req.Province,
-	})
+	_, err := l.svcCtx.Ums.MemberLoginLogAdd(
+		l.ctx, &umsclient.MemberLoginLogAddReq{
+			MemberId:   req.MemberId,
+			CreateTime: req.CreateTime,
+			Ip:         req.Ip,
+			City:       req.City,
+			LoginType:  req.LoginType,
+			Province:   req.Province,
+		},
+	)
 
 	if err != nil {
 		return nil, err

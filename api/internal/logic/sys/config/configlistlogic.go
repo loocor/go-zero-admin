@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
-	"go-zero-admin/rpc/sys/sysclient"
+	"go-zero-admin/service/sys/sysclient"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,10 +25,12 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) ConfigL
 }
 
 func (l *ConfigListLogic) ConfigList(req types.ListConfigReq) (*types.ListConfigResp, error) {
-	resp, err := l.svcCtx.Sys.ConfigList(l.ctx, &sysclient.ConfigListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sys.ConfigList(
+		l.ctx, &sysclient.ConfigListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -36,20 +39,22 @@ func (l *ConfigListLogic) ConfigList(req types.ListConfigReq) (*types.ListConfig
 	var list []*types.ListConfigData
 
 	for _, config := range resp.List {
-		list = append(list, &types.ListConfigData{
-			Id:             config.Id,
-			Value:          config.Value,
-			Label:          config.Label,
-			Type:           config.Type,
-			Description:    config.Description,
-			Sort:           config.Sort,
-			CreateBy:       config.CreateBy,
-			CreateTime:     config.CreateTime,
-			LastUpdateBy:   config.LastUpdateBy,
-			LastUpdateTime: config.LastUpdateTime,
-			Remarks:        config.Remarks,
-			DelFlag:        config.DelFlag,
-		})
+		list = append(
+			list, &types.ListConfigData{
+				Id:             config.Id,
+				Value:          config.Value,
+				Label:          config.Label,
+				Type:           config.Type,
+				Description:    config.Description,
+				Sort:           config.Sort,
+				CreateBy:       config.CreateBy,
+				CreateTime:     config.CreateTime,
+				LastUpdateBy:   config.LastUpdateBy,
+				LastUpdateTime: config.LastUpdateTime,
+				Remarks:        config.Remarks,
+				DelFlag:        config.DelFlag,
+			},
+		)
 	}
 
 	return &types.ListConfigResp{

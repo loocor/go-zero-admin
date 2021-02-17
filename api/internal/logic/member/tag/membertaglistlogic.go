@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewMemberTagListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Memb
 }
 
 func (l *MemberTagListLogic) MemberTagList(req types.ListMemberTagReq) (*types.ListMemberTagResp, error) {
-	resp, err := l.svcCtx.Ums.MemberTagList(l.ctx, &umsclient.MemberTagListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Ums.MemberTagList(
+		l.ctx, &umsclient.MemberTagListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,12 +44,14 @@ func (l *MemberTagListLogic) MemberTagList(req types.ListMemberTagReq) (*types.L
 	var list []*types.ListtMemberTagData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtMemberTagData{
-			Id:                item.Id,
-			Name:              item.Name,
-			FinishOrderCount:  item.FinishOrderCount,
-			FinishOrderAmount: float64(item.FinishOrderAmount),
-		})
+		list = append(
+			list, &types.ListtMemberTagData{
+				Id:                item.Id,
+				Name:              item.Name,
+				FinishOrderCount:  item.FinishOrderCount,
+				FinishOrderAmount: float64(item.FinishOrderAmount),
+			},
+		)
 	}
 
 	return &types.ListMemberTagResp{

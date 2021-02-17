@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderD
 }
 
 func (l *OrderDeleteLogic) OrderDelete(req types.DeleteOrderReq) (*types.DeleteOrderResp, error) {
-	_, _ = l.svcCtx.Oms.OrderDelete(l.ctx, &omsclient.OrderDeleteReq{
-		Id: req.Id,
-	})
+	_, _ = l.svcCtx.Oms.OrderDelete(
+		l.ctx, &omsclient.OrderDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	return &types.DeleteOrderResp{}, nil
 }

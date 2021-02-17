@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,12 +26,14 @@ func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeB
 }
 
 func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
-	_, err := l.svcCtx.Sms.HomeBrandAdd(l.ctx, &smsclient.HomeBrandAddReq{
-		BrandId:         req.BrandId,
-		BrandName:       req.BrandName,
-		RecommendStatus: req.RecommendStatus,
-		Sort:            req.Sort,
-	})
+	_, err := l.svcCtx.Sms.HomeBrandAdd(
+		l.ctx, &smsclient.HomeBrandAddReq{
+			BrandId:         req.BrandId,
+			BrandName:       req.BrandName,
+			RecommendStatus: req.RecommendStatus,
+			Sort:            req.Sort,
+		},
+	)
 
 	if err != nil {
 		return nil, err

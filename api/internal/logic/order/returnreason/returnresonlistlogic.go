@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewReturnResonListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Re
 }
 
 func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*types.ListReturnResonResp, error) {
-	resp, err := l.svcCtx.Oms.OrderReturnReasonList(l.ctx, &omsclient.OrderReturnReasonListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Oms.OrderReturnReasonList(
+		l.ctx, &omsclient.OrderReturnReasonListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,13 +44,15 @@ func (l *ReturnResonListLogic) ReturnResonList(req types.ListReturnResonReq) (*t
 	var list []*types.ListtReturnResonData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtReturnResonData{
-			Id:         item.Id,
-			Name:       item.Name,
-			Sort:       item.Sort,
-			Status:     item.Status,
-			CreateTime: item.CreateTime,
-		})
+		list = append(
+			list, &types.ListtReturnResonData{
+				Id:         item.Id,
+				Name:       item.Name,
+				Sort:       item.Sort,
+				Status:     item.Status,
+				CreateTime: item.CreateTime,
+			},
+		)
 	}
 
 	return &types.ListReturnResonResp{

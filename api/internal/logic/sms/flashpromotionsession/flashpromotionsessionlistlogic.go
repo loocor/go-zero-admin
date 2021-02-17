@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(req types.ListFlashPromotionSessionReq) (*types.ListFlashPromotionSessionResp, error) {
-	resp, err := l.svcCtx.Sms.FlashPromotionSessionList(l.ctx, &smsclient.FlashPromotionSessionListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.FlashPromotionSessionList(
+		l.ctx, &smsclient.FlashPromotionSessionListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,14 +45,16 @@ func (l *FlashPromotionSessionListLogic) FlashPromotionSessionList(req types.Lis
 	var list []*types.ListtFlashPromotionSessionData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtFlashPromotionSessionData{
-			Id:         item.Id,
-			Name:       item.Name,
-			StartTime:  item.StartTime,
-			EndTime:    item.EndTime,
-			Status:     item.Status,
-			CreateTime: item.CreateTime,
-		})
+		list = append(
+			list, &types.ListtFlashPromotionSessionData{
+				Id:         item.Id,
+				Name:       item.Name,
+				StartTime:  item.StartTime,
+				EndTime:    item.EndTime,
+				Status:     item.Status,
+				CreateTime: item.CreateTime,
+			},
+		)
 	}
 
 	return &types.ListFlashPromotionSessionResp{

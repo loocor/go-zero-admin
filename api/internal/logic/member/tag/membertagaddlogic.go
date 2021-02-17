@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,11 +26,13 @@ func NewMemberTagAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 }
 
 func (l *MemberTagAddLogic) MemberTagAdd(req types.AddMemberTagReq) (*types.AddMemberTagResp, error) {
-	_, err := l.svcCtx.Ums.MemberTagAdd(l.ctx, &umsclient.MemberTagAddReq{
-		Name:              req.Name,
-		FinishOrderCount:  req.FinishOrderCount,
-		FinishOrderAmount: int64(req.FinishOrderAmount),
-	})
+	_, err := l.svcCtx.Ums.MemberTagAdd(
+		l.ctx, &umsclient.MemberTagAddReq{
+			Name:              req.Name,
+			FinishOrderCount:  req.FinishOrderCount,
+			FinishOrderAmount: int64(req.FinishOrderAmount),
+		},
+	)
 
 	if err != nil {
 		return nil, err

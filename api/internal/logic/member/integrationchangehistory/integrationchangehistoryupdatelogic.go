@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -24,17 +25,22 @@ func NewIntegrationChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
-func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(req types.UpdateIntegrationChangeHistoryReq) (*types.UpdateIntegrationChangeHistoryResp, error) {
-	_, err := l.svcCtx.Ums.IntegrationChangeHistoryUpdate(l.ctx, &umsclient.IntegrationChangeHistoryUpdateReq{
-		Id:          req.Id,
-		MemberId:    req.MemberId,
-		CreateTime:  req.CreateTime,
-		ChangeType:  req.ChangeType,
-		ChangeCount: req.ChangeCount,
-		OperateMan:  req.OperateMan,
-		OperateNote: req.OperateNote,
-		SourceType:  req.SourceType,
-	})
+func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(req types.UpdateIntegrationChangeHistoryReq) (
+	*types.UpdateIntegrationChangeHistoryResp,
+	error,
+) {
+	_, err := l.svcCtx.Ums.IntegrationChangeHistoryUpdate(
+		l.ctx, &umsclient.IntegrationChangeHistoryUpdateReq{
+			Id:          req.Id,
+			MemberId:    req.MemberId,
+			CreateTime:  req.CreateTime,
+			ChangeType:  req.ChangeType,
+			ChangeCount: req.ChangeCount,
+			OperateMan:  req.OperateMan,
+			OperateNote: req.OperateNote,
+			SourceType:  req.SourceType,
+		},
+	)
 
 	if err != nil {
 		return nil, err

@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,13 +26,15 @@ func NewMemberPriceUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *MemberPriceUpdateLogic) MemberPriceUpdate(req types.UpdateMemberPriceReq) (*types.UpdateMemberPriceResp, error) {
-	_, err := l.svcCtx.Pms.MemberPriceUpdate(l.ctx, &pmsclient.MemberPriceUpdateReq{
-		Id:              req.Id,
-		ProductId:       req.ProductId,
-		MemberLevelId:   req.MemberLevelId,
-		MemberPrice:     int64(req.MemberPrice),
-		MemberLevelName: req.MemberLevelName,
-	})
+	_, err := l.svcCtx.Pms.MemberPriceUpdate(
+		l.ctx, &pmsclient.MemberPriceUpdateReq{
+			Id:              req.Id,
+			ProductId:       req.ProductId,
+			MemberLevelId:   req.MemberLevelId,
+			MemberPrice:     int64(req.MemberPrice),
+			MemberLevelName: req.MemberLevelName,
+		},
+	)
 
 	if err != nil {
 		return nil, err

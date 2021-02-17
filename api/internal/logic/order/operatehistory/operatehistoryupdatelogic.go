@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/oms/omsclient"
+
+	"go-zero-admin/service/oms/omsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,14 +26,16 @@ func NewOperateHistoryUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *OperateHistoryUpdateLogic) OperateHistoryUpdate(req types.UpdateOperateHistoryReq) (*types.UpdateOperateHistoryResp, error) {
-	_, err := l.svcCtx.Oms.OrderOperateHistoryUpdate(l.ctx, &omsclient.OrderOperateHistoryUpdateReq{
-		Id:          req.Id,
-		OrderId:     req.OrderId,
-		OperateMan:  req.OperateMan,
-		CreateTime:  req.CreateTime.Format("2006-01-02 15:04:05"),
-		OrderStatus: req.OrderStatus,
-		Note:        req.Note,
-	})
+	_, err := l.svcCtx.Oms.OrderOperateHistoryUpdate(
+		l.ctx, &omsclient.OrderOperateHistoryUpdateReq{
+			Id:          req.Id,
+			OrderId:     req.OrderId,
+			OperateMan:  req.OperateMan,
+			CreateTime:  req.CreateTime.Format("2006-01-02 15:04:05"),
+			OrderStatus: req.OrderStatus,
+			Note:        req.Note,
+		},
+	)
 
 	if err != nil {
 		return nil, err

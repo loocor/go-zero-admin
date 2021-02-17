@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,15 +26,17 @@ func NewMemberRuleSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(req types.UpdateMemberRuleSettingReq) (*types.UpdateMemberRuleSettingResp, error) {
-	_, err := l.svcCtx.Ums.MemberRuleSettingUpdate(l.ctx, &umsclient.MemberRuleSettingUpdateReq{
-		Id:                req.Id,
-		ContinueSignDay:   req.ContinueSignDay,
-		ContinueSignPoint: req.ContinueSignPoint,
-		ConsumePerPoint:   int64(req.ConsumePerPoint),
-		LowOrderAmount:    int64(req.LowOrderAmount),
-		MaxPointPerOrder:  req.MaxPointPerOrder,
-		Type:              req.Type,
-	})
+	_, err := l.svcCtx.Ums.MemberRuleSettingUpdate(
+		l.ctx, &umsclient.MemberRuleSettingUpdateReq{
+			Id:                req.Id,
+			ContinueSignDay:   req.ContinueSignDay,
+			ContinueSignPoint: req.ContinueSignPoint,
+			ConsumePerPoint:   int64(req.ConsumePerPoint),
+			LowOrderAmount:    int64(req.LowOrderAmount),
+			MaxPointPerOrder:  req.MaxPointPerOrder,
+			Type:              req.Type,
+		},
+	)
 
 	if err != nil {
 		return nil, err

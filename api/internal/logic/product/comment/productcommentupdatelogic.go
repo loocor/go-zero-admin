@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/pms/pmsclient"
+
+	"go-zero-admin/service/pms/pmsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,23 +26,25 @@ func NewProductCommentUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *ProductCommentUpdateLogic) ProductCommentUpdate(req types.UpdateProductCommentReq) (*types.UpdateProductCommentResp, error) {
-	_, err := l.svcCtx.Pms.CommentUpdate(l.ctx, &pmsclient.CommentUpdateReq{
-		Id:               req.Id,
-		ProductId:        req.ProductId,
-		MemberNickName:   req.MemberNickName,
-		ProductName:      req.ProductName,
-		Star:             req.Star,
-		MemberIp:         req.MemberIp,
-		CreateTime:       req.CreateTime,
-		ShowStatus:       req.ShowStatus,
-		ProductAttribute: req.ProductAttribute,
-		CollectCouont:    req.CollectCouont,
-		ReadCount:        req.ReadCount,
-		Content:          req.Content,
-		Pics:             req.Pics,
-		MemberIcon:       req.MemberIcon,
-		ReplayCount:      req.ReplayCount,
-	})
+	_, err := l.svcCtx.Pms.CommentUpdate(
+		l.ctx, &pmsclient.CommentUpdateReq{
+			Id:               req.Id,
+			ProductId:        req.ProductId,
+			MemberNickName:   req.MemberNickName,
+			ProductName:      req.ProductName,
+			Star:             req.Star,
+			MemberIp:         req.MemberIp,
+			CreateTime:       req.CreateTime,
+			ShowStatus:       req.ShowStatus,
+			ProductAttribute: req.ProductAttribute,
+			CollectCount:     req.CollectCount,
+			ReadCount:        req.ReadCount,
+			Content:          req.Content,
+			Pics:             req.Pics,
+			MemberIcon:       req.MemberIcon,
+			ReplayCount:      req.ReplayCount,
+		},
+	)
 
 	if err != nil {
 		return nil, err

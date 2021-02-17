@@ -7,26 +7,30 @@ info(
 
 type (
     addFlashPromotionReq struct {
-        Title      string    `json:"title"`
-        StartDate  string `json:"start_date"`  // 开始日期
-        EndDate    string `json:"end_date"`    // 结束日期
-        Status     int64     `json:"status"`      // 上下线状态
+        Title string `json:"title"`
+        StartDate string `json:"start_date"`   // 开始日期
+        EndDate string `json:"end_date"`       // 结束日期
+        Status int64 `json:"status"`           // 上下线状态
         CreateTime string `json:"create_time"` // 秒杀时间段名称
     }
+
     addFlashPromotionResp struct {
     }
+
     ListFlashPromotionReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
+
     ListtFlashPromotionData struct {
-        Id         int64     `json:"id"`
-        Title      string    `json:"title"`
-        StartDate  string `json:"start_date"`  // 开始日期
-        EndDate    string `json:"end_date"`    // 结束日期
-        Status     int64     `json:"status"`      // 上下线状态
+        Id int64 `json:"id"`
+        Title string `json:"title"`
+        StartDate string `json:"start_date"`   // 开始日期
+        EndDate string `json:"end_date"`       // 结束日期
+        Status int64 `json:"status"`           // 上下线状态
         CreateTime string `json:"create_time"` // 秒杀时间段名称
     }
+
     ListFlashPromotionResp struct {
         Current int64 `json:"current"`
         Data []*ListtFlashPromotionData `json:"data"`
@@ -34,19 +38,23 @@ type (
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
+
     UpdateFlashPromotionReq struct {
-        Id         int64     `json:"id"`
-        Title      string    `json:"title"`
-        StartDate  string `json:"start_date"`  // 开始日期
-        EndDate    string `json:"end_date"`    // 结束日期
-        Status     int64     `json:"status"`      // 上下线状态
+        Id int64 `json:"id"`
+        Title string `json:"title"`
+        StartDate string `json:"start_date"`   // 开始日期
+        EndDate string `json:"end_date"`       // 结束日期
+        Status int64 `json:"status"`           // 上下线状态
         CreateTime string `json:"create_time"` // 秒杀时间段名称
     }
+
     UpdateFlashPromotionResp struct {
     }
+
     DeleteFlashPromotionReq struct {
         Id int64 `json:"id"`
     }
+
     DeleteFlashPromotionResp struct {
     }
 )

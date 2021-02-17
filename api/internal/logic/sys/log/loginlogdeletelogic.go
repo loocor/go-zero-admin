@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-	"go-zero-admin/rpc/sys/sysclient"
+
+	"go-zero-admin/service/sys/sysclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,9 +26,11 @@ func NewLoginLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Log
 }
 
 func (l *LoginLogDeleteLogic) LoginLogDelete(req types.DeleteLoginLogReq) (*types.DeleteLoginLogResp, error) {
-	_, err := l.svcCtx.Sys.LoginLogDelete(l.ctx, &sysclient.LoginLogDeleteReq{
-		Id: req.Id,
-	})
+	_, err := l.svcCtx.Sys.LoginLogDelete(
+		l.ctx, &sysclient.LoginLogDeleteReq{
+			Id: req.Id,
+		},
+	)
 
 	if err != nil {
 		return nil, err

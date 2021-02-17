@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/ums/umsclient"
+
+	"go-zero-admin/service/ums/umsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -25,11 +26,16 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req types.ListIntegrationConsumeSettingReq) (*types.ListIntegrationConsumeSettingResp, error) {
-	resp, err := l.svcCtx.Ums.IntegrationConsumeSettingList(l.ctx, &umsclient.IntegrationConsumeSettingListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req types.ListIntegrationConsumeSettingReq) (
+	*types.ListIntegrationConsumeSettingResp,
+	error,
+) {
+	resp, err := l.svcCtx.Ums.IntegrationConsumeSettingList(
+		l.ctx, &umsclient.IntegrationConsumeSettingListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -41,13 +47,15 @@ func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req t
 	var list []*types.ListtIntegrationConsumeSettingData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtIntegrationConsumeSettingData{
-			Id:                 item.Id,
-			DeductionPerAmount: item.DeductionPerAmount,
-			MaxPercentPerOrder: item.MaxPercentPerOrder,
-			UseUnit:            item.UseUnit,
-			CouponStatus:       item.CouponStatus,
-		})
+		list = append(
+			list, &types.ListtIntegrationConsumeSettingData{
+				Id:                 item.Id,
+				DeductionPerAmount: item.DeductionPerAmount,
+				MaxPercentPerOrder: item.MaxPercentPerOrder,
+				UseUnit:            item.UseUnit,
+				CouponStatus:       item.CouponStatus,
+			},
+		)
 	}
 
 	return &types.ListIntegrationConsumeSettingResp{

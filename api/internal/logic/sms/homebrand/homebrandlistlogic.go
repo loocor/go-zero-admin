@@ -3,7 +3,8 @@ package logic
 import (
 	"context"
 	"fmt"
-	"go-zero-admin/rpc/sms/smsclient"
+
+	"go-zero-admin/service/sms/smsclient"
 
 	"go-zero-admin/api/internal/svc"
 	"go-zero-admin/api/internal/types"
@@ -26,10 +27,12 @@ func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Home
 }
 
 func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.ListHomeBrandResp, error) {
-	resp, err := l.svcCtx.Sms.HomeBrandList(l.ctx, &smsclient.HomeBrandListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-	})
+	resp, err := l.svcCtx.Sms.HomeBrandList(
+		l.ctx, &smsclient.HomeBrandListReq{
+			Current:  req.Current,
+			PageSize: req.PageSize,
+		},
+	)
 
 	if err != nil {
 		return nil, err
@@ -42,13 +45,15 @@ func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.L
 	var list []*types.ListtHomeBrandData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListtHomeBrandData{
-			Id:              item.Id,
-			BrandId:         item.BrandId,
-			BrandName:       item.BrandName,
-			RecommendStatus: item.RecommendStatus,
-			Sort:            item.Sort,
-		})
+		list = append(
+			list, &types.ListtHomeBrandData{
+				Id:              item.Id,
+				BrandId:         item.BrandId,
+				BrandName:       item.BrandName,
+				RecommendStatus: item.RecommendStatus,
+				Sort:            item.Sort,
+			},
+		)
 	}
 
 	return &types.ListHomeBrandResp{

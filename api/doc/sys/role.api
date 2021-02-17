@@ -10,12 +10,15 @@ type (
         Name string `json:"name"`                          // 角色名称
         Remark string `json:"remark"`                      // 备注
     }
+
     addRoleResp struct {
     }
+
     ListRoleReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
+
     ListRoleData struct {
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 角色名称
@@ -24,8 +27,9 @@ type (
         CreateTime string `json:"create_time"`             // 创建时间
         LastUpdateBy string `json:"last_update_by"`        // 更新人
         LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1：已删除  0：正常
+        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1: 已删除  0: 正常
     }
+
     ListRoleResp struct {
         Current int64 `json:"current"`
         Data []*ListRoleData `json:"data"`
@@ -33,24 +37,32 @@ type (
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
+
     UpdateRoleReq struct {
         Id int64 `json:"id"`                               // 编号
         Name string `json:"name"`                          // 角色名称
         Remark string `json:"remark"`                      // 备注
     }
+
     UpdateRoleResp struct {
     }
+
     DeleteRoleReq struct {
         Id int64 `json:"id"`
     }
+
     DeleteRoleResp struct {
     }
+
     RoleMenuIdsReq struct {
     }
+
     RoleMenuIdsResp struct {
     }
+
     UpdateRoleMenuReq struct {
     }
+
     UpdateRoleMenuResp struct {
     }
 )
