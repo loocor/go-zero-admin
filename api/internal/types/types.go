@@ -2,14 +2,14 @@
 package types
 
 type CommonData struct {
-	Id         int64  `json:"id, optional"`         // 编号
-	CreateBy   string `json:"createBy, optional"`   // 创建人
-	UpdateBy   string `json:"updateBy, optional"`   // 更新人
-	DeleteBy   string `json:"deleteBy, optional"`   // 删除人
-	CreateTime int64  `json:"createTime, optional"` // 创建时间，go-zero 会自动计算
-	UpdateTime int64  `json:"updateTime, optional"` // 更新时间，go-zero 会自动计算
-	DeleteTime int64  `json:"deleteTime, optional"` // 删除时间
-	DelFlag    int64  `json:"delFlag, default=0"`   // 是否删除 -1: 已删除 0: 正常
+	Id         int64  `json:"id, optional"`          // 编号
+	CreateBy   string `json:"createBy, optional"`    // 创建人
+	UpdateBy   string `json:"updateBy, optional"`    // 更新人
+	CreateTime int64  `json:"createTime, optional"`  // 创建时间，go-zero 会自动计算
+	UpdateTime int64  `json:"updateTime, optional"`  // 更新时间，go-zero 会自动计算
+	DeleteBy   string `json:"deleteBy, optional"`    // 删除人
+	DeleteTime int64  `json:"deleteTime, optional"`  // 删除时间
+	DeleteFlag int64  `json:"deleteFlag, default=0"` // 是否删除 -1: 已删除 0: 正常
 }
 
 type CommonResp struct {
@@ -73,9 +73,9 @@ type ConfigDeleteResp struct {
 }
 
 type DeptData struct {
-	Name     string `json:"name"`      // 机构名称
-	ParentId int64  `json:"parent_id"` // 上级机构ID, 一级机构为0
-	OrderNum int64  `json:"order_num"` // 排序
+	Name     string `json:"name"`     // 机构名称
+	ParentId int64  `json:"parentId"` // 上级机构ID, 一级机构为0
+	OrderNum int64  `json:"orderNum"` // 排序
 	CommonData
 }
 
@@ -156,9 +156,9 @@ type DictDeleteResp struct {
 }
 
 type LoginLogData struct {
-	UserName string `json:"user_name"` // 用户名
-	Status   string `json:"status"`    // 登录状态 (online:在线, 登录初始状态; login:退出登录后将 online 置为login; logout:退出登录)
-	Ip       string `json:"ip"`        // IP地址
+	UserName string `json:"userName"` // 用户名
+	Status   string `json:"status"`   // 登录状态 (online:在线, 登录初始状态; login:退出登录后将 online 置为login; logout:退出登录)
+	Ip       string `json:"ip"`       // IP地址
 	CommonData
 }
 
@@ -180,13 +180,13 @@ type LoginLogDeleteResp struct {
 }
 
 type MenuData struct {
-	Name     string `json:"name"`      // 菜单名称
-	ParentId int64  `json:"parent_id"` // 父菜单ID, 一级菜单为0
-	Url      string `json:"url"`       // 菜单URL,类型: 1.普通页面 (如用户管理, /sysmodel/user) 2.嵌套完整外部页面, 以http(s)开头的链接 3.嵌套服务器页面, 使用iframe:前缀+目标URL(如SQL监控, iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
-	Perms    string `json:"perms"`     // 授权(多个用逗号分隔, 如: sysmodel:user:add,sysmodel:user:edit)
-	Type     int64  `json:"type"`      // 类型 0: 目录 1: 菜单 2: 按钮
-	Icon     string `json:"icon"`      // 菜单图标
-	OrderNum int64  `json:"order_num"` // 排序
+	Name     string `json:"name"`     // 菜单名称
+	ParentId int64  `json:"parentId"` // 父菜单ID, 一级菜单为0
+	Url      string `json:"url"`      // 菜单URL,类型: 1.普通页面 (如用户管理, /sysmodel/user) 2.嵌套完整外部页面, 以http(s)开头的链接 3.嵌套服务器页面, 使用iframe:前缀+目标URL(如SQL监控, iframe:/druid/login.html, iframe:前缀会替换成服务器地址)
+	Perms    string `json:"perms"`    // 授权(多个用逗号分隔, 如: sysmodel:user:add,sysmodel:user:edit)
+	Type     int64  `json:"type"`     // 类型 0: 目录 1: 菜单 2: 按钮
+	Icon     string `json:"icon"`     // 菜单图标
+	OrderNum int64  `json:"orderNum"` // 排序
 	CommonData
 }
 
@@ -277,7 +277,7 @@ type RoleMenuUpdateResp struct {
 }
 
 type SysLogData struct {
-	UserName  string `json:"user_name"` // 用户名
+	UserName  string `json:"userName"`  // 用户名
 	Operation string `json:"operation"` // 用户操作
 	Method    string `json:"method"`    // 请求方法
 	Params    string `json:"params"`    // 请求参数
@@ -341,16 +341,12 @@ type UserAddResp struct {
 }
 
 type UserListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonListReq
 }
 
 type UserListResp struct {
-	Current  int64       `json:"current"`
-	Data     []*UserData `json:"data"`
-	PageSize int64       `json:"pageSize"`
-	Success  bool        `json:"success"`
-	Total    int64       `json:"total"`
+	Data []*UserData `json:"data"`
+	CommonListResp
 }
 
 type UserUpdateReq struct {
@@ -393,92 +389,52 @@ type UserStatusUpdateResp struct {
 	CommonResp
 }
 
+type MemberData struct {
+	MemberLevelId         int64  `json:"memberLevelId"`                   // 会员级别 ID
+	Username              string `json:"username"`                        // 用户名
+	Password              string `json:"password"`                        // 密码
+	Nickname              string `json:"nickname, optional"`              // 昵称
+	Phone                 string `json:"phone"`                           // 手机号码
+	IdNumber              string `json:"idNumber, optional"`              // 身份证号
+	Status                int64  `json:"status, default=1"`               // 帐号启用状态: 0->禁用; 1->启用
+	Icon                  string `json:"icon, optional"`                  // 头像
+	Gender                int64  `json:"gender, default=0"`               // 性别: 0->未知; 1->男; 2->女
+	Birthday              string `json:"birthday, optional"`              // 生日
+	Email                 string `json:"email, optional"`                 // 电邮
+	City                  string `json:"city, optional"`                  // 城市
+	Job                   string `json:"job, optional"`                   // 职业
+	PersonalizedSignature string `json:"personalizedSignature, optional"` // 签名
+	SourceType            int64  `json:"sourceType"`                      // 来源
+	Integration           int64  `json:"integration, default=0"`          // 积分值
+	Growth                int64  `json:"growth, default=0"`               // 成长值
+	LuckyCount            int64  `json:"luckyCount, default=0"`           // 剩余抽奖次数
+	HistoryIntegration    int64  `json:"historyIntegration"`              // 历史积分数量
+	CommonData
+}
+
 type MemberAddReq struct {
-	MemberLevelId         int64  `json:"member_level_id"`        // 会员级别 ID
-	Username              string `json:"username"`               // 用户名
-	Password              string `json:"password"`               // 密码
-	Nickname              string `json:"nickname"`               // 昵称
-	Phone                 string `json:"phone"`                  // 手机号码
-	Status                int64  `json:"status"`                 // 帐号启用状态: 0->禁用; 1->启用
-	CreateTime            string `json:"create_time"`            // 注册时间
-	Icon                  string `json:"icon"`                   // 头像
-	Gender                int64  `json:"gender"`                 // 性别: 0->未知; 1->男; 2->女
-	Birthday              string `json:"birthday"`               // 生日
-	City                  string `json:"city"`                   // 所在城市
-	Job                   string `json:"job"`                    // 职业
-	PersonalizedSignature string `json:"personalized_signature"` // 个性签名
-	SourceType            int64  `json:"source_type"`            // 用户来源
-	Integration           int64  `json:"integration"`            // 积分
-	Growth                int64  `json:"growth"`                 // 成长值
-	LuckyCount            int64  `json:"lucky_count"`            // 剩余抽奖次数
-	HistoryIntegration    int64  `json:"history_integration"`    // 历史积分数量
+	MemberData
 }
 
 type MemberAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
-}
-
-type MemberData struct {
-	Id                    int64  `json:"id"`
-	MemberLevelId         int64  `json:"member_level_id"`        // 会员级别 ID
-	Username              string `json:"username"`               // 用户名
-	Password              string `json:"password"`               // 密码
-	Nickname              string `json:"nickname"`               // 昵称
-	Phone                 string `json:"phone"`                  // 手机号码
-	Status                int64  `json:"status"`                 // 帐号启用状态:0->禁用; 1->启用
-	CreateTime            string `json:"create_time"`            // 注册时间
-	Icon                  string `json:"icon"`                   // 头像
-	Gender                int64  `json:"gender"`                 // 性别: 0->未知; 1->男; 2->女
-	Birthday              string `json:"birthday"`               // 生日
-	City                  string `json:"city"`                   // 所做城市
-	Job                   string `json:"job"`                    // 职业
-	PersonalizedSignature string `json:"personalized_signature"` // 个性签名
-	SourceType            int64  `json:"source_type"`            // 用户来源
-	Integration           int64  `json:"integration"`            // 积分
-	Growth                int64  `json:"growth"`                 // 成长值
-	LuckyCount            int64  `json:"lucky_count"`            // 剩余抽奖次数
-	HistoryIntegration    int64  `json:"history_integration"`    // 历史积分数量
+	CommonListReq
 }
 
 type MemberListResp struct {
-	Current  int64         `json:"current"`
-	Data     []*MemberData `json:"data"`
-	PageSize int64         `json:"pageSize"`
-	Success  bool          `json:"success"`
-	Total    int64         `json:"total"`
+	Data []*MemberData `json:"data"`
+	CommonListResp
 }
 
 type MemberUpdateReq struct {
-	Id                    int64  `json:"id"`
-	MemberLevelId         int64  `json:"member_level_id"`
-	Username              string `json:"username"`               // 用户名
-	Password              string `json:"password"`               // 密码
-	Nickname              string `json:"nickname"`               // 昵称
-	Phone                 string `json:"phone"`                  // 手机号码
-	Status                int64  `json:"status"`                 // 帐号启用状态:0->禁用; 1->启用
-	CreateTime            string `json:"create_time"`            // 注册时间
-	Icon                  string `json:"icon"`                   // 头像
-	Gender                int64  `json:"gender"`                 // 性别: 0->未知; 1->男; 2->女
-	Birthday              string `json:"birthday"`               // 生日
-	City                  string `json:"city"`                   // 所做城市
-	Job                   string `json:"job"`                    // 职业
-	PersonalizedSignature string `json:"personalized_signature"` // 个性签名
-	SourceType            int64  `json:"source_type"`            // 用户来源
-	Integration           int64  `json:"integration"`            // 积分
-	Growth                int64  `json:"growth"`                 // 成长值
-	LuckyCount            int64  `json:"lucky_count"`            // 剩余抽奖次数
-	HistoryIntegration    int64  `json:"history_integration"`    // 历史积分数量
+	MemberData
 }
 
 type MemberUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberDeleteReq struct {
@@ -486,69 +442,47 @@ type MemberDeleteReq struct {
 }
 
 type MemberDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberAddressAddReq struct {
-	MemberId      int64  `json:"member_id"`
-	Name          string `json:"name"`           // 收货人名称
-	PhoneNumber   string `json:"phone_number"`   // 电话号码
-	DefaultStatus int64  `json:"default_status"` // 是否为默认
-	PostCode      string `json:"post_code"`      // 邮政编码
-	Province      string `json:"province"`       // 省份/直辖市
-	City          string `json:"city"`           // 城市
-	Region        string `json:"region"`         // 区
-	DetailAddress string `json:"detail_address"` // 详细地址(街道)
-}
-
-type MemberAddressAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberAddressListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberAddressData struct {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"member_id"`
-	Name          string `json:"name"`           // 收货人名称
-	PhoneNumber   string `json:"phone_number"`   // 电话号码
-	DefaultStatus int64  `json:"default_status"` // 是否为默认
-	PostCode      string `json:"post_code"`      // 邮政编码
-	Province      string `json:"province"`       // 省份/直辖市
-	City          string `json:"city"`           // 城市
-	Region        string `json:"region"`         // 区
-	DetailAddress string `json:"detail_address"` // 详细地址(街道)
+	MemberId      int64  `json:"memberId"`                 // 会员 ID
+	Name          string `json:"name"`                     // 收货人名称
+	PhoneNumber   string `json:"phoneNumber"`              // 电话号码
+	IsDefault     bool   `json:"isDefault, default=false"` // 是否为默认
+	Country       string `json:"country, default=china"`   // 国家
+	Province      string `json:"province"`                 // 省
+	City          string `json:"city"`                     // 市
+	Region        string `json:"region"`                   // 区
+	DetailAddress string `json:"detailAddress"`            // 详细地址
+	PostCode      string `json:"postCode"`                 // 邮政编码
+	Remark        string `json:"remark"`                   // 备注
+	CommonData
+}
+
+type MemberAddressAddReq struct {
+	MemberAddressData
+}
+
+type MemberAddressAddResp struct {
+	CommonResp
+}
+
+type MemberAddressListReq struct {
+	CommonListReq
 }
 
 type MemberAddressListResp struct {
-	Current  int64                `json:"current"`
-	Data     []*MemberAddressData `json:"data"`
-	PageSize int64                `json:"pageSize"`
-	Success  bool                 `json:"success"`
-	Total    int64                `json:"total"`
+	Data []*MemberAddressData `json:"data"`
+	CommonListResp
 }
 
 type MemberAddressUpdateReq struct {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"member_id"`
-	Name          string `json:"name"`           // 收货人名称
-	PhoneNumber   string `json:"phone_number"`   // 电话号码
-	DefaultStatus int64  `json:"default_status"` // 是否为默认
-	PostCode      string `json:"post_code"`      // 邮政编码
-	Province      string `json:"province"`       // 省份/直辖市
-	City          string `json:"city"`           // 城市
-	Region        string `json:"region"`         // 区
-	DetailAddress string `json:"detail_address"` // 详细地址(街道)
+	MemberAddressData
 }
 
 type MemberAddressUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberAddressDeleteReq struct {
@@ -556,63 +490,42 @@ type MemberAddressDeleteReq struct {
 }
 
 type MemberAddressDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type GrowthChangeHistoryAddReq struct {
-	MemberId    int64  `json:"member_id"`
-	CreateTime  string `json:"create_time"`
-	ChangeType  int64  `json:"change_type"`  // 改变类型: 0->增加; 1->减少
-	ChangeCount int64  `json:"change_count"` // 积分改变数量
-	OperateMan  string `json:"operate_man"`  // 操作人员
-	OperateNote string `json:"operate_note"` // 操作备注
-	SourceType  int64  `json:"source_type"`  // 积分来源: 0->购物; 1->管理员修改
-}
-
-type GrowthChangeHistoryAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type GrowthChangeHistoryListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type GrowthChangeHistoryData struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"member_id"`
-	CreateTime  string `json:"create_time"`
-	ChangeType  int64  `json:"change_type"`  // 改变类型: 0->增加; 1->减少
-	ChangeCount int64  `json:"change_count"` // 积分改变数量
-	OperateMan  string `json:"operate_man"`  // 操作人员
-	OperateNote string `json:"operate_note"` // 操作备注
-	SourceType  int64  `json:"source_type"`  // 积分来源: 0->购物; 1->管理员修改
+	MemberId     int64  `json:"memberId"`     // 会员 ID
+	ChangeType   int64  `json:"changeType"`   // 变更类型: 0->增加; 1->减少
+	ChangeCount  int64  `json:"changeCount"`  // 变更数量
+	ChangeBy     string `json:"changeBy"`     // 变更人员
+	ChangeReason int64  `json:"changeReason"` // 变更原因: 0->购物; 1->管理员修改
+	ChangeNote   string `json:"changeNote"`   // 变更备注
+	CommonData
+}
+
+type GrowthChangeHistoryAddReq struct {
+	GrowthChangeHistoryData
+}
+
+type GrowthChangeHistoryAddResp struct {
+	CommonResp
+}
+
+type GrowthChangeHistoryListReq struct {
+	CommonListReq
 }
 
 type GrowthChangeHistoryListResp struct {
-	Current  int64                      `json:"current"`
-	Data     []*GrowthChangeHistoryData `json:"data"`
-	PageSize int64                      `json:"pageSize"`
-	Success  bool                       `json:"success"`
-	Total    int64                      `json:"total"`
+	Data []*GrowthChangeHistoryData `json:"data"`
+	CommonListResp
 }
 
 type GrowthChangeHistoryUpdateReq struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"member_id"`
-	CreateTime  string `json:"create_time"`
-	ChangeType  int64  `json:"change_type"`  // 改变类型: 0->增加; 1->减少
-	ChangeCount int64  `json:"change_count"` // 积分改变数量
-	OperateMan  string `json:"operate_man"`  // 操作人员
-	OperateNote string `json:"operate_note"` // 操作备注
-	SourceType  int64  `json:"source_type"`  // 积分来源: 0->购物; 1->管理员修改
+	GrowthChangeHistoryData
 }
 
 type GrowthChangeHistoryUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type GrowthChangeHistoryDeleteReq struct {
@@ -620,63 +533,42 @@ type GrowthChangeHistoryDeleteReq struct {
 }
 
 type GrowthChangeHistoryDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type IntegrationChangeHistoryAddReq struct {
-	MemberId    int64  `json:"member_id"`    // 会员 ID
-	CreateTime  string `json:"create_time"`  // 创建时间
-	ChangeType  int64  `json:"change_type"`  // 改变类型: 0->增加; 1->减少
-	ChangeCount int64  `json:"change_count"` // 积分改变数量
-	OperateMan  string `json:"operate_man"`  // 操作人员
-	OperateNote string `json:"operate_note"` // 操作备注
-	SourceType  int64  `json:"source_type"`  // 积分来源: 0->购物; 1->管理员修改
-}
-
-type IntegrationChangeHistoryAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type IntegrationChangeHistoryListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type IntegrationChangeHistoryData struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"member_id"`    // 会员 ID
-	CreateTime  string `json:"create_time"`  // 创建时间
-	ChangeType  int64  `json:"change_type"`  // 改变类型: 0->增加; 1->减少
-	ChangeCount int64  `json:"change_count"` // 积分改变数量
-	OperateMan  string `json:"operate_man"`  // 操作人员
-	OperateNote string `json:"operate_note"` // 操作备注
-	SourceType  int64  `json:"source_type"`  // 积分来源: 0->购物; 1->管理员修改
+	MemberId     int64  `json:"memberId"`     // 会员 ID
+	ChangeType   int64  `json:"changeType"`   // 变更类型: 0->增加; 1->减少
+	ChangeCount  int64  `json:"changeCount"`  // 变更数量
+	ChangeBy     string `json:"changeBy"`     // 变更人员
+	ChangeReason int64  `json:"changeReason"` // 变更原因: 0->购物; 1->管理员修改
+	ChangeNote   string `json:"changeNote"`   // 变更备注
+	CommonData
+}
+
+type IntegrationChangeHistoryAddReq struct {
+	IntegrationChangeHistoryData
+}
+
+type IntegrationChangeHistoryAddResp struct {
+	CommonResp
+}
+
+type IntegrationChangeHistoryListReq struct {
+	CommonListReq
 }
 
 type IntegrationChangeHistoryListResp struct {
-	Current  int64                           `json:"current"`
-	Data     []*IntegrationChangeHistoryData `json:"data"`
-	PageSize int64                           `json:"pageSize"`
-	Success  bool                            `json:"success"`
-	Total    int64                           `json:"total"`
+	Data []*IntegrationChangeHistoryData `json:"data"`
+	CommonListResp
 }
 
 type IntegrationChangeHistoryUpdateReq struct {
-	Id          int64  `json:"id"`
-	MemberId    int64  `json:"member_id"`    // 会员 ID
-	CreateTime  string `json:"create_time"`  // 创建时间
-	ChangeType  int64  `json:"change_type"`  // 改变类型: 0->增加; 1->减少
-	ChangeCount int64  `json:"change_count"` // 积分改变数量
-	OperateMan  string `json:"operate_man"`  // 操作人员
-	OperateNote string `json:"operate_note"` // 操作备注
-	SourceType  int64  `json:"source_type"`  // 积分来源: 0->购物; 1->管理员修改
+	IntegrationChangeHistoryData
 }
 
 type IntegrationChangeHistoryUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type IntegrationChangeHistoryDeleteReq struct {
@@ -684,54 +576,40 @@ type IntegrationChangeHistoryDeleteReq struct {
 }
 
 type IntegrationChangeHistoryDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type IntegrationConsumeSettingAddReq struct {
-	DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
-	UseUnit            int64 `json:"use_unit"`              // 每次使用积分最小单位100
-	CouponStatus       int64 `json:"coupon_status"`         // 是否可以和优惠券同用; 0->不可以; 1->可以
-}
-
-type IntegrationConsumeSettingAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type IntegrationConsumeSettingListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type IntegrationConsumeSettingData struct {
-	Id                 int64 `json:"id"`
-	DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
-	UseUnit            int64 `json:"use_unit"`              // 每次使用积分最小单位100
-	CouponStatus       int64 `json:"coupon_status"`         // 是否可以和优惠券同用; 0->不可以; 1->可以
+	DeductionPerAmount int64 `json:"deductionPerAmount"` // 每一元需要抵扣的积分数量
+	MaxPercentPerOrder int64 `json:"maxPercentPerOrder"` // 每笔订单最高抵用百分比
+	UseUnit            int64 `json:"useUnit"`            // 每次使用积分最小单位100
+	CouponStatus       int64 `json:"couponStatus"`       // 是否可以和优惠券同用; 0->不可以; 1->可以
+	CommonData
+}
+
+type IntegrationConsumeSettingAddReq struct {
+	IntegrationConsumeSettingData
+}
+
+type IntegrationConsumeSettingAddResp struct {
+	CommonResp
+}
+
+type IntegrationConsumeSettingListReq struct {
+	CommonListReq
 }
 
 type IntegrationConsumeSettingListResp struct {
-	Current  int64                            `json:"current"`
-	Data     []*IntegrationConsumeSettingData `json:"data"`
-	PageSize int64                            `json:"pageSize"`
-	Success  bool                             `json:"success"`
-	Total    int64                            `json:"total"`
+	Data []*IntegrationConsumeSettingData `json:"data"`
+	CommonListResp
 }
 
 type IntegrationConsumeSettingUpdateReq struct {
-	Id                 int64 `json:"id"`
-	DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
-	UseUnit            int64 `json:"use_unit"`              // 每次使用积分最小单位100
-	CouponStatus       int64 `json:"coupon_status"`         // 是否可以和优惠券同用; 0->不可以; 1->可以
+	IntegrationConsumeSettingData
 }
 
 type IntegrationConsumeSettingUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type IntegrationConsumeSettingDeleteReq struct {
@@ -739,78 +617,48 @@ type IntegrationConsumeSettingDeleteReq struct {
 }
 
 type IntegrationConsumeSettingDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberLevelAddReq struct {
-	Name                  string  `json:"name"`
-	GrowthPoint           int64   `json:"growth_point"`           // 成长点值
-	DefaultStatus         int64   `json:"default_status"`         // 是否为默认等级: 0->不是; 1->是
-	FreeFreightPoint      float64 `json:"free_freight_point"`     // 免运费标准
-	CommentGrowthPoint    int64   `json:"comment_growth_point"`   // 每次评价获取的成长值
-	PriviledgeFreeFreight int64   `json:"privilege_free_freight"` // 是否有免邮特权
-	PriviledgeSignIn      int64   `json:"privilege_sign_in"`      // 是否有签到特权
-	PriviledgeComment     int64   `json:"privilege_comment"`      // 是否有评论获奖励特权
-	PriviledgePromotion   int64   `json:"privilege_promotion"`    // 是否有专享活动特权
-	PriviledgeMemberPrice int64   `json:"privilege_member_price"` // 是否有会员价格特权
-	PriviledgeBirthday    int64   `json:"privilege_birthday"`     // 是否有生日特权
-	Note                  string  `json:"note"`                   // 备注
-}
-
-type MemberLevelAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberLevelListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberLevelData struct {
-	Id                    int64   `json:"id"`
-	Name                  string  `json:"name"`
-	GrowthPoint           int64   `json:"growth_point"`           // 成长点值
-	DefaultStatus         int64   `json:"default_status"`         // 是否为默认等级: 0->不是; 1->是
-	FreeFreightPoint      float64 `json:"free_freight_point"`     // 免运费标准
-	CommentGrowthPoint    int64   `json:"comment_growth_point"`   // 每次评价获取的成长值
-	PriviledgeFreeFreight int64   `json:"privilege_free_freight"` // 是否有免邮特权
-	PriviledgeSignIn      int64   `json:"privilege_sign_in"`      // 是否有签到特权
-	PriviledgeComment     int64   `json:"privilege_comment"`      // 是否有评论获奖励特权
-	PriviledgePromotion   int64   `json:"privilege_promotion"`    // 是否有专享活动特权
-	PriviledgeMemberPrice int64   `json:"privilege_member_price"` // 是否有会员价格特权
-	PriviledgeBirthday    int64   `json:"privilege_birthday"`     // 是否有生日特权
-	Note                  string  `json:"note"`                   // 备注
+	Name                  string  `json:"name"`                  // 会员级别名称
+	GrowthPoint           int64   `json:"growthPoint"`           // 成长点值
+	IsDefault             int64   `json:"isDefault"`             // 是否为默认等级: 0->不是; 1->是
+	FreeFreightPoint      float64 `json:"freeFreightPoint"`      // 免运费标准
+	CommentGrowthPoint    int64   `json:"commentGrowthPoint"`    // 每次评价获取的成长值
+	PriviledgeFreeFreight int64   `json:"priviledgeFreeFreight"` // 是否有免邮特权
+	PriviledgeSignIn      int64   `json:"priviledgeSignIn"`      // 是否有签到特权
+	PriviledgeComment     int64   `json:"priviledgeComment"`     // 是否有评论获奖励特权
+	PriviledgePromotion   int64   `json:"priviledgePromotion"`   // 是否有专享活动特权
+	PriviledgeMemberPrice int64   `json:"priviledgeMemberPrice"` // 是否有会员价格特权
+	PriviledgeBirthday    int64   `json:"priviledgeBirthday"`    // 是否有生日特权
+	Note                  string  `json:"note"`                  // 备注
+	CommonData
+}
+
+type MemberLevelAddReq struct {
+	MemberLevelData
+}
+
+type MemberLevelAddResp struct {
+	CommonResp
+}
+
+type MemberLevelListReq struct {
+	CommonListReq
 }
 
 type MemberLevelListResp struct {
-	Current  int64              `json:"current"`
-	Data     []*MemberLevelData `json:"data"`
-	PageSize int64              `json:"pageSize"`
-	Success  bool               `json:"success"`
-	Total    int64              `json:"total"`
+	Data []*MemberLevelData `json:"data"`
+	CommonListResp
 }
 
 type MemberLevelUpdateReq struct {
-	Id                    int64   `json:"id"`
-	Name                  string  `json:"name"`
-	GrowthPoint           int64   `json:"growth_point"`           // 成长点值
-	DefaultStatus         int64   `json:"default_status"`         // 是否为默认等级: 0->不是; 1->是
-	FreeFreightPoint      float64 `json:"free_freight_point"`     // 免运费标准
-	CommentGrowthPoint    int64   `json:"comment_growth_point"`   // 每次评价获取的成长值
-	PriviledgeFreeFreight int64   `json:"privilege_free_freight"` // 是否有免邮特权
-	PriviledgeSignIn      int64   `json:"privilege_sign_in"`      // 是否有签到特权
-	PriviledgeComment     int64   `json:"privilege_comment"`      // 是否有评论获奖励特权
-	PriviledgePromotion   int64   `json:"privilege_promotion"`    // 是否有专享活动特权
-	PriviledgeMemberPrice int64   `json:"privilege_member_price"` // 是否有会员价格特权
-	PriviledgeBirthday    int64   `json:"privilege_birthday"`     // 是否有生日特权
-	Note                  string  `json:"note"`                   // 备注
+	MemberLevelData
 }
 
 type MemberLevelUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberLevelDeleteReq struct {
@@ -818,60 +666,41 @@ type MemberLevelDeleteReq struct {
 }
 
 type MemberLevelDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberLoginLogAddReq struct {
-	MemberId   int64  `json:"member_id"`
-	CreateTime string `json:"create_time"`
-	Ip         string `json:"ip"`
-	City       string `json:"city"`
-	LoginType  int64  `json:"login_type"` // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
-	Province   string `json:"province"`
-}
-
-type MemberLoginLogAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberLoginLogListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberLoginLogData struct {
-	Id         int64  `json:"id"`
-	MemberId   int64  `json:"member_id"`   // 会员 ID
-	CreateTime string `json:"create_time"` // 登录时间
-	Ip         string `json:"ip"`          // IP 地址
-	City       string `json:"city"`        // 城市
-	LoginType  int64  `json:"login_type"`  // 登录类型: 0->登录类型: 0->PC, 1->android, 2->ios, 3->mp
-	Province   string `json:"province"`    // 省份
+	MemberId  int64  `json:"memberId"`  // 会员 ID
+	LoginType int64  `json:"loginType"` // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
+	Ip        string `json:"ip"`        // IP 地址
+	City      string `json:"city"`      // 城市
+	Province  string `json:"province"`  // 省份
+	CommonData
+}
+
+type MemberLoginLogAddReq struct {
+	MemberLoginLogData
+}
+
+type MemberLoginLogAddResp struct {
+	CommonResp
+}
+
+type MemberLoginLogListReq struct {
+	CommonListReq
 }
 
 type MemberLoginLogListResp struct {
-	Current  int64                 `json:"current"`
-	Data     []*MemberLoginLogData `json:"data"`
-	PageSize int64                 `json:"pageSize"`
-	Success  bool                  `json:"success"`
-	Total    int64                 `json:"total"`
+	Data []*MemberLoginLogData `json:"data"`
+	CommonListResp
 }
 
 type MemberLoginLogUpdateReq struct {
-	Id         int64  `json:"id"`
-	MemberId   int64  `json:"member_id"`   // 会员 ID
-	CreateTime string `json:"create_time"` // 登录时间
-	Ip         string `json:"ip"`          // IP 地址
-	City       string `json:"city"`        // 城市
-	LoginType  int64  `json:"login_type"`  // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
-	Province   string `json:"province"`    // 省份
+	MemberLoginLogData
 }
 
 type MemberLoginLogUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberLoginLogDeleteReq struct {
@@ -879,60 +708,42 @@ type MemberLoginLogDeleteReq struct {
 }
 
 type MemberLoginLogDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberRuleSettingAddReq struct {
-	ContinueSignDay   int64   `json:"continue_sign_day"`   // 连续签到天数
-	ContinueSignPoint int64   `json:"continue_sign_point"` // 连续签到赠送数量
-	ConsumePerPoint   float64 `json:"consume_per_point"`   // 每消费多少元获取1个点
-	LowOrderAmount    float64 `json:"low_order_amount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int64   `json:"max_point_per_order"` // 每笔订单最高获取点数
-	Type              int64   `json:"type"`                // 类型: 0->积分规则; 1->成长值规则
-}
-
-type MemberRuleSettingAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberRuleSettingListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberRuleSettingData struct {
-	Id                int64   `json:"id"`
-	ContinueSignDay   int64   `json:"continue_sign_day"`   // 连续签到天数
-	ContinueSignPoint int64   `json:"continue_sign_point"` // 连续签到赠送数量
-	ConsumePerPoint   float64 `json:"consume_per_point"`   // 每消费多少元获取1个点
-	LowOrderAmount    float64 `json:"low_order_amount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int64   `json:"max_point_per_order"` // 每笔订单最高获取点数
-	Type              int64   `json:"type"`                // 类型: 0->积分规则; 1->成长值规则
+	Type              int64   `json:"type"`              // 类型: 0->积分规则; 1->成长值规则
+	ContinueSignDay   int64   `json:"continueSignDay"`   // 连续签到天数
+	ContinueSignPoint int64   `json:"continueSignPoint"` // 连续签到赠送数量
+	ConsumePerPoint   float64 `json:"consumePerPoint"`   // 每消费多少元获取1个点
+	LowOrderAmount    float64 `json:"lowOrderAmount"`    // 最低获取点数的订单金额
+	MaxPointPerOrder  int64   `json:"maxPointPerOrder"`  // 每笔订单最高获取点数
+	CommonData
+}
+
+type MemberRuleSettingAddReq struct {
+	MemberRuleSettingData
+}
+
+type MemberRuleSettingAddResp struct {
+	CommonResp
+}
+
+type MemberRuleSettingListReq struct {
+	CommonListReq
 }
 
 type MemberRuleSettingListResp struct {
-	Current  int64                    `json:"current"`
-	Data     []*MemberRuleSettingData `json:"data"`
-	PageSize int64                    `json:"pageSize"`
-	Success  bool                     `json:"success"`
-	Total    int64                    `json:"total"`
+	Data []*MemberRuleSettingData `json:"data"`
+	CommonListResp
 }
 
 type MemberRuleSettingUpdateReq struct {
-	Id                int64   `json:"id"`
-	ContinueSignDay   int64   `json:"continue_sign_day"`   // 连续签到天数
-	ContinueSignPoint int64   `json:"continue_sign_point"` // 连续签到赠送数量
-	ConsumePerPoint   float64 `json:"consume_per_point"`   // 每消费多少元获取1个点
-	LowOrderAmount    float64 `json:"low_order_amount"`    // 最低获取点数的订单金额
-	MaxPointPerOrder  int64   `json:"max_point_per_order"` // 每笔订单最高获取点数
-	Type              int64   `json:"type"`                // 类型: 0->积分规则; 1->成长值规则
+	MemberRuleSettingData
 }
 
 type MemberRuleSettingUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberRuleSettingDeleteReq struct {
@@ -940,87 +751,51 @@ type MemberRuleSettingDeleteReq struct {
 }
 
 type MemberRuleSettingDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberStatisticsInfoAddReq struct {
-	MemberId            int64   `json:"member_id"`
-	ConsumeAmount       float64 `json:"consume_amount"`        // 累计消费金额
-	OrderCount          int64   `json:"order_count"`           // 订单数量
-	CouponCount         int64   `json:"coupon_count"`          // 优惠券数量
-	CommentCount        int64   `json:"comment_count"`         // 评价数
-	ReturnOrderCount    int64   `json:"return_order_count"`    // 退货数量
-	LoginCount          int64   `json:"login_count"`           // 登录次数
-	AttendCount         int64   `json:"attend_count"`          // 关注数量
-	FansCount           int64   `json:"fans_count"`            // 粉丝数量
-	CollectProductCount int64   `json:"collect_product_count"` // 收藏商品数量
-	CollectSubjectCount int64   `json:"collect_subject_count"` // 收藏主题数量
-	CollectTopicCount   int64   `json:"collect_topic_count"`   // 收藏话题数量
-	CollectCommentCount int64   `json:"collect_comment_count"` // 收藏评论数量
-	InviteFriendCount   int64   `json:"invite_friend_count"`   // 邀请朋友数量
-	RecentOrderTime     string  `json:"recent_order_time"`     // 最后一次下订单时间
-}
-
-type MemberStatisticsInfoAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberStatisticsInfoListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberStatisticsInfoData struct {
-	Id                  int64   `json:"id"`
-	MemberId            int64   `json:"member_id"`             // 会员ID
-	ConsumeAmount       float64 `json:"consume_amount"`        // 累计消费金额
-	OrderCount          int64   `json:"order_count"`           // 订单数量
-	CouponCount         int64   `json:"coupon_count"`          // 优惠券数量
-	CommentCount        int64   `json:"comment_count"`         // 评价数
-	ReturnOrderCount    int64   `json:"return_order_count"`    // 退货数量
-	LoginCount          int64   `json:"login_count"`           // 登录次数
-	AttendCount         int64   `json:"attend_count"`          // 关注数量
-	FansCount           int64   `json:"fans_count"`            // 粉丝数量
-	CollectProductCount int64   `json:"collect_product_count"` // 收藏商品数量
-	CollectSubjectCount int64   `json:"collect_subject_count"` // 收藏主题数量
-	CollectTopicCount   int64   `json:"collect_topic_count"`   // 收藏话题数量
-	CollectCommentCount int64   `json:"collect_comment_count"` // 收藏评论数量
-	InviteFriendCount   int64   `json:"invite_friend_count"`   // 邀请朋友数量
-	RecentOrderTime     string  `json:"recent_order_time"`     // 最后一次下订单时间
+	MemberId            int64   `json:"memberId"`            // 会员ID
+	ConsumeAmount       float64 `json:"consumeAmount"`       // 累计消费金额
+	OrderCount          int64   `json:"orderCount"`          // 订单数量
+	CouponCount         int64   `json:"couponCount"`         // 优惠券数量
+	CommentCount        int64   `json:"commentCount"`        // 评价数
+	ReturnOrderCount    int64   `json:"returnOrderCount"`    // 退货数量
+	LoginCount          int64   `json:"loginCount"`          // 登录次数
+	AttendCount         int64   `json:"attendCount"`         // 关注数量
+	FansCount           int64   `json:"fansCount"`           // 粉丝数量
+	CollectProductCount int64   `json:"collectProductCount"` // 收藏商品数量
+	CollectSubjectCount int64   `json:"collectSubjectCount"` // 收藏主题数量
+	CollectTopicCount   int64   `json:"collectTopicCount"`   // 收藏话题数量
+	CollectCommentCount int64   `json:"collectCommentCount"` // 收藏评论数量
+	InviteFriendCount   int64   `json:"inviteFriendCount"`   // 邀请朋友数量
+	RecentOrderTime     string  `json:"recentOrderTime"`     // 最后一次下订单时间
+	CommonData
+}
+
+type MemberStatisticsInfoAddReq struct {
+	MemberStatisticsInfoData
+}
+
+type MemberStatisticsInfoAddResp struct {
+	CommonResp
+}
+
+type MemberStatisticsInfoListReq struct {
+	CommonListReq
 }
 
 type MemberStatisticsInfoListResp struct {
-	Current  int64                       `json:"current"`
-	Data     []*MemberStatisticsInfoData `json:"data"`
-	PageSize int64                       `json:"pageSize"`
-	Success  bool                        `json:"success"`
-	Total    int64                       `json:"total"`
+	Data []*MemberStatisticsInfoData `json:"data"`
+	CommonListResp
 }
 
 type MemberStatisticsInfoUpdateReq struct {
-	Id                  int64   `json:"id"`
-	MemberId            int64   `json:"member_id"`             // 会员ID
-	ConsumeAmount       float64 `json:"consume_amount"`        // 累计消费金额
-	OrderCount          int64   `json:"order_count"`           // 订单数量
-	CouponCount         int64   `json:"coupon_count"`          // 优惠券数量
-	CommentCount        int64   `json:"comment_count"`         // 评价数
-	ReturnOrderCount    int64   `json:"return_order_count"`    // 退货数量
-	LoginCount          int64   `json:"login_count"`           // 登录次数
-	AttendCount         int64   `json:"attend_count"`          // 关注数量
-	FansCount           int64   `json:"fans_count"`            // 粉丝数量
-	CollectProductCount int64   `json:"collect_product_count"` // 收藏商品数量
-	CollectSubjectCount int64   `json:"collect_subject_count"` // 收藏主题数量
-	CollectTopicCount   int64   `json:"collect_topic_count"`   // 收藏话题数量
-	CollectCommentCount int64   `json:"collect_comment_count"` // 收藏话题数量
-	InviteFriendCount   int64   `json:"invite_friend_count"`   // 邀请朋友数量
-	RecentOrderTime     string  `json:"recent_order_time"`     // 最后一次下订单时间
+	MemberStatisticsInfoData
 }
 
 type MemberStatisticsInfoUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberStatisticsInfoDeleteReq struct {
@@ -1028,51 +803,39 @@ type MemberStatisticsInfoDeleteReq struct {
 }
 
 type MemberStatisticsInfoDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberTagAddReq struct {
-	Name              string  `json:"name"`
-	FinishOrderCount  int64   `json:"finish_order_count"`  // 自动打标签完成订单数量
-	FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
-}
-
-type MemberTagAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberTagListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberTagData struct {
-	Id                int64   `json:"id"`
 	Name              string  `json:"name"`
-	FinishOrderCount  int64   `json:"finish_order_count"`  // 自动打标签完成订单数量
-	FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
+	FinishOrderCount  int64   `json:"finishOrderCount"`  // 自动打标签完成订单数量
+	FinishOrderAmount float64 `json:"finishOrderAmount"` // 自动打标签完成订单金额
+	CommonData
+}
+
+type MemberTagAddReq struct {
+	MemberTagData
+}
+
+type MemberTagAddResp struct {
+	CommonResp
+}
+
+type MemberTagListReq struct {
+	CommonListReq
 }
 
 type MemberTagListResp struct {
-	Current  int64            `json:"current"`
-	Data     []*MemberTagData `json:"data"`
-	PageSize int64            `json:"pageSize"`
-	Success  bool             `json:"success"`
-	Total    int64            `json:"total"`
+	Data []*MemberTagData `json:"data"`
+	CommonListResp
 }
 
 type MemberTagUpdateReq struct {
-	Id                int64   `json:"id"`
-	Name              string  `json:"name"`
-	FinishOrderCount  int64   `json:"finish_order_count"`  // 自动打标签完成订单数量
-	FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
+	MemberTagData
 }
 
 type MemberTagUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberTagDeleteReq struct {
@@ -1080,54 +843,40 @@ type MemberTagDeleteReq struct {
 }
 
 type MemberTagDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberTaskAddReq struct {
-	Name        string `json:"name"`
-	Growth      int64  `json:"growth"`      // 赠送成长值
-	Integration int64  `json:"integration"` // 赠送积分
-	Type        int64  `json:"type"`        // 任务类型: 0->新手任务; 1->日常任务
-}
-
-type MemberTaskAddResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
-}
-
-type MemberTaskListReq struct {
-	Current  int64 `form:"current"`
-	PageSize int64 `form:"pageSize"`
+	CommonResp
 }
 
 type MemberTaskData struct {
-	Id          int64  `json:"id"`
 	Name        string `json:"name"`
+	Type        int64  `json:"type"`        // 任务类型: 0->新手任务; 1->日常任务
 	Growth      int64  `json:"growth"`      // 赠送成长值
 	Integration int64  `json:"integration"` // 赠送积分
-	Type        int64  `json:"type"`        // 任务类型: 0->新手任务; 1->日常任务
+	CommonData
+}
+
+type MemberTaskAddReq struct {
+	MemberTaskData
+}
+
+type MemberTaskAddResp struct {
+	CommonResp
+}
+
+type MemberTaskListReq struct {
+	CommonListReq
 }
 
 type MemberTaskListResp struct {
-	Current  int64             `json:"current"`
-	Data     []*MemberTaskData `json:"data"`
-	PageSize int64             `json:"pageSize"`
-	Success  bool              `json:"success"`
-	Total    int64             `json:"total"`
+	Data []*MemberTaskData `json:"data"`
+	CommonListResp
 }
 
 type MemberTaskUpdateReq struct {
-	Id          int64  `json:"id"`
-	Name        string `json:"name"`
-	Growth      int64  `json:"growth"`      // 赠送成长值
-	Integration int64  `json:"integration"` // 赠送积分
-	Type        int64  `json:"type"`        // 任务类型: 0->新手任务; 1->日常任务
+	MemberTaskData
 }
 
 type MemberTaskUpdateResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }
 
 type MemberTaskDeleteReq struct {
@@ -1135,6 +884,5 @@ type MemberTaskDeleteReq struct {
 }
 
 type MemberTaskDeleteResp struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+	CommonResp
 }

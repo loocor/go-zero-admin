@@ -3,8 +3,8 @@ syntax = "v1"
 // import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
 
 info(
-    title: "Admin Config"
-    desc: "admin config management"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
     version: "1.0.0"
@@ -13,8 +13,8 @@ info(
 type (
     DeptData struct {
         Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id"`                  // 上级机构ID, 一级机构为0
-        OrderNum int64 `json:"order_num"`                  // 排序
+        ParentId int64 `json:"parentId"`                   // 上级机构ID, 一级机构为0
+        OrderNum int64 `json:"orderNum"`                   // 排序
         CommonData
     }
 

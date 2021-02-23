@@ -1,88 +1,59 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
     title: "Zdmin"
     desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
+    MemberStatisticsInfoData struct {
+        MemberId int64 `json:"memberId"`                           // 会员ID
+        ConsumeAmount float64 `json:"consumeAmount"`               // 累计消费金额
+        OrderCount int64 `json:"orderCount"`                       // 订单数量
+        CouponCount int64 `json:"couponCount"`                     // 优惠券数量
+        CommentCount int64 `json:"commentCount"`                   // 评价数
+        ReturnOrderCount int64 `json:"returnOrderCount"`           // 退货数量
+        LoginCount int64 `json:"loginCount"`                       // 登录次数
+        AttendCount int64 `json:"attendCount"`                     // 关注数量
+        FansCount int64 `json:"fansCount"`                         // 粉丝数量
+        CollectProductCount int64 `json:"collectProductCount"`     // 收藏商品数量
+        CollectSubjectCount int64 `json:"collectSubjectCount"`     // 收藏主题数量
+        CollectTopicCount int64 `json:"collectTopicCount"`         // 收藏话题数量
+        CollectCommentCount int64 `json:"collectCommentCount"`     // 收藏评论数量
+        InviteFriendCount int64 `json:"inviteFriendCount"`         // 邀请朋友数量
+        RecentOrderTime string `json:"recentOrderTime"`            // 最后一次下订单时间
+        CommonData
+    }
+
     MemberStatisticsInfoAddReq struct {
-        MemberId int64 `json:"member_id"`
-        ConsumeAmount float64 `json:"consume_amount"`               // 累计消费金额
-        OrderCount int64 `json:"order_count"`                       // 订单数量
-        CouponCount int64 `json:"coupon_count"`                     // 优惠券数量
-        CommentCount int64 `json:"comment_count"`                   // 评价数
-        ReturnOrderCount int64 `json:"return_order_count"`          // 退货数量
-        LoginCount int64 `json:"login_count"`                       // 登录次数
-        AttendCount int64 `json:"attend_count"`                     // 关注数量
-        FansCount int64 `json:"fans_count"`                         // 粉丝数量
-        CollectProductCount int64 `json:"collect_product_count"`    // 收藏商品数量
-        CollectSubjectCount int64 `json:"collect_subject_count"`    // 收藏主题数量
-        CollectTopicCount int64 `json:"collect_topic_count"`        // 收藏话题数量
-        CollectCommentCount int64 `json:"collect_comment_count"`    // 收藏评论数量
-        InviteFriendCount int64 `json:"invite_friend_count"`        // 邀请朋友数量
-        RecentOrderTime string `json:"recent_order_time"`           // 最后一次下订单时间
+        MemberStatisticsInfoData
     }
 
     MemberStatisticsInfoAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberStatisticsInfoListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        CommonListReq
     }
 
-    MemberStatisticsInfoData struct {
-        Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`                           // 会员ID
-        ConsumeAmount float64 `json:"consume_amount"`               // 累计消费金额
-        OrderCount int64 `json:"order_count"`                       // 订单数量
-        CouponCount int64 `json:"coupon_count"`                     // 优惠券数量
-        CommentCount int64 `json:"comment_count"`                   // 评价数
-        ReturnOrderCount int64 `json:"return_order_count"`          // 退货数量
-        LoginCount int64 `json:"login_count"`                       // 登录次数
-        AttendCount int64 `json:"attend_count"`                     // 关注数量
-        FansCount int64 `json:"fans_count"`                         // 粉丝数量
-        CollectProductCount int64 `json:"collect_product_count"`    // 收藏商品数量
-        CollectSubjectCount int64 `json:"collect_subject_count"`    // 收藏主题数量
-        CollectTopicCount int64 `json:"collect_topic_count"`        // 收藏话题数量
-        CollectCommentCount int64 `json:"collect_comment_count"`    // 收藏评论数量
-        InviteFriendCount int64 `json:"invite_friend_count"`        // 邀请朋友数量
-        RecentOrderTime string `json:"recent_order_time"`           // 最后一次下订单时间
-    }
 
     MemberStatisticsInfoListResp struct {
-        Current int64 `json:"current"`
         Data []*MemberStatisticsInfoData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     MemberStatisticsInfoUpdateReq struct {
-        Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`                           // 会员ID
-        ConsumeAmount float64 `json:"consume_amount"`               // 累计消费金额
-        OrderCount int64 `json:"order_count"`                       // 订单数量
-        CouponCount int64 `json:"coupon_count"`                     // 优惠券数量
-        CommentCount int64 `json:"comment_count"`                   // 评价数
-        ReturnOrderCount int64 `json:"return_order_count"`          // 退货数量
-        LoginCount int64 `json:"login_count"`                       // 登录次数
-        AttendCount int64 `json:"attend_count"`                     // 关注数量
-        FansCount int64 `json:"fans_count"`                         // 粉丝数量
-        CollectProductCount int64 `json:"collect_product_count"`    // 收藏商品数量
-        CollectSubjectCount int64 `json:"collect_subject_count"`    // 收藏主题数量
-        CollectTopicCount int64 `json:"collect_topic_count"`        // 收藏话题数量
-        CollectCommentCount int64 `json:"collect_comment_count"`    // 收藏话题数量
-        InviteFriendCount int64 `json:"invite_friend_count"`        // 邀请朋友数量
-        RecentOrderTime string `json:"recent_order_time"`           // 最后一次下订单时间
+        MemberStatisticsInfoData
     }
 
     MemberStatisticsInfoUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberStatisticsInfoDeleteReq struct {
@@ -90,8 +61,7 @@ type (
     }
 
     MemberStatisticsInfoDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

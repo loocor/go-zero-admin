@@ -1,55 +1,47 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
     title: "Zdmin"
     desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
+    IntegrationConsumeSettingData struct {
+        DeductionPerAmount int64 `json:"deductionPerAmount"`   // 每一元需要抵扣的积分数量
+        MaxPercentPerOrder int64 `json:"maxPercentPerOrder"`   // 每笔订单最高抵用百分比
+        UseUnit int64 `json:"useUnit"`                         // 每次使用积分最小单位100
+        CouponStatus int64 `json:"couponStatus"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
+        CommonData
+    }
+
     IntegrationConsumeSettingAddReq struct {
-        DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-        MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
-        UseUnit int64 `json:"use_unit"`                         // 每次使用积分最小单位100
-        CouponStatus int64 `json:"coupon_status"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
+        IntegrationConsumeSettingData
     }
 
     IntegrationConsumeSettingAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     IntegrationConsumeSettingListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    IntegrationConsumeSettingData struct {
-        Id int64 `json:"id"`
-        DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-        MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
-        UseUnit int64 `json:"use_unit"`                         // 每次使用积分最小单位100
-        CouponStatus int64 `json:"coupon_status"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
+        CommonListReq
     }
 
     IntegrationConsumeSettingListResp struct {
-        Current int64 `json:"current"`
         Data []*IntegrationConsumeSettingData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     IntegrationConsumeSettingUpdateReq struct {
-        Id int64 `json:"id"`
-        DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
-        MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
-        UseUnit int64 `json:"use_unit"`                         // 每次使用积分最小单位100
-        CouponStatus int64 `json:"coupon_status"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
+        IntegrationConsumeSettingData
     }
 
     IntegrationConsumeSettingUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     IntegrationConsumeSettingDeleteReq struct {
@@ -57,8 +49,7 @@ type (
     }
 
     IntegrationConsumeSettingDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

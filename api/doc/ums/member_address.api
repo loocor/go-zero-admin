@@ -1,70 +1,54 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "Admin address"
-    desc: "Admin address management"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
+    MemberAddressData struct {
+        MemberId int64 `json:"memberId"`                                    // 会员 ID
+        Name string `json:"name"`                                           // 收货人名称
+        PhoneNumber string `json:"phoneNumber"`                             // 电话号码
+        IsDefault bool `json:"isDefault, default=false"`                    // 是否为默认
+        Country string `json:"country, default=china"`                      // 国家
+        Province string `json:"province"`                                   // 省
+        City string `json:"city"`                                           // 市
+        Region string `json:"region"`                                       // 区
+        DetailAddress string `json:"detailAddress"`                         // 详细地址
+        PostCode string `json:"postCode"`                                   // 邮政编码
+        Remark string `json:"remark"`                                       // 备注
+        CommonData
+    }
+
     MemberAddressAddReq struct {
-        MemberId int64 `json:"member_id"`
-        Name string `json:"name"`                           // 收货人名称
-        PhoneNumber string `json:"phone_number"`            // 电话号码
-        DefaultStatus int64 `json:"default_status"`         // 是否为默认
-        PostCode string `json:"post_code"`                  // 邮政编码
-        Province string `json:"province"`                   // 省份/直辖市
-        City string `json:"city"`                           // 城市
-        Region string `json:"region"`                       // 区
-        DetailAddress string `json:"detail_address"`        // 详细地址(街道)
+        MemberAddressData
     }
 
     MemberAddressAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberAddressListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    MemberAddressData struct {
-        Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`
-        Name string `json:"name"`                           // 收货人名称
-        PhoneNumber string `json:"phone_number"`            // 电话号码
-        DefaultStatus int64 `json:"default_status"`         // 是否为默认
-        PostCode string `json:"post_code"`                  // 邮政编码
-        Province string `json:"province"`                   // 省份/直辖市
-        City string `json:"city"`                           // 城市
-        Region string `json:"region"`                       // 区
-        DetailAddress string `json:"detail_address"`        // 详细地址(街道)
+        CommonListReq
     }
 
     MemberAddressListResp struct {
-        Current int64 `json:"current"`
         Data []*MemberAddressData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     MemberAddressUpdateReq struct {
-        Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`
-        Name string `json:"name"`                           // 收货人名称
-        PhoneNumber string `json:"phone_number"`            // 电话号码
-        DefaultStatus int64 `json:"default_status"`         // 是否为默认
-        PostCode string `json:"post_code"`                  // 邮政编码
-        Province string `json:"province"`                   // 省份/直辖市
-        City string `json:"city"`                           // 城市
-        Region string `json:"region"`                       // 区
-        DetailAddress string `json:"detail_address"`        // 详细地址(街道)
+        MemberAddressData
     }
 
     MemberAddressUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberAddressDeleteReq struct {
@@ -72,8 +56,7 @@ type (
     }
 
     MemberAddressDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

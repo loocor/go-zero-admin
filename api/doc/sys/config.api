@@ -3,8 +3,8 @@ syntax = "v1"
 // import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
 
 info(
-    title: "Admin Config"
-    desc: "admin config management"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
     version: "1.0.0"

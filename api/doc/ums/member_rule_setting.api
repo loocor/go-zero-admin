@@ -1,61 +1,49 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
     title: "Zdmin"
     desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
-    MemberRuleSettingAddReq struct {
-        ContinueSignDay int64 `json:"continue_sign_day"`            // 连续签到天数
-        ContinueSignPoint int64 `json:"continue_sign_point"`        // 连续签到赠送数量
-        ConsumePerPoint float64 `json:"consume_per_point"`          // 每消费多少元获取1个点
-        LowOrderAmount float64 `json:"low_order_amount"`            // 最低获取点数的订单金额
-        MaxPointPerOrder int64 `json:"max_point_per_order"`         // 每笔订单最高获取点数
+    MemberRuleSettingData struct {
         Type int64 `json:"type"`                                    // 类型: 0->积分规则; 1->成长值规则
+        ContinueSignDay int64 `json:"continueSignDay"`              // 连续签到天数
+        ContinueSignPoint int64 `json:"continueSignPoint"`          // 连续签到赠送数量
+        ConsumePerPoint float64 `json:"consumePerPoint"`            // 每消费多少元获取1个点
+        LowOrderAmount float64 `json:"lowOrderAmount"`              // 最低获取点数的订单金额
+        MaxPointPerOrder int64 `json:"maxPointPerOrder"`            // 每笔订单最高获取点数
+        CommonData
+    }
+
+    MemberRuleSettingAddReq struct {
+        MemberRuleSettingData
     }
 
     MemberRuleSettingAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberRuleSettingListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    MemberRuleSettingData struct {
-        Id int64 `json:"id"`
-        ContinueSignDay int64 `json:"continue_sign_day"`            // 连续签到天数
-        ContinueSignPoint int64 `json:"continue_sign_point"`        // 连续签到赠送数量
-        ConsumePerPoint float64 `json:"consume_per_point"`          // 每消费多少元获取1个点
-        LowOrderAmount float64 `json:"low_order_amount"`            // 最低获取点数的订单金额
-        MaxPointPerOrder int64 `json:"max_point_per_order"`         // 每笔订单最高获取点数
-        Type int64 `json:"type"`                                    // 类型: 0->积分规则; 1->成长值规则
+        CommonListReq
     }
 
     MemberRuleSettingListResp struct {
-        Current int64 `json:"current"`
         Data []*MemberRuleSettingData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     MemberRuleSettingUpdateReq struct {
-        Id int64 `json:"id"`
-        ContinueSignDay int64 `json:"continue_sign_day"`            // 连续签到天数
-        ContinueSignPoint int64 `json:"continue_sign_point"`        // 连续签到赠送数量
-        ConsumePerPoint float64 `json:"consume_per_point"`          // 每消费多少元获取1个点
-        LowOrderAmount float64 `json:"low_order_amount"`            // 最低获取点数的订单金额
-        MaxPointPerOrder int64 `json:"max_point_per_order"`         // 每笔订单最高获取点数
-        Type int64 `json:"type"`                                    // 类型: 0->积分规则; 1->成长值规则
+        MemberRuleSettingData
     }
 
     MemberRuleSettingUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberRuleSettingDeleteReq struct {
@@ -63,8 +51,7 @@ type (
     }
 
     MemberRuleSettingDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

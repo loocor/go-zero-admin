@@ -1,52 +1,46 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
     title: "Zdmin"
     desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
-    MemberTagAddReq struct {
+    MemberTagData struct {
         Name string `json:"name"`
-        FinishOrderCount int64 `json:"finish_order_count"`     // 自动打标签完成订单数量
-        FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
+        FinishOrderCount int64 `json:"finishOrderCount"`        // 自动打标签完成订单数量
+        FinishOrderAmount float64 `json:"finishOrderAmount"`    // 自动打标签完成订单金额
+        CommonData
+    }
+
+    MemberTagAddReq struct {
+        MemberTagData
     }
 
     MemberTagAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberTagListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    MemberTagData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        FinishOrderCount int64 `json:"finish_order_count"`     // 自动打标签完成订单数量
-        FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
+        CommonListReq
     }
 
     MemberTagListResp struct {
-        Current int64 `json:"current"`
         Data []*MemberTagData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     MemberTagUpdateReq struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        FinishOrderCount int64 `json:"finish_order_count"`     // 自动打标签完成订单数量
-        FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
+        MemberTagData
     }
 
     MemberTagUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberTagDeleteReq struct {
@@ -54,8 +48,7 @@ type (
     }
 
     MemberTagDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

@@ -1,61 +1,48 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
     title: "Zdmin"
     desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
+    MemberLoginLogData struct {
+        MemberId int64 `json:"memberId"`            // 会员 ID
+        LoginType int64 `json:"loginType"`          // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
+        Ip string `json:"ip"`                       // IP 地址
+        City string `json:"city"`                   // 城市
+        Province string `json:"province"`           // 省份
+        CommonData
+    }
+
     MemberLoginLogAddReq struct {
-        MemberId int64 `json:"member_id"`
-        CreateTime string `json:"create_time"`
-        Ip string `json:"ip"`
-        City string `json:"city"`
-        LoginType int64 `json:"login_type"`         // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
-        Province string `json:"province"`
+        MemberLoginLogData
     }
 
     MemberLoginLogAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberLoginLogListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    MemberLoginLogData struct {
-        Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`           // 会员 ID
-        CreateTime string `json:"create_time"`      // 登录时间
-        Ip string `json:"ip"`                       // IP 地址
-        City string `json:"city"`                   // 城市
-        LoginType int64 `json:"login_type"`         // 登录类型: 0->登录类型: 0->PC, 1->android, 2->ios, 3->mp
-        Province string `json:"province"`           // 省份
+        CommonListReq
     }
 
     MemberLoginLogListResp struct {
-        Current int64 `json:"current"`
         Data []*MemberLoginLogData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     MemberLoginLogUpdateReq struct {
-        Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`           // 会员 ID
-        CreateTime string `json:"create_time"`      // 登录时间
-        Ip string `json:"ip"`                       // IP 地址
-        City string `json:"city"`                   // 城市
-        LoginType int64 `json:"login_type"`         // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
-        Province string `json:"province"`           // 省份
+        MemberLoginLogData
     }
 
     MemberLoginLogUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberLoginLogDeleteReq struct {
@@ -63,8 +50,7 @@ type (
     }
 
     MemberLoginLogDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

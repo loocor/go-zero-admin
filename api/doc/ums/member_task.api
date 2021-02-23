@@ -1,55 +1,47 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
     title: "Zdmin"
     desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
-    MemberTaskAddReq struct {
+    MemberTaskData struct {
         Name string `json:"name"`
+        Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
         Growth int64 `json:"growth"`            // 赠送成长值
         Integration int64 `json:"integration"`  // 赠送积分
-        Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
+        CommonData
+    }
+
+    MemberTaskAddReq struct {
+        MemberTaskData
     }
 
     MemberTaskAddResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberTaskListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    MemberTaskData struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        Growth int64 `json:"growth"`            // 赠送成长值
-        Integration int64 `json:"integration"`  // 赠送积分
-        Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
+        CommonListReq
     }
 
     MemberTaskListResp struct {
-        Current int64 `json:"current"`
         Data []*MemberTaskData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+        CommonListResp
     }
 
     MemberTaskUpdateReq struct {
-        Id int64 `json:"id"`
-        Name string `json:"name"`
-        Growth int64 `json:"growth"`            // 赠送成长值
-        Integration int64 `json:"integration"`  // 赠送积分
-        Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
+        MemberTaskData
     }
 
     MemberTaskUpdateResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 
     MemberTaskDeleteReq struct {
@@ -57,8 +49,7 @@ type (
     }
 
     MemberTaskDeleteResp struct {
-        Code int64 `json:"code"`
-        Message string `json:"message"`
+        CommonResp
     }
 )
 

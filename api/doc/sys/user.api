@@ -3,10 +3,11 @@ syntax = "v1"
 // import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
 
 info(
-    title: "Admin User"
-    desc: "admin user management"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
     author: "Loocor"
     email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
@@ -49,8 +50,7 @@ type (
     }
 
     UserListReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+        CommonListReq
     }
 
     UserListResp struct {

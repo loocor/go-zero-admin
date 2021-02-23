@@ -12,7 +12,7 @@ info(
 
 type (
     SysLogData struct {
-        UserName string `json:"user_name"`                      // 用户名
+        UserName string `json:"userName"`                      // 用户名
         Operation string `json:"operation"`                     // 用户操作
         Method string `json:"method"`                           // 请求方法
         Params string `json:"params"`                           // 请求参数
