@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,12 +23,8 @@ func NewMemberDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Membe
 	}
 }
 
-func (l *MemberDeleteLogic) MemberDelete(req types.DeleteMemberReq) (*types.DeleteMemberResp, error) {
-	_, _ = l.svcCtx.Ums.MemberDelete(
-		l.ctx, &umsclient.MemberDeleteReq{
-			Id: req.Id,
-		},
-	)
+func (l *MemberDeleteLogic) MemberDelete(req types.MemberDeleteReq) (*types.MemberDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &types.DeleteMemberResp{}, nil
+	return &types.MemberDeleteResp{}, nil
 }

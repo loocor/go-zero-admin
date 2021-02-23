@@ -8,135 +8,148 @@ package umsclient
 import (
 	"context"
 
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/zrpc"
 )
 
 type (
-	IntegrationChangeHistoryAddResp         = ums.IntegrationChangeHistoryAddResp
-	IntegrationConsumeSettingUpdateReq      = ums.IntegrationConsumeSettingUpdateReq
-	MemberLevelUpdateResp                   = ums.MemberLevelUpdateResp
-	MemberLoginLogUpdateResp                = ums.MemberLoginLogUpdateResp
-	MemberRuleSettingListData               = ums.MemberRuleSettingListData
-	MemberMemberTagRelationListData         = ums.MemberMemberTagRelationListData
-	MemberRuleSettingListResp               = ums.MemberRuleSettingListResp
-	MemberTaskDeleteResp                    = ums.MemberTaskDeleteResp
-	GrowthChangeHistoryDeleteResp           = ums.GrowthChangeHistoryDeleteResp
-	MemberMemberTagRelationAddResp          = ums.MemberMemberTagRelationAddResp
-	MemberLevelListData                     = ums.MemberLevelListData
-	MemberProductCategoryRelationUpdateReq  = ums.MemberProductCategoryRelationUpdateReq
-	MemberTagAddReq                         = ums.MemberTagAddReq
-	MemberUpdateResp                        = ums.MemberUpdateResp
-	IntegrationConsumeSettingListResp       = ums.IntegrationConsumeSettingListResp
-	IntegrationConsumeSettingDeleteResp     = ums.IntegrationConsumeSettingDeleteResp
-	MemberMemberTagRelationUpdateResp       = ums.MemberMemberTagRelationUpdateResp
-	MemberStatisticsInfoUpdateReq           = ums.MemberStatisticsInfoUpdateReq
-	MemberAddReq                            = ums.MemberAddReq
-	IntegrationChangeHistoryUpdateResp      = ums.IntegrationChangeHistoryUpdateResp
-	MemberReceiveAddressListReq             = ums.MemberReceiveAddressListReq
-	MemberRuleSettingUpdateResp             = ums.MemberRuleSettingUpdateResp
-	MemberTaskUpdateReq                     = ums.MemberTaskUpdateReq
-	MemberListResp                          = ums.MemberListResp
-	MemberDeleteResp                        = ums.MemberDeleteResp
-	GrowthChangeHistoryListData             = ums.GrowthChangeHistoryListData
-	GrowthChangeHistoryDeleteReq            = ums.GrowthChangeHistoryDeleteReq
-	GrowthChangeHistoryAddResp              = ums.GrowthChangeHistoryAddResp
-	MemberLevelAddResp                      = ums.MemberLevelAddResp
-	MemberLevelUpdateReq                    = ums.MemberLevelUpdateReq
-	MemberLoginLogListData                  = ums.MemberLoginLogListData
-	MemberProductCategoryRelationDeleteResp = ums.MemberProductCategoryRelationDeleteResp
-	MemberLevelAddReq                       = ums.MemberLevelAddReq
-	MemberLevelListResp                     = ums.MemberLevelListResp
-	MemberRuleSettingDeleteResp             = ums.MemberRuleSettingDeleteResp
-	MemberTaskAddReq                        = ums.MemberTaskAddReq
-	IntegrationChangeHistoryDeleteReq       = ums.IntegrationChangeHistoryDeleteReq
-	MemberLoginLogAddReq                    = ums.MemberLoginLogAddReq
-	MemberProductCategoryRelationListData   = ums.MemberProductCategoryRelationListData
+	MemberLevelData                         = ums.MemberLevelData
+	MemberStatisticsInfoListReq             = ums.MemberStatisticsInfoListReq
+	MemberAddressUpdateReq                  = ums.MemberAddressUpdateReq
 	MemberProductCategoryRelationListResp   = ums.MemberProductCategoryRelationListResp
-	MemberStatisticsInfoListData            = ums.MemberStatisticsInfoListData
-	MemberStatisticsInfoListResp            = ums.MemberStatisticsInfoListResp
-	MemberTagDeleteReq                      = ums.MemberTagDeleteReq
-	MemberMemberTagRelationDeleteResp       = ums.MemberMemberTagRelationDeleteResp
-	MemberMemberTagRelationDeleteReq        = ums.MemberMemberTagRelationDeleteReq
-	MemberStatisticsInfoDeleteReq           = ums.MemberStatisticsInfoDeleteReq
-	IntegrationConsumeSettingListData       = ums.IntegrationConsumeSettingListData
-	IntegrationConsumeSettingUpdateResp     = ums.IntegrationConsumeSettingUpdateResp
-	MemberProductCategoryRelationListReq    = ums.MemberProductCategoryRelationListReq
-	IntegrationChangeHistoryListReq         = ums.IntegrationChangeHistoryListReq
-	IntegrationConsumeSettingDeleteReq      = ums.IntegrationConsumeSettingDeleteReq
-	MemberProductCategoryRelationAddReq     = ums.MemberProductCategoryRelationAddReq
-	MemberReceiveAddressUpdateReq           = ums.MemberReceiveAddressUpdateReq
-	MemberRuleSettingAddReq                 = ums.MemberRuleSettingAddReq
-	MemberTaskListReq                       = ums.MemberTaskListReq
+	MemberReceiveAddressAddResp             = ums.MemberReceiveAddressAddResp
+	MemberReceiveAddressListResp            = ums.MemberReceiveAddressListResp
+	MemberProductCategoryRelationData       = ums.MemberProductCategoryRelationData
+	MemberLoginLogUpdateReq                 = ums.MemberLoginLogUpdateReq
+	MemberLevelListReq                      = ums.MemberLevelListReq
+	MemberLoginLogUpdateResp                = ums.MemberLoginLogUpdateResp
+	IntegrationConsumeSettingAddReq         = ums.IntegrationConsumeSettingAddReq
+	MemberTagRelationAddReq                 = ums.MemberTagRelationAddReq
+	MemberListReq                           = ums.MemberListReq
+	MemberAddressListReq                    = ums.MemberAddressListReq
+	GrowthChangeHistoryUpdateReq            = ums.GrowthChangeHistoryUpdateReq
+	MemberTagUpdateResp                     = ums.MemberTagUpdateResp
+	MemberTaskAddReq                        = ums.MemberTaskAddReq
 	MemberDeleteReq                         = ums.MemberDeleteReq
+	IntegrationConsumeSettingUpdateResp     = ums.IntegrationConsumeSettingUpdateResp
+	MemberLevelAddResp                      = ums.MemberLevelAddResp
+	MemberReceiveAddressListReq             = ums.MemberReceiveAddressListReq
+	MemberReceiveAddressDeleteResp          = ums.MemberReceiveAddressDeleteResp
+	MemberTaskUpdateReq                     = ums.MemberTaskUpdateReq
 	GrowthChangeHistoryUpdateResp           = ums.GrowthChangeHistoryUpdateResp
+	MemberStatisticsInfoAddReq              = ums.MemberStatisticsInfoAddReq
+	MemberTaskAddResp                       = ums.MemberTaskAddResp
+	GrowthChangeHistoryAddResp              = ums.GrowthChangeHistoryAddResp
+	MemberReceiveAddressAddReq              = ums.MemberReceiveAddressAddReq
+	MemberTaskListResp                      = ums.MemberTaskListResp
+	MemberTagRelationListReq                = ums.MemberTagRelationListReq
+	IntegrationChangeHistoryDeleteResp      = ums.IntegrationChangeHistoryDeleteResp
+	MemberLoginLogData                      = ums.MemberLoginLogData
+	MemberRuleSettingUpdateReq              = ums.MemberRuleSettingUpdateReq
+	MemberRuleSettingDeleteResp             = ums.MemberRuleSettingDeleteResp
+	MemberStatisticsInfoDeleteResp          = ums.MemberStatisticsInfoDeleteResp
+	IntegrationChangeHistoryListReq         = ums.IntegrationChangeHistoryListReq
+	IntegrationChangeHistoryUpdateResp      = ums.IntegrationChangeHistoryUpdateResp
+	MemberProductCategoryRelationUpdateReq  = ums.MemberProductCategoryRelationUpdateReq
+	MemberProductCategoryRelationUpdateResp = ums.MemberProductCategoryRelationUpdateResp
+	MemberStatisticsInfoListResp            = ums.MemberStatisticsInfoListResp
+	MemberAddressAddResp                    = ums.MemberAddressAddResp
+	MemberLevelAddReq                       = ums.MemberLevelAddReq
+	MemberLoginLogAddResp                   = ums.MemberLoginLogAddResp
+	MemberTagDeleteReq                      = ums.MemberTagDeleteReq
+	IntegrationConsumeSettingDeleteReq      = ums.IntegrationConsumeSettingDeleteReq
+	MemberStatisticsInfoUpdateResp          = ums.MemberStatisticsInfoUpdateResp
+	MemberTaskDeleteResp                    = ums.MemberTaskDeleteResp
+	GrowthChangeHistoryListResp             = ums.GrowthChangeHistoryListResp
+	IntegrationConsumeSettingUpdateReq      = ums.IntegrationConsumeSettingUpdateReq
+	MemberLevelUpdateReq                    = ums.MemberLevelUpdateReq
+	MemberLoginLogListReq                   = ums.MemberLoginLogListReq
+	MemberStatisticsInfoData                = ums.MemberStatisticsInfoData
+	MemberTagAddResp                        = ums.MemberTagAddResp
+	MemberTaskDeleteReq                     = ums.MemberTaskDeleteReq
+	GrowthChangeHistoryDeleteResp           = ums.GrowthChangeHistoryDeleteResp
+	IntegrationChangeHistoryData            = ums.IntegrationChangeHistoryData
+	IntegrationConsumeSettingData           = ums.IntegrationConsumeSettingData
+	MemberProductCategoryRelationListReq    = ums.MemberProductCategoryRelationListReq
+	MemberProductCategoryRelationDeleteResp = ums.MemberProductCategoryRelationDeleteResp
+	MemberAddressDeleteResp                 = ums.MemberAddressDeleteResp
+	MemberLevelListResp                     = ums.MemberLevelListResp
+	MemberTagRelationUpdateResp             = ums.MemberTagRelationUpdateResp
+	MemberReceiveAddressData                = ums.MemberReceiveAddressData
+	MemberRuleSettingUpdateResp             = ums.MemberRuleSettingUpdateResp
+	MemberStatisticsInfoDeleteReq           = ums.MemberStatisticsInfoDeleteReq
+	MemberTagListReq                        = ums.MemberTagListReq
+	GrowthChangeHistoryAddReq               = ums.GrowthChangeHistoryAddReq
+	MemberTagRelationAddResp                = ums.MemberTagRelationAddResp
+	MemberTagRelationDeleteReq              = ums.MemberTagRelationDeleteReq
+	MemberReceiveAddressUpdateResp          = ums.MemberReceiveAddressUpdateResp
+	IntegrationConsumeSettingListResp       = ums.IntegrationConsumeSettingListResp
+	MemberTaskData                          = ums.MemberTaskData
+	MemberDeleteResp                        = ums.MemberDeleteResp
+	MemberUpdateReq                         = ums.MemberUpdateReq
+	GrowthChangeHistoryData                 = ums.GrowthChangeHistoryData
+	IntegrationChangeHistoryDeleteReq       = ums.IntegrationChangeHistoryDeleteReq
+	MemberMemberTagRelationData             = ums.MemberMemberTagRelationData
+	MemberTaskListReq                       = ums.MemberTaskListReq
+	MemberAddResp                           = ums.MemberAddResp
+	IntegrationChangeHistoryAddReq          = ums.IntegrationChangeHistoryAddReq
+	MemberRuleSettingListReq                = ums.MemberRuleSettingListReq
+	MemberAddressData                       = ums.MemberAddressData
+	MemberStatisticsInfoUpdateReq           = ums.MemberStatisticsInfoUpdateReq
+	IntegrationConsumeSettingDeleteResp     = ums.IntegrationConsumeSettingDeleteResp
+	MemberRuleSettingData                   = ums.MemberRuleSettingData
+	MemberAddressListResp                   = ums.MemberAddressListResp
+	MemberLoginLogAddReq                    = ums.MemberLoginLogAddReq
+	MemberReceiveAddressUpdateReq           = ums.MemberReceiveAddressUpdateReq
+	MemberTagData                           = ums.MemberTagData
+	MemberTagDeleteResp                     = ums.MemberTagDeleteResp
+	MemberTaskUpdateResp                    = ums.MemberTaskUpdateResp
+	GrowthChangeHistoryDeleteReq            = ums.GrowthChangeHistoryDeleteReq
+	IntegrationChangeHistoryAddResp         = ums.IntegrationChangeHistoryAddResp
 	IntegrationConsumeSettingListReq        = ums.IntegrationConsumeSettingListReq
-	MemberMemberTagRelationUpdateReq        = ums.MemberMemberTagRelationUpdateReq
-	MemberListData                          = ums.MemberListData
+	MemberLevelDeleteResp                   = ums.MemberLevelDeleteResp
+	MemberTagRelationDeleteResp             = ums.MemberTagRelationDeleteResp
+	MemberUpdateResp                        = ums.MemberUpdateResp
+	GrowthChangeHistoryListReq              = ums.GrowthChangeHistoryListReq
+	IntegrationConsumeSettingAddResp        = ums.IntegrationConsumeSettingAddResp
+	MemberLevelUpdateResp                   = ums.MemberLevelUpdateResp
+	MemberProductCategoryRelationAddResp    = ums.MemberProductCategoryRelationAddResp
+	MemberRuleSettingDeleteReq              = ums.MemberRuleSettingDeleteReq
+	MemberAddressDeleteReq                  = ums.MemberAddressDeleteReq
+	MemberReceiveAddressDeleteReq           = ums.MemberReceiveAddressDeleteReq
+	MemberRuleSettingAddResp                = ums.MemberRuleSettingAddResp
+	IntegrationChangeHistoryUpdateReq       = ums.IntegrationChangeHistoryUpdateReq
+	MemberLevelDeleteReq                    = ums.MemberLevelDeleteReq
+	MemberLoginLogListResp                  = ums.MemberLoginLogListResp
+	MemberTagRelationUpdateReq              = ums.MemberTagRelationUpdateReq
+	MemberTagUpdateReq                      = ums.MemberTagUpdateReq
+	MemberAddressUpdateResp                 = ums.MemberAddressUpdateResp
+	MemberRuleSettingListResp               = ums.MemberRuleSettingListResp
+	MemberTagAddReq                         = ums.MemberTagAddReq
+	MemberData                              = ums.MemberData
+	MemberProductCategoryRelationAddReq     = ums.MemberProductCategoryRelationAddReq
+	MemberRuleSettingAddReq                 = ums.MemberRuleSettingAddReq
+	MemberStatisticsInfoAddResp             = ums.MemberStatisticsInfoAddResp
+	MemberTagRelationListResp               = ums.MemberTagRelationListResp
+	MemberAddressAddReq                     = ums.MemberAddressAddReq
 	IntegrationChangeHistoryListResp        = ums.IntegrationChangeHistoryListResp
 	MemberLoginLogDeleteReq                 = ums.MemberLoginLogDeleteReq
-	IntegrationChangeHistoryAddReq          = ums.IntegrationChangeHistoryAddReq
-	IntegrationConsumeSettingAddReq         = ums.IntegrationConsumeSettingAddReq
-	MemberReceiveAddressAddResp             = ums.MemberReceiveAddressAddResp
-	MemberStatisticsInfoDeleteResp          = ums.MemberStatisticsInfoDeleteResp
-	MemberTagListData                       = ums.MemberTagListData
-	MemberTagDeleteResp                     = ums.MemberTagDeleteResp
-	MemberTaskListData                      = ums.MemberTaskListData
-	MemberLoginLogUpdateReq                 = ums.MemberLoginLogUpdateReq
-	MemberTagAddResp                        = ums.MemberTagAddResp
-	MemberLevelDeleteResp                   = ums.MemberLevelDeleteResp
-	MemberTaskUpdateResp                    = ums.MemberTaskUpdateResp
-	GrowthChangeHistoryListReq              = ums.GrowthChangeHistoryListReq
-	MemberRuleSettingAddResp                = ums.MemberRuleSettingAddResp
-	MemberStatisticsInfoAddReq              = ums.MemberStatisticsInfoAddReq
-	MemberTagUpdateResp                     = ums.MemberTagUpdateResp
-	GrowthChangeHistoryUpdateReq            = ums.GrowthChangeHistoryUpdateReq
-	MemberProductCategoryRelationAddResp    = ums.MemberProductCategoryRelationAddResp
-	MemberReceiveAddressListResp            = ums.MemberReceiveAddressListResp
-	MemberRuleSettingDeleteReq              = ums.MemberRuleSettingDeleteReq
-	MemberListReq                           = ums.MemberListReq
-	MemberLevelDeleteReq                    = ums.MemberLevelDeleteReq
-	MemberProductCategoryRelationUpdateResp = ums.MemberProductCategoryRelationUpdateResp
-	IntegrationChangeHistoryDeleteResp      = ums.IntegrationChangeHistoryDeleteResp
-	MemberLoginLogListResp                  = ums.MemberLoginLogListResp
-	MemberTaskListResp                      = ums.MemberTaskListResp
-	MemberLoginLogDeleteResp                = ums.MemberLoginLogDeleteResp
-	MemberReceiveAddressDeleteResp          = ums.MemberReceiveAddressDeleteResp
-	MemberTagListReq                        = ums.MemberTagListReq
-	MemberTaskDeleteReq                     = ums.MemberTaskDeleteReq
-	GrowthChangeHistoryAddReq               = ums.GrowthChangeHistoryAddReq
-	GrowthChangeHistoryListResp             = ums.GrowthChangeHistoryListResp
-	MemberRuleSettingUpdateReq              = ums.MemberRuleSettingUpdateReq
-	MemberStatisticsInfoAddResp             = ums.MemberStatisticsInfoAddResp
-	MemberAddResp                           = ums.MemberAddResp
-	IntegrationConsumeSettingAddResp        = ums.IntegrationConsumeSettingAddResp
-	MemberStatisticsInfoUpdateResp          = ums.MemberStatisticsInfoUpdateResp
-	MemberTagListResp                       = ums.MemberTagListResp
-	MemberMemberTagRelationListReq          = ums.MemberMemberTagRelationListReq
-	MemberReceiveAddressDeleteReq           = ums.MemberReceiveAddressDeleteReq
-	MemberUpdateReq                         = ums.MemberUpdateReq
-	MemberMemberTagRelationAddReq           = ums.MemberMemberTagRelationAddReq
-	MemberReceiveAddressListData            = ums.MemberReceiveAddressListData
-	MemberTaskAddResp                       = ums.MemberTaskAddResp
-	MemberLevelListReq                      = ums.MemberLevelListReq
-	MemberMemberTagRelationListResp         = ums.MemberMemberTagRelationListResp
-	MemberReceiveAddressAddReq              = ums.MemberReceiveAddressAddReq
-	MemberReceiveAddressUpdateResp          = ums.MemberReceiveAddressUpdateResp
-	MemberStatisticsInfoListReq             = ums.MemberStatisticsInfoListReq
-	MemberTagUpdateReq                      = ums.MemberTagUpdateReq
-	IntegrationChangeHistoryListData        = ums.IntegrationChangeHistoryListData
-	IntegrationChangeHistoryUpdateReq       = ums.IntegrationChangeHistoryUpdateReq
-	MemberLoginLogAddResp                   = ums.MemberLoginLogAddResp
-	MemberLoginLogListReq                   = ums.MemberLoginLogListReq
 	MemberProductCategoryRelationDeleteReq  = ums.MemberProductCategoryRelationDeleteReq
-	MemberRuleSettingListReq                = ums.MemberRuleSettingListReq
+	MemberListResp                          = ums.MemberListResp
+	MemberLoginLogDeleteResp                = ums.MemberLoginLogDeleteResp
+	MemberTagListResp                       = ums.MemberTagListResp
+	MemberAddReq                            = ums.MemberAddReq
 
 	Ums interface {
 		MemberAdd(ctx context.Context, in *MemberAddReq) (*MemberAddResp, error)
 		MemberList(ctx context.Context, in *MemberListReq) (*MemberListResp, error)
 		MemberUpdate(ctx context.Context, in *MemberUpdateReq) (*MemberUpdateResp, error)
 		MemberDelete(ctx context.Context, in *MemberDeleteReq) (*MemberDeleteResp, error)
+		MemberAddressAdd(ctx context.Context, in *MemberAddressAddReq) (*MemberAddressAddResp, error)
+		MemberAddressList(ctx context.Context, in *MemberAddressListReq) (*MemberAddressListResp, error)
+		MemberAddressUpdate(ctx context.Context, in *MemberAddressUpdateReq) (*MemberAddressUpdateResp, error)
+		MemberAddressDelete(ctx context.Context, in *MemberAddressDeleteReq) (*MemberAddressDeleteResp, error)
 		GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error)
 		GrowthChangeHistoryList(ctx context.Context, in *GrowthChangeHistoryListReq) (*GrowthChangeHistoryListResp, error)
 		GrowthChangeHistoryUpdate(ctx context.Context, in *GrowthChangeHistoryUpdateReq) (*GrowthChangeHistoryUpdateResp, error)
@@ -157,18 +170,6 @@ type (
 		MemberLoginLogList(ctx context.Context, in *MemberLoginLogListReq) (*MemberLoginLogListResp, error)
 		MemberLoginLogUpdate(ctx context.Context, in *MemberLoginLogUpdateReq) (*MemberLoginLogUpdateResp, error)
 		MemberLoginLogDelete(ctx context.Context, in *MemberLoginLogDeleteReq) (*MemberLoginLogDeleteResp, error)
-		MemberMemberTagRelationAdd(ctx context.Context, in *MemberMemberTagRelationAddReq) (*MemberMemberTagRelationAddResp, error)
-		MemberMemberTagRelationList(ctx context.Context, in *MemberMemberTagRelationListReq) (*MemberMemberTagRelationListResp, error)
-		MemberMemberTagRelationUpdate(ctx context.Context, in *MemberMemberTagRelationUpdateReq) (*MemberMemberTagRelationUpdateResp, error)
-		MemberMemberTagRelationDelete(ctx context.Context, in *MemberMemberTagRelationDeleteReq) (*MemberMemberTagRelationDeleteResp, error)
-		MemberProductCategoryRelationAdd(ctx context.Context, in *MemberProductCategoryRelationAddReq) (*MemberProductCategoryRelationAddResp, error)
-		MemberProductCategoryRelationList(ctx context.Context, in *MemberProductCategoryRelationListReq) (*MemberProductCategoryRelationListResp, error)
-		MemberProductCategoryRelationUpdate(ctx context.Context, in *MemberProductCategoryRelationUpdateReq) (*MemberProductCategoryRelationUpdateResp, error)
-		MemberProductCategoryRelationDelete(ctx context.Context, in *MemberProductCategoryRelationDeleteReq) (*MemberProductCategoryRelationDeleteResp, error)
-		MemberReceiveAddressAdd(ctx context.Context, in *MemberReceiveAddressAddReq) (*MemberReceiveAddressAddResp, error)
-		MemberReceiveAddressList(ctx context.Context, in *MemberReceiveAddressListReq) (*MemberReceiveAddressListResp, error)
-		MemberReceiveAddressUpdate(ctx context.Context, in *MemberReceiveAddressUpdateReq) (*MemberReceiveAddressUpdateResp, error)
-		MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq) (*MemberReceiveAddressDeleteResp, error)
 		MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq) (*MemberRuleSettingAddResp, error)
 		MemberRuleSettingList(ctx context.Context, in *MemberRuleSettingListReq) (*MemberRuleSettingListResp, error)
 		MemberRuleSettingUpdate(ctx context.Context, in *MemberRuleSettingUpdateReq) (*MemberRuleSettingUpdateResp, error)
@@ -185,6 +186,18 @@ type (
 		MemberTaskList(ctx context.Context, in *MemberTaskListReq) (*MemberTaskListResp, error)
 		MemberTaskUpdate(ctx context.Context, in *MemberTaskUpdateReq) (*MemberTaskUpdateResp, error)
 		MemberTaskDelete(ctx context.Context, in *MemberTaskDeleteReq) (*MemberTaskDeleteResp, error)
+		MemberTagRelationAdd(ctx context.Context, in *MemberTagRelationAddReq) (*MemberTagRelationAddResp, error)
+		MemberTagRelationList(ctx context.Context, in *MemberTagRelationListReq) (*MemberTagRelationListResp, error)
+		MemberTagRelationUpdate(ctx context.Context, in *MemberTagRelationUpdateReq) (*MemberTagRelationUpdateResp, error)
+		MemberTagRelationDelete(ctx context.Context, in *MemberTagRelationDeleteReq) (*MemberTagRelationDeleteResp, error)
+		MemberProductCategoryRelationAdd(ctx context.Context, in *MemberProductCategoryRelationAddReq) (*MemberProductCategoryRelationAddResp, error)
+		MemberProductCategoryRelationList(ctx context.Context, in *MemberProductCategoryRelationListReq) (*MemberProductCategoryRelationListResp, error)
+		MemberProductCategoryRelationUpdate(ctx context.Context, in *MemberProductCategoryRelationUpdateReq) (*MemberProductCategoryRelationUpdateResp, error)
+		MemberProductCategoryRelationDelete(ctx context.Context, in *MemberProductCategoryRelationDeleteReq) (*MemberProductCategoryRelationDeleteResp, error)
+		MemberReceiveAddressAdd(ctx context.Context, in *MemberReceiveAddressAddReq) (*MemberReceiveAddressAddResp, error)
+		MemberReceiveAddressList(ctx context.Context, in *MemberReceiveAddressListReq) (*MemberReceiveAddressListResp, error)
+		MemberReceiveAddressUpdate(ctx context.Context, in *MemberReceiveAddressUpdateReq) (*MemberReceiveAddressUpdateResp, error)
+		MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq) (*MemberReceiveAddressDeleteResp, error)
 	}
 
 	defaultUms struct {
@@ -216,6 +229,26 @@ func (m *defaultUms) MemberUpdate(ctx context.Context, in *MemberUpdateReq) (*Me
 func (m *defaultUms) MemberDelete(ctx context.Context, in *MemberDeleteReq) (*MemberDeleteResp, error) {
 	client := ums.NewUmsClient(m.cli.Conn())
 	return client.MemberDelete(ctx, in)
+}
+
+func (m *defaultUms) MemberAddressAdd(ctx context.Context, in *MemberAddressAddReq) (*MemberAddressAddResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberAddressAdd(ctx, in)
+}
+
+func (m *defaultUms) MemberAddressList(ctx context.Context, in *MemberAddressListReq) (*MemberAddressListResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberAddressList(ctx, in)
+}
+
+func (m *defaultUms) MemberAddressUpdate(ctx context.Context, in *MemberAddressUpdateReq) (*MemberAddressUpdateResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberAddressUpdate(ctx, in)
+}
+
+func (m *defaultUms) MemberAddressDelete(ctx context.Context, in *MemberAddressDeleteReq) (*MemberAddressDeleteResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberAddressDelete(ctx, in)
 }
 
 func (m *defaultUms) GrowthChangeHistoryAdd(ctx context.Context, in *GrowthChangeHistoryAddReq) (*GrowthChangeHistoryAddResp, error) {
@@ -318,66 +351,6 @@ func (m *defaultUms) MemberLoginLogDelete(ctx context.Context, in *MemberLoginLo
 	return client.MemberLoginLogDelete(ctx, in)
 }
 
-func (m *defaultUms) MemberMemberTagRelationAdd(ctx context.Context, in *MemberMemberTagRelationAddReq) (*MemberMemberTagRelationAddResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberMemberTagRelationAdd(ctx, in)
-}
-
-func (m *defaultUms) MemberMemberTagRelationList(ctx context.Context, in *MemberMemberTagRelationListReq) (*MemberMemberTagRelationListResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberMemberTagRelationList(ctx, in)
-}
-
-func (m *defaultUms) MemberMemberTagRelationUpdate(ctx context.Context, in *MemberMemberTagRelationUpdateReq) (*MemberMemberTagRelationUpdateResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberMemberTagRelationUpdate(ctx, in)
-}
-
-func (m *defaultUms) MemberMemberTagRelationDelete(ctx context.Context, in *MemberMemberTagRelationDeleteReq) (*MemberMemberTagRelationDeleteResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberMemberTagRelationDelete(ctx, in)
-}
-
-func (m *defaultUms) MemberProductCategoryRelationAdd(ctx context.Context, in *MemberProductCategoryRelationAddReq) (*MemberProductCategoryRelationAddResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberProductCategoryRelationAdd(ctx, in)
-}
-
-func (m *defaultUms) MemberProductCategoryRelationList(ctx context.Context, in *MemberProductCategoryRelationListReq) (*MemberProductCategoryRelationListResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberProductCategoryRelationList(ctx, in)
-}
-
-func (m *defaultUms) MemberProductCategoryRelationUpdate(ctx context.Context, in *MemberProductCategoryRelationUpdateReq) (*MemberProductCategoryRelationUpdateResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberProductCategoryRelationUpdate(ctx, in)
-}
-
-func (m *defaultUms) MemberProductCategoryRelationDelete(ctx context.Context, in *MemberProductCategoryRelationDeleteReq) (*MemberProductCategoryRelationDeleteResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberProductCategoryRelationDelete(ctx, in)
-}
-
-func (m *defaultUms) MemberReceiveAddressAdd(ctx context.Context, in *MemberReceiveAddressAddReq) (*MemberReceiveAddressAddResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberReceiveAddressAdd(ctx, in)
-}
-
-func (m *defaultUms) MemberReceiveAddressList(ctx context.Context, in *MemberReceiveAddressListReq) (*MemberReceiveAddressListResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberReceiveAddressList(ctx, in)
-}
-
-func (m *defaultUms) MemberReceiveAddressUpdate(ctx context.Context, in *MemberReceiveAddressUpdateReq) (*MemberReceiveAddressUpdateResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberReceiveAddressUpdate(ctx, in)
-}
-
-func (m *defaultUms) MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq) (*MemberReceiveAddressDeleteResp, error) {
-	client := ums.NewUmsClient(m.cli.Conn())
-	return client.MemberReceiveAddressDelete(ctx, in)
-}
-
 func (m *defaultUms) MemberRuleSettingAdd(ctx context.Context, in *MemberRuleSettingAddReq) (*MemberRuleSettingAddResp, error) {
 	client := ums.NewUmsClient(m.cli.Conn())
 	return client.MemberRuleSettingAdd(ctx, in)
@@ -456,4 +429,64 @@ func (m *defaultUms) MemberTaskUpdate(ctx context.Context, in *MemberTaskUpdateR
 func (m *defaultUms) MemberTaskDelete(ctx context.Context, in *MemberTaskDeleteReq) (*MemberTaskDeleteResp, error) {
 	client := ums.NewUmsClient(m.cli.Conn())
 	return client.MemberTaskDelete(ctx, in)
+}
+
+func (m *defaultUms) MemberTagRelationAdd(ctx context.Context, in *MemberTagRelationAddReq) (*MemberTagRelationAddResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberTagRelationAdd(ctx, in)
+}
+
+func (m *defaultUms) MemberTagRelationList(ctx context.Context, in *MemberTagRelationListReq) (*MemberTagRelationListResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberTagRelationList(ctx, in)
+}
+
+func (m *defaultUms) MemberTagRelationUpdate(ctx context.Context, in *MemberTagRelationUpdateReq) (*MemberTagRelationUpdateResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberTagRelationUpdate(ctx, in)
+}
+
+func (m *defaultUms) MemberTagRelationDelete(ctx context.Context, in *MemberTagRelationDeleteReq) (*MemberTagRelationDeleteResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberTagRelationDelete(ctx, in)
+}
+
+func (m *defaultUms) MemberProductCategoryRelationAdd(ctx context.Context, in *MemberProductCategoryRelationAddReq) (*MemberProductCategoryRelationAddResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCategoryRelationAdd(ctx, in)
+}
+
+func (m *defaultUms) MemberProductCategoryRelationList(ctx context.Context, in *MemberProductCategoryRelationListReq) (*MemberProductCategoryRelationListResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCategoryRelationList(ctx, in)
+}
+
+func (m *defaultUms) MemberProductCategoryRelationUpdate(ctx context.Context, in *MemberProductCategoryRelationUpdateReq) (*MemberProductCategoryRelationUpdateResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCategoryRelationUpdate(ctx, in)
+}
+
+func (m *defaultUms) MemberProductCategoryRelationDelete(ctx context.Context, in *MemberProductCategoryRelationDeleteReq) (*MemberProductCategoryRelationDeleteResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberProductCategoryRelationDelete(ctx, in)
+}
+
+func (m *defaultUms) MemberReceiveAddressAdd(ctx context.Context, in *MemberReceiveAddressAddReq) (*MemberReceiveAddressAddResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberReceiveAddressAdd(ctx, in)
+}
+
+func (m *defaultUms) MemberReceiveAddressList(ctx context.Context, in *MemberReceiveAddressListReq) (*MemberReceiveAddressListResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberReceiveAddressList(ctx, in)
+}
+
+func (m *defaultUms) MemberReceiveAddressUpdate(ctx context.Context, in *MemberReceiveAddressUpdateReq) (*MemberReceiveAddressUpdateResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberReceiveAddressUpdate(ctx, in)
+}
+
+func (m *defaultUms) MemberReceiveAddressDelete(ctx context.Context, in *MemberReceiveAddressDeleteReq) (*MemberReceiveAddressDeleteResp, error) {
+	client := ums.NewUmsClient(m.cli.Conn())
+	return client.MemberReceiveAddressDelete(ctx, in)
 }

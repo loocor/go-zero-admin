@@ -1,69 +1,66 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Admin Sys Log"
+    desc: "admin system log management"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    addRoleReq struct {
+    RoleData struct {
         Name string `json:"name"`                          // 角色名称
         Remark string `json:"remark"`                      // 备注
+        CommonData
     }
 
-    addRoleResp struct {
+    RoleAddReq struct {
+        RoleData
     }
 
-    ListRoleReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+    RoleAddResp struct {
+        CommonResp
     }
 
-    ListRoleData struct {
-        Id int64 `json:"id"`                               // 编号
-        Name string `json:"name"`                          // 角色名称
-        Remark string `json:"remark"`                      // 备注
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1: 已删除  0: 正常
+    RoleListReq struct {
+        CommonListReq
     }
 
-    ListRoleResp struct {
-        Current int64 `json:"current"`
-        Data []*ListRoleData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+    RoleListResp struct {
+        Data []*RoleData `json:"data"`
+        CommonListResp
     }
 
-    UpdateRoleReq struct {
-        Id int64 `json:"id"`                               // 编号
-        Name string `json:"name"`                          // 角色名称
-        Remark string `json:"remark"`                      // 备注
+    RoleUpdateReq struct {
+        RoleData
     }
 
-    UpdateRoleResp struct {
+    RoleUpdateResp struct {
+        CommonResp
     }
 
-    DeleteRoleReq struct {
+    RoleDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteRoleResp struct {
+    RoleDeleteResp struct {
+        CommonResp
     }
 
     RoleMenuIdsReq struct {
     }
 
     RoleMenuIdsResp struct {
+        CommonResp
     }
 
-    UpdateRoleMenuReq struct {
+    RoleMenuUpdateReq struct {
     }
 
-    UpdateRoleMenuResp struct {
+    RoleMenuUpdateResp struct {
+        CommonResp
     }
 )
 
@@ -71,21 +68,27 @@ type (
     group: sys/role
 )
 service admin-api {
+    @doc "新增角色"
     @handler RoleAdd
-    post /api/sys/role/add (addRoleReq) returns (addRoleResp)
+    post /api/sys/role/add (RoleAddReq) returns (RoleAddResp)
 
+    @doc "角色列表"
     @handler RoleList
-    get /api/sys/role/list (ListRoleReq) returns (ListRoleResp)
+    get /api/sys/role/list (RoleListReq) returns (RoleListResp)
 
+    @doc "更新角色"
     @handler RoleUpdate
-    post /api/sys/role/update (UpdateRoleReq) returns (UpdateRoleResp)
+    post /api/sys/role/update (RoleUpdateReq) returns (RoleUpdateResp)
 
+    @doc "删除角色"
     @handler RoleDelete
-    post /api/sys/role/delete (DeleteRoleReq) returns (DeleteRoleResp)
+    post /api/sys/role/delete (RoleDeleteReq) returns (RoleDeleteResp)
 
+    @doc "角色菜单列表"
     @handler RoleMenuIds
-    post /api/sys/role/roleMenuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
+    post /api/sys/role/menuIds (RoleMenuIdsReq) returns (RoleMenuIdsResp)
 
-    @handler UpdateRoleMenu
-    post /api/sys/role/updateRoleMenu (UpdateRoleMenuReq) returns (UpdateRoleMenuResp)
+    @doc "更新角色菜单"
+    @handler RoleMenuUpdate
+    post /api/sys/role/menuUpdate (RoleMenuUpdateReq) returns (RoleMenuUpdateResp)
 }

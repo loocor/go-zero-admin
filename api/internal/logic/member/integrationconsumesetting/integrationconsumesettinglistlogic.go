@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,43 +23,8 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req types.ListIntegrationConsumeSettingReq) (
-	*types.ListIntegrationConsumeSettingResp,
-	error,
-) {
-	resp, err := l.svcCtx.Ums.IntegrationConsumeSettingList(
-		l.ctx, &umsclient.IntegrationConsumeSettingListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(req types.IntegrationConsumeSettingListReq) (*types.IntegrationConsumeSettingListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
-	var list []*types.ListtIntegrationConsumeSettingData
-
-	for _, item := range resp.List {
-		list = append(
-			list, &types.ListtIntegrationConsumeSettingData{
-				Id:                 item.Id,
-				DeductionPerAmount: item.DeductionPerAmount,
-				MaxPercentPerOrder: item.MaxPercentPerOrder,
-				UseUnit:            item.UseUnit,
-				CouponStatus:       item.CouponStatus,
-			},
-		)
-	}
-
-	return &types.ListIntegrationConsumeSettingResp{
-		Current:  req.Current,
-		Data:     nil,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.IntegrationConsumeSettingListResp{}, nil
 }

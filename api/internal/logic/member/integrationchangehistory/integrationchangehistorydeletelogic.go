@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,15 +23,8 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
-func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req types.DeleteIntegrationChangeHistoryReq) (
-	*types.DeleteIntegrationChangeHistoryResp,
-	error,
-) {
-	_, _ = l.svcCtx.Ums.IntegrationChangeHistoryDelete(
-		l.ctx, &umsclient.IntegrationChangeHistoryDeleteReq{
-			Id: req.Id,
-		},
-	)
+func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(req types.IntegrationChangeHistoryDeleteReq) (*types.IntegrationChangeHistoryDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &types.DeleteIntegrationChangeHistoryResp{}, nil
+	return &types.IntegrationChangeHistoryDeleteResp{}, nil
 }

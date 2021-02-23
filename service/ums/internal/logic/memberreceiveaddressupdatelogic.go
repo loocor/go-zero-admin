@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,22 +24,7 @@ func NewMemberReceiveAddressUpdateLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 func (l *MemberReceiveAddressUpdateLogic) MemberReceiveAddressUpdate(in *ums.MemberReceiveAddressUpdateReq) (*ums.MemberReceiveAddressUpdateResp, error) {
-	err := l.svcCtx.UmsMemberReceiveAddressModel.Update(
-		umsmodel.UmsMemberReceiveAddress{
-			Id:            in.Id,
-			MemberId:      in.MemberId,
-			Name:          in.Name,
-			PhoneNumber:   in.PhoneNumber,
-			DefaultStatus: in.DefaultStatus,
-			PostCode:      in.PostCode,
-			Province:      in.Province,
-			City:          in.City,
-			Region:        in.Region,
-			DetailAddress: in.DetailAddress,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.MemberReceiveAddressUpdateResp{}, nil
 }

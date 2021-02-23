@@ -1,27 +1,29 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    addIntegrationConsumeSettingReq struct {
+    IntegrationConsumeSettingAddReq struct {
         DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
         MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
         UseUnit int64 `json:"use_unit"`                         // 每次使用积分最小单位100
         CouponStatus int64 `json:"coupon_status"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
     }
 
-    addIntegrationConsumeSettingResp struct {
+    IntegrationConsumeSettingAddResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    ListIntegrationConsumeSettingReq struct {
+    IntegrationConsumeSettingListReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
 
-    ListtIntegrationConsumeSettingData struct {
+    IntegrationConsumeSettingData struct {
         Id int64 `json:"id"`
         DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
         MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
@@ -29,15 +31,15 @@ type (
         CouponStatus int64 `json:"coupon_status"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
     }
 
-    ListIntegrationConsumeSettingResp struct {
+    IntegrationConsumeSettingListResp struct {
         Current int64 `json:"current"`
-        Data []*ListtIntegrationConsumeSettingData `json:"data"`
+        Data []*IntegrationConsumeSettingData `json:"data"`
         PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
 
-    UpdateIntegrationConsumeSettingReq struct {
+    IntegrationConsumeSettingUpdateReq struct {
         Id int64 `json:"id"`
         DeductionPerAmount int64 `json:"deduction_per_amount"`  // 每一元需要抵扣的积分数量
         MaxPercentPerOrder int64 `json:"max_percent_per_order"` // 每笔订单最高抵用百分比
@@ -45,14 +47,18 @@ type (
         CouponStatus int64 `json:"coupon_status"`               // 是否可以和优惠券同用; 0->不可以; 1->可以
     }
 
-    UpdateIntegrationConsumeSettingResp struct {
+    IntegrationConsumeSettingUpdateResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    DeleteIntegrationConsumeSettingReq struct {
+    IntegrationConsumeSettingDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteIntegrationConsumeSettingResp struct {
+    IntegrationConsumeSettingDeleteResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 )
 
@@ -60,15 +66,19 @@ type (
     group: member/integrationconsumesetting
 )
 service admin-api {
+    @doc "新增积分消费历史"
     @handler IntegrationConsumeSettingAdd
-    post /api/member/integrationconsumesetting/add (addIntegrationConsumeSettingReq) returns (addIntegrationConsumeSettingResp)
+    post /api/member/integrationconsumesetting/add (IntegrationConsumeSettingAddReq) returns (IntegrationConsumeSettingAddResp)
 
+    @doc "积分消费历史列表"
     @handler IntegrationConsumeSettingList
-    get /api/member/integrationconsumesetting/list (ListIntegrationConsumeSettingReq) returns (ListIntegrationConsumeSettingResp)
+    get /api/member/integrationconsumesetting/list (IntegrationConsumeSettingListReq) returns (IntegrationConsumeSettingListResp)
 
+    @doc "更新积分消费历史"
     @handler IntegrationConsumeSettingUpdate
-    post /api/member/integrationconsumesetting/update (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
+    post /api/member/integrationconsumesetting/update (IntegrationConsumeSettingUpdateReq) returns (IntegrationConsumeSettingUpdateResp)
 
+    @doc "删除积分消费历史"
     @handler IntegrationConsumeSettingDelete
-    post /api/member/integrationconsumesetting/delete (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
+    post /api/member/integrationconsumesetting/delete (IntegrationConsumeSettingDeleteReq) returns (IntegrationConsumeSettingDeleteResp)
 }

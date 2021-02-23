@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,21 +24,7 @@ func NewIntegrationChangeHistoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *IntegrationChangeHistoryUpdateLogic) IntegrationChangeHistoryUpdate(in *ums.IntegrationChangeHistoryUpdateReq) (*ums.IntegrationChangeHistoryUpdateResp, error) {
-	CreateTime, _ := time.Parse("2006-01-02 15:04:05", in.CreateTime)
-	err := l.svcCtx.UmsIntegrationChangeHistoryModel.Update(
-		umsmodel.UmsIntegrationChangeHistory{
-			Id:          in.Id,
-			MemberId:    in.MemberId,
-			CreateTime:  CreateTime,
-			ChangeType:  in.ChangeType,
-			ChangeCount: in.ChangeCount,
-			OperateMan:  in.OperateMan,
-			OperateNote: in.OperateNote,
-			SourceType:  in.SourceType,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.IntegrationChangeHistoryUpdateResp{}, nil
 }

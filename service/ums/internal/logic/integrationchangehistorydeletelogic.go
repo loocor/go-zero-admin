@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,11 +24,7 @@ func NewIntegrationChangeHistoryDeleteLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *IntegrationChangeHistoryDeleteLogic) IntegrationChangeHistoryDelete(in *ums.IntegrationChangeHistoryDeleteReq) (*ums.IntegrationChangeHistoryDeleteResp, error) {
-	err := l.svcCtx.UmsIntegrationChangeHistoryModel.Delete(in.Id)
-
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.IntegrationChangeHistoryDeleteResp{}, nil
 }

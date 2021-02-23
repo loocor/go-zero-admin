@@ -1,69 +1,57 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Admin Config"
+    desc: "admin config management"
+    author: "Loocor"
+    email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
-    addConfigReq struct {
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
+    ConfigData struct {
+        Value string `json:"value"`                        // 配置数据
+        Label string `json:"label"`                        // 配置名称
+        Type string `json:"type"`                          // 数据类型
+        Description string `json:"description"`            // 配置描述
         Sort int64 `json:"sort"`                           // 排序 (升序)
         Remarks string `json:"remarks"`                    // 备注信息
+        CommonData
     }
 
-    addConfigResp struct {
+    ConfigAddReq struct {
+        ConfigData
     }
 
-    ListConfigReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+    ConfigAddResp struct {
+        CommonResp
     }
 
-    ListConfigData struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序 (升序)
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"del_flag"`                    // 是否删除 -1: 已删除 0: 正常
+    ConfigListReq struct {
+        CommonListReq
     }
 
-    ListConfigResp struct {
-        Current int64 `json:"current"`
-        Data []*ListConfigData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+    ConfigListResp struct {
+        Data []*ConfigData `json:"data"`
+        CommonListResp
     }
 
-    UpdateConfigReq struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort int64 `json:"sort"`                           // 排序 (升序)
-        Remarks string `json:"remarks"`                    // 备注信息
+    ConfigUpdateReq struct {
+        ConfigData
     }
 
-    UpdateConfigResp struct {
+    ConfigUpdateResp struct {
+        CommonResp
     }
 
-    DeleteConfigReq struct {
+    ConfigDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteConfigResp struct {
+    ConfigDeleteResp struct {
+        CommonResp
     }
 )
 
@@ -71,15 +59,19 @@ type (
     group: sys/config
 )
 service admin-api {
+    @doc "新增配置"
     @handler ConfigAdd
-    post /api/sys/config/add (addConfigReq) returns (addConfigResp)
+    post /api/sys/config/add (ConfigAddReq) returns (ConfigAddResp)
 
+    @doc "配置列表"
     @handler ConfigList
-    get /api/sys/config/list (ListConfigReq) returns (ListConfigResp)
+    get /api/sys/config/list (ConfigListReq) returns (ConfigListResp)
 
+    @doc "更新配置"
     @handler ConfigUpdate
-    post /api/sys/config/update (UpdateConfigReq) returns (UpdateConfigResp)
+    post /api/sys/config/update (ConfigUpdateReq) returns (ConfigUpdateResp)
 
+    @doc "删除配置"
     @handler ConfigDelete
-    post /api/sys/config/delete (DeleteConfigReq) returns (DeleteConfigResp)
+    post /api/sys/config/delete (ConfigDeleteReq) returns (ConfigDeleteResp)
 }

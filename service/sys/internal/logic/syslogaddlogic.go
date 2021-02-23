@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/sys"
-
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,22 +24,7 @@ func NewSysLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SysLogA
 }
 
 func (l *SysLogAddLogic) SysLogAdd(in *sys.SysLogAddReq) (*sys.SysLogAddResp, error) {
-	_, err := l.svcCtx.SysLogModel.Insert(
-		sysmodel.SysLog{
-			UserName:       in.UserName,
-			Operation:      in.Operation,
-			Method:         in.Method,
-			Params:         in.Params,
-			Time:           in.Time,
-			Ip:             in.Ip,
-			CreateBy:       in.CreateBy,
-			LastUpdateBy:   in.CreateBy,
-			LastUpdateTime: time.Now(),
-		})
-
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &sys.SysLogAddResp{}, nil
 }

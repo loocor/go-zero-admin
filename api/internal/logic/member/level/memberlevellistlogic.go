@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,48 +23,8 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Me
 	}
 }
 
-func (l *MemberLevelListLogic) MemberLevelList(req types.ListMemberLevelReq) (*types.ListMemberLevelResp, error) {
-	resp, err := l.svcCtx.Ums.MemberLevelList(
-		l.ctx, &umsclient.MemberLevelListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *MemberLevelListLogic) MemberLevelList(req types.MemberLevelListReq) (*types.MemberLevelListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
-	var list []*types.ListtMemberLevelData
-
-	for _, item := range resp.List {
-		list = append(
-			list, &types.ListtMemberLevelData{
-				Id:                    item.Id,
-				Name:                  item.Name,
-				GrowthPoint:           item.GrowthPoint,
-				DefaultStatus:         item.DefaultStatus,
-				FreeFreightPoint:      float64(item.FreeFreightPoint),
-				CommentGrowthPoint:    item.CommentGrowthPoint,
-				PriviledgeFreeFreight: item.PriviledgeFreeFreight,
-				PriviledgeSignIn:      item.PriviledgeSignIn,
-				PriviledgeComment:     item.PriviledgeComment,
-				PriviledgePromotion:   item.PriviledgePromotion,
-				PriviledgeMemberPrice: item.PriviledgeMemberPrice,
-				PriviledgeBirthday:    item.PriviledgeBirthday,
-				Note:                  item.Note,
-			},
-		)
-	}
-
-	return &types.ListMemberLevelResp{
-		Current:  req.Current,
-		Data:     nil,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.MemberLevelListResp{}, nil
 }

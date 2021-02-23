@@ -1,27 +1,29 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    addMemberTaskReq struct {
+    MemberTaskAddReq struct {
         Name string `json:"name"`
         Growth int64 `json:"growth"`            // 赠送成长值
         Integration int64 `json:"integration"`  // 赠送积分
         Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
     }
 
-    addMemberTaskResp struct {
+    MemberTaskAddResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    ListMemberTaskReq struct {
+    MemberTaskListReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
 
-    ListtMemberTaskData struct {
+    MemberTaskData struct {
         Id int64 `json:"id"`
         Name string `json:"name"`
         Growth int64 `json:"growth"`            // 赠送成长值
@@ -29,15 +31,15 @@ type (
         Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
     }
 
-    ListMemberTaskResp struct {
+    MemberTaskListResp struct {
         Current int64 `json:"current"`
-        Data []*ListtMemberTaskData `json:"data"`
+        Data []*MemberTaskData `json:"data"`
         PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
 
-    UpdateMemberTaskReq struct {
+    MemberTaskUpdateReq struct {
         Id int64 `json:"id"`
         Name string `json:"name"`
         Growth int64 `json:"growth"`            // 赠送成长值
@@ -45,14 +47,18 @@ type (
         Type int64 `json:"type"`                // 任务类型: 0->新手任务; 1->日常任务
     }
 
-    UpdateMemberTaskResp struct {
+    MemberTaskUpdateResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    DeleteMemberTaskReq struct {
+    MemberTaskDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteMemberTaskResp struct {
+    MemberTaskDeleteResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 )
 
@@ -60,15 +66,19 @@ type (
     group: member/task
 )
 service admin-api {
+    @doc "新增会员任务"
     @handler MemberTaskAdd
-    post /api/member/task/add (addMemberTaskReq) returns (addMemberTaskResp)
+    post /api/member/task/add (MemberTaskAddReq) returns (MemberTaskAddResp)
 
+    @doc "会员任务列表"
     @handler MemberTaskList
-    get /api/member/task/list (ListMemberTaskReq) returns (ListMemberTaskResp)
+    get /api/member/task/list (MemberTaskListReq) returns (MemberTaskListResp)
 
+    @doc "更新会员任务"
     @handler MemberTaskUpdate
-    post /api/member/task/update (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
+    post /api/member/task/update (MemberTaskUpdateReq) returns (MemberTaskUpdateResp)
 
+    @doc "删除会员任务"
     @handler MemberTaskDelete
-    post /api/member/task/delete (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
+    post /api/member/task/delete (MemberTaskDeleteReq) returns (MemberTaskDeleteResp)
 }

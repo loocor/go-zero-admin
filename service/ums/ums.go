@@ -7,17 +7,17 @@ import (
 	"flag"
 	"fmt"
 
-	"go-zero-admin/service/ums/internal/config"
-	"go-zero-admin/service/ums/internal/server"
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/config"
+	"zdmin/service/ums/internal/server"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
-var configFile = flag.String("f", "service/ums/etc/ums.yaml", "the config file")
+var configFile = flag.String("f", "etc/ums.yaml", "the config file")
 
 func main() {
 	flag.Parse()

@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,33 +24,7 @@ func NewMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberLevelListLogic) MemberLevelList(in *ums.MemberLevelListReq) (*ums.MemberLevelListResp, error) {
-	all, _ := l.svcCtx.UmsMemberLevelModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	var list []*ums.MemberLevelListData
-	for _, item := range *all {
-
-		list = append(list, &ums.MemberLevelListData{
-			Id:                    item.Id,
-			Name:                  item.Name,
-			GrowthPoint:           item.GrowthPoint,
-			DefaultStatus:         item.DefaultStatus,
-			FreeFreightPoint:      int64(item.FreeFreightPoint),
-			CommentGrowthPoint:    item.CommentGrowthPoint,
-			PriviledgeFreeFreight: item.PriviledgeFreeFreight,
-			PriviledgeSignIn:      item.PriviledgeSignIn,
-			PriviledgeComment:     item.PriviledgeComment,
-			PriviledgePromotion:   item.PriviledgePromotion,
-			PriviledgeMemberPrice: item.PriviledgeMemberPrice,
-			PriviledgeBirthday:    item.PriviledgeBirthday,
-			Note:                  item.Note,
-		})
-	}
-
-	fmt.Println(list)
-	return &ums.MemberLevelListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &ums.MemberLevelListResp{}, nil
 }

@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,11 +24,7 @@ func NewMenuDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MenuDe
 }
 
 func (l *MenuDeleteLogic) MenuDelete(in *sys.MenuDeleteReq) (*sys.MenuDeleteResp, error) {
-	err := l.svcCtx.MenuModel.Delete(in.Id)
-
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &sys.MenuDeleteResp{}, nil
 }

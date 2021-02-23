@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,24 +24,7 @@ func NewMemberLevelAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberLevelAddLogic) MemberLevelAdd(in *ums.MemberLevelAddReq) (*ums.MemberLevelAddResp, error) {
-	_, err := l.svcCtx.UmsMemberLevelModel.Insert(
-		umsmodel.UmsMemberLevel{
-			Name:                  in.Name,
-			GrowthPoint:           in.GrowthPoint,
-			DefaultStatus:         in.DefaultStatus,
-			FreeFreightPoint:      float64(in.FreeFreightPoint),
-			CommentGrowthPoint:    in.CommentGrowthPoint,
-			PriviledgeFreeFreight: in.PriviledgeFreeFreight,
-			PriviledgeSignIn:      in.PriviledgeSignIn,
-			PriviledgeComment:     in.PriviledgeComment,
-			PriviledgePromotion:   in.PriviledgePromotion,
-			PriviledgeMemberPrice: in.PriviledgeMemberPrice,
-			PriviledgeBirthday:    in.PriviledgeBirthday,
-			Note:                  in.Note,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.MemberLevelAddResp{}, nil
 }

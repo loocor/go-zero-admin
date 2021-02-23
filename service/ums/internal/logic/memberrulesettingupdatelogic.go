@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,19 +24,7 @@ func NewMemberRuleSettingUpdateLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberRuleSettingUpdateLogic) MemberRuleSettingUpdate(in *ums.MemberRuleSettingUpdateReq) (*ums.MemberRuleSettingUpdateResp, error) {
-	err := l.svcCtx.UmsMemberRuleSettingModel.Update(
-		umsmodel.UmsMemberRuleSetting{
-			Id:                in.Id,
-			ContinueSignDay:   in.ContinueSignDay,
-			ContinueSignPoint: in.ContinueSignPoint,
-			ConsumePerPoint:   float64(in.ConsumePerPoint),
-			LowOrderAmount:    float64(in.LowOrderAmount),
-			MaxPointPerOrder:  in.MaxPointPerOrder,
-			Type:              in.Type,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.MemberRuleSettingUpdateResp{}, nil
 }

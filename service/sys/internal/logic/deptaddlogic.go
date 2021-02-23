@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/sys"
-
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,20 +24,7 @@ func NewDeptAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeptAddLo
 }
 
 func (l *DeptAddLogic) DeptAdd(in *sys.DeptAddReq) (*sys.DeptAddResp, error) {
-	_, err := l.svcCtx.DeptModel.Insert(
-		sysmodel.SysDept{
-			Name:           in.Name,
-			ParentId:       in.ParentId,
-			OrderNum:       in.OrderNum,
-			CreateBy:       in.CreateBy,
-			LastUpdateBy:   in.CreateBy,
-			LastUpdateTime: time.Now(),
-			DelFlag:        0,
-		})
-
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &sys.DeptAddResp{}, nil
 }

@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,18 +23,8 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) RoleAddLog
 	}
 }
 
-func (l *RoleAddLogic) RoleAdd(req types.AddRoleReq) (*types.AddRoleResp, error) {
-	_, err := l.svcCtx.Sys.RoleAdd(
-		l.ctx, &sysclient.RoleAddReq{
-			Name:     req.Name,
-			Remark:   req.Remark,
-			CreateBy: "admin", // todo 从 token 里面拿
-		},
-	)
+func (l *RoleAddLogic) RoleAdd(req types.RoleAddReq) (*types.RoleAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.AddRoleResp{}, nil
+	return &types.RoleAddResp{}, nil
 }

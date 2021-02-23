@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,42 +23,8 @@ func NewMemberLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.ListMemberLoginLogReq) (*types.ListMemberLoginLogResp, error) {
-	resp, err := l.svcCtx.Ums.MemberLoginLogList(
-		l.ctx, &umsclient.MemberLoginLogListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *MemberLoginLogListLogic) MemberLoginLogList(req types.MemberLoginLogListReq) (*types.MemberLoginLogListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
-	var list []*types.ListtMemberLoginLogData
-
-	for _, item := range resp.List {
-		list = append(
-			list, &types.ListtMemberLoginLogData{
-				Id:         item.Id,
-				MemberId:   item.MemberId,
-				CreateTime: item.CreateTime,
-				Ip:         item.Ip,
-				City:       item.City,
-				LoginType:  item.LoginType,
-				Province:   item.Province,
-			},
-		)
-	}
-
-	return &types.ListMemberLoginLogResp{
-		Current:  req.Current,
-		Data:     nil,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.MemberLoginLogListResp{}, nil
 }

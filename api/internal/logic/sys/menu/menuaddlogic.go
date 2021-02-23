@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,23 +23,8 @@ func NewMenuAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) MenuAddLog
 	}
 }
 
-func (l *MenuAddLogic) MenuAdd(req types.AddMenuReq) (*types.AddMenuResp, error) {
-	_, err := l.svcCtx.Sys.MenuAdd(
-		l.ctx, &sysclient.MenuAddReq{
-			Name:     req.Name,
-			ParentId: req.ParentId,
-			Url:      req.Url,
-			Perms:    req.Perms,
-			Type:     req.Type,
-			Icon:     req.Icon,
-			OrderNum: req.OrderNum,
-			CreateBy: "admin", // todo 从 token 里面拿
-		},
-	)
+func (l *MenuAddLogic) MenuAdd(req types.MenuAddReq) (*types.MenuAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.AddMenuResp{}, nil
+	return &types.MenuAddResp{}, nil
 }

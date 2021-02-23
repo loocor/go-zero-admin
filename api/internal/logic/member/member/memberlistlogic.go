@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,51 +23,8 @@ func NewMemberListLogic(ctx context.Context, svcCtx *svc.ServiceContext) MemberL
 	}
 }
 
-func (l *MemberListLogic) MemberList(req types.ListMemberReq) (*types.ListMemberResp, error) {
-	resp, err := l.svcCtx.Ums.MemberList(
-		l.ctx, &umsclient.MemberListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *MemberListLogic) MemberList(req types.MemberListReq) (*types.MemberListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	var list []*types.ListtMemberData
-
-	for _, member := range resp.List {
-		list = append(
-			list, &types.ListtMemberData{
-				Id:                    member.Id,
-				MemberLevelId:         member.MemberLevelId,
-				Username:              member.Username,
-				Password:              member.Password,
-				Nickname:              member.Nickname,
-				Phone:                 member.Phone,
-				Status:                member.Status,
-				CreateTime:            member.CreateTime,
-				Icon:                  member.Icon,
-				Gender:                member.Gender,
-				Birthday:              member.Birthday,
-				City:                  member.City,
-				Job:                   member.Job,
-				PersonalizedSignature: member.PersonalizedSignature,
-				SourceType:            member.SourceType,
-				Integration:           member.Integration,
-				Growth:                member.Growth,
-				LuckyCount:            member.LuckyCount,
-				HistoryIntegration:    member.HistoryIntegration,
-			},
-		)
-	}
-
-	return &types.ListMemberResp{
-		Current:  req.Current,
-		Data:     nil,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.MemberListResp{}, nil
 }

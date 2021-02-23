@@ -1,64 +1,70 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    addMemberLoginLogReq struct {
+    MemberLoginLogAddReq struct {
         MemberId int64 `json:"member_id"`
         CreateTime string `json:"create_time"`
         Ip string `json:"ip"`
         City string `json:"city"`
-        LoginType int64 `json:"login_type"` // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
+        LoginType int64 `json:"login_type"`         // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
         Province string `json:"province"`
     }
 
-    addMemberLoginLogResp struct {
+    MemberLoginLogAddResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    ListMemberLoginLogReq struct {
+    MemberLoginLogListReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
 
-    ListtMemberLoginLogData struct {
+    MemberLoginLogData struct {
         Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`
-        CreateTime string `json:"create_time"`
-        Ip string `json:"ip"`
-        City string `json:"city"`
-        LoginType int64 `json:"login_type"` // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
-        Province string `json:"province"`
+        MemberId int64 `json:"member_id"`           // 会员 ID
+        CreateTime string `json:"create_time"`      // 登录时间
+        Ip string `json:"ip"`                       // IP 地址
+        City string `json:"city"`                   // 城市
+        LoginType int64 `json:"login_type"`         // 登录类型: 0->登录类型: 0->PC, 1->android, 2->ios, 3->mp
+        Province string `json:"province"`           // 省份
     }
 
-    ListMemberLoginLogResp struct {
+    MemberLoginLogListResp struct {
         Current int64 `json:"current"`
-        Data []*ListtMemberLoginLogData `json:"data"`
+        Data []*MemberLoginLogData `json:"data"`
         PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
 
-    UpdateMemberLoginLogReq struct {
+    MemberLoginLogUpdateReq struct {
         Id int64 `json:"id"`
-        MemberId int64 `json:"member_id"`
-        CreateTime string `json:"create_time"`
-        Ip string `json:"ip"`
-        City string `json:"city"`
-        LoginType int64 `json:"login_type"` // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
-        Province string `json:"province"`
+        MemberId int64 `json:"member_id"`           // 会员 ID
+        CreateTime string `json:"create_time"`      // 登录时间
+        Ip string `json:"ip"`                       // IP 地址
+        City string `json:"city"`                   // 城市
+        LoginType int64 `json:"login_type"`         // 登录类型: 0->PC, 1->android, 2->ios, 3->mp
+        Province string `json:"province"`           // 省份
     }
 
-    UpdateMemberLoginLogResp struct {
+    MemberLoginLogUpdateResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    DeleteMemberLoginLogReq struct {
+    MemberLoginLogDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteMemberLoginLogResp struct {
+    MemberLoginLogDeleteResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 )
 
@@ -66,15 +72,19 @@ type (
     group: member/loginlog
 )
 service admin-api {
+    @doc "新增会员登录日志"
     @handler MemberLoginLogAdd
-    post /api/member/loginlog/add (addMemberLoginLogReq) returns (addMemberLoginLogResp)
+    post /api/member/loginlog/add (MemberLoginLogAddReq) returns (MemberLoginLogAddResp)
 
+    @doc "会员登录日志列表"
     @handler MemberLoginLogList
-    get /api/member/loginlog/list (ListMemberLoginLogReq) returns (ListMemberLoginLogResp)
+    get /api/member/loginlog/list (MemberLoginLogListReq) returns (MemberLoginLogListResp)
 
+    @doc "更新会员登录日志"
     @handler MemberLoginLogUpdate
-    post /api/member/loginlog/update (UpdateMemberLoginLogReq) returns (UpdateMemberLoginLogResp)
+    post /api/member/loginlog/update (MemberLoginLogUpdateReq) returns (MemberLoginLogUpdateResp)
 
+    @doc "删除会员登录日志"
     @handler MemberLoginLogDelete
-    post /api/member/loginlog/delete (DeleteMemberLoginLogReq) returns (DeleteMemberLoginLogResp)
+    post /api/member/loginlog/delete (MemberLoginLogDeleteReq) returns (MemberLoginLogDeleteResp)
 }

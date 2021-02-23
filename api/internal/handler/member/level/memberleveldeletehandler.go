@@ -3,16 +3,16 @@ package handler
 import (
 	"net/http"
 
-	"go-zero-admin/api/internal/logic/member/level"
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/logic/member/level"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/rest/httpx"
 )
 
 func MemberLevelDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.DeleteMemberLevelReq
+		var req types.MemberLevelDeleteReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return

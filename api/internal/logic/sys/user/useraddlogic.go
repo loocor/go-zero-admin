@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"strconv"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,22 +23,8 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserAddLog
 	}
 }
 
-func (l *UserAddLogic) UserAdd(req types.AddUserReq) (*types.AddUserResp, error) {
-	deptId, _ := strconv.ParseInt(req.DeptId, 10, 64)
-	_, err := l.svcCtx.Sys.UserAdd(
-		l.ctx, &sysclient.UserAddReq{
-			Email:    req.Email,
-			Mobile:   req.Mobile,
-			Name:     req.Name,
-			NickName: req.NickName,
-			DeptId:   deptId,
-			CreateBy: "admin", // todo 从 token 里面拿
-		},
-	)
+func (l *UserAddLogic) UserAdd(req types.UserAddReq) (*types.UserAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.AddUserResp{}, nil
+	return &types.UserAddResp{}, nil
 }

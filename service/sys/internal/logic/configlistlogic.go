@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,33 +24,7 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Config
 }
 
 func (l *ConfigListLogic) ConfigList(in *sys.ConfigListReq) (*sys.ConfigListResp, error) {
-	all, err := l.svcCtx.ConfigModel.FindAll(in.Current, in.PageSize)
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
-	var list []*sys.ConfigListData
-	for _, config := range *all {
-		fmt.Println(config)
-		list = append(list, &sys.ConfigListData{
-			Id:             config.Id,
-			Value:          config.Value,
-			Label:          config.Label,
-			Type:           config.Type,
-			Description:    config.Description,
-			Sort:           int64(config.Sort),
-			Remarks:        config.Remarks,
-			DelFlag:        config.DelFlag,
-			CreateBy:       config.CreateBy,
-			CreateTime:     config.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   config.LastUpdateBy,
-			LastUpdateTime: config.LastUpdateTime.Format("2006-01-02 15:04:05"),
-		})
-	}
-
-	return &sys.ConfigListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &sys.ConfigListResp{}, nil
 }

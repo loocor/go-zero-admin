@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,31 +24,7 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Logi
 }
 
 func (l *LoginLogListLogic) LoginLogList(in *sys.LoginLogListReq) (*sys.LoginLogListResp, error) {
-	all, err := l.svcCtx.LoginLogModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	var list []*sys.LoginLogListData
-	for _, log := range *all {
-		fmt.Println(log)
-		list = append(list, &sys.LoginLogListData{
-			Id:             log.Id,
-			UserName:       log.UserName,
-			Status:         log.Status,
-			Ip:             log.Ip,
-			CreateBy:       log.CreateBy,
-			CreateTime:     log.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   log.LastUpdateBy,
-			LastUpdateTime: log.LastUpdateTime.Format("2006-01-02 15:04:05"),
-		})
-	}
-
-	return &sys.LoginLogListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &sys.LoginLogListResp{}, nil
 }

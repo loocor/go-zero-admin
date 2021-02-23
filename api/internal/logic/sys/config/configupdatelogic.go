@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,23 +23,8 @@ func NewConfigUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Confi
 	}
 }
 
-func (l *ConfigUpdateLogic) ConfigUpdate(req types.UpdateConfigReq) (*types.UpdateConfigResp, error) {
-	_, err := l.svcCtx.Sys.ConfigUpdate(
-		l.ctx, &sysclient.ConfigUpdateReq{
-			Id:           req.Id,
-			Value:        req.Value,
-			Label:        req.Label,
-			Type:         req.Type,
-			Description:  req.Description,
-			Sort:         req.Sort,
-			Remarks:      req.Remarks,
-			LastUpdateBy: "admin", // todo 从 token 里面拿
-		},
-	)
+func (l *ConfigUpdateLogic) ConfigUpdate(req types.ConfigUpdateReq) (*types.ConfigUpdateResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.UpdateConfigResp{}, nil
+	return &types.ConfigUpdateResp{}, nil
 }

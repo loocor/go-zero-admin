@@ -1,70 +1,57 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Admin Dict"
+    desc: "admin dictionary management"
+    author: "Loocor"
+    email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
-
 type (
-    addDictReq struct {
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort string `json:"sort"`                          // 排序 (升序)
-        Remarks string `json:"remarks"`                    // 备注信息
-    }
-
-    addDictResp struct {
-    }
-
-    ListDictReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
-    }
-
-    ListDictData struct {
-        Id int64 `json:"id"`                               // 编号
-        Value string `json:"value"`                        // 数据值
-        Label string `json:"label"`                        // 标签名
-        Type string `json:"type"`                          // 类型
-        Description string `json:"description"`            // 描述
-        Sort float64 `json:"sort"`                         // 排序 (升序)
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        Remarks string `json:"remarks"`                    // 备注信息
-        DelFlag int64 `json:"del_flag"`                    // 是否删除 -1: 已删除 0: 正常
-    }
-
-    ListDictResp struct {
-        Current int64 `json:"current"`
-        Data []*ListDictData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
-    }
-
-    UpdateDictReq struct {
-        Id int64 `json:"id"`                               // 编号
+    DictData struct {
         Value string `json:"value"`                        // 数据值
         Label string `json:"label"`                        // 标签名
         Type string `json:"type"`                          // 类型
         Description string `json:"description"`            // 描述
         Sort float64 `json:"sort"`                         // 排序 (升序)
         Remarks string `json:"remarks"`                    // 备注信息
+        CommonData
     }
 
-    UpdateDictResp struct {
+    DictAddReq struct {
+        DictData
     }
 
-    DeleteDictReq struct {
+    DictAddResp struct {
+        CommonResp
+    }
+
+    DictListReq struct {
+        CommonListReq
+    }
+
+    DictListResp struct {
+        Data []*DictData `json:"data"`
+        CommonListResp
+    }
+
+    DictUpdateReq struct {
+        DictData
+    }
+
+    DictUpdateResp struct {
+        CommonResp
+    }
+
+    DictDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteDictResp struct {
+    DictDeleteResp struct {
+        CommonResp
     }
 )
 
@@ -72,15 +59,19 @@ type (
     group: sys/dict
 )
 service admin-api {
+    @doc "新增词典"
     @handler DictAdd
-    post /api/sys/dict/add (addDictReq) returns (addDictResp)
+    post /api/sys/dict/add (DictAddReq) returns (DictAddResp)
 
+    @doc "词典列表"
     @handler DictList
-    get /api/sys/dict/list (ListDictReq) returns (ListDictResp)
+    get /api/sys/dict/list (DictListReq) returns (DictListResp)
 
+    @doc "更新词典"
     @handler DictUpdate
-    post /api/sys/dict/update (UpdateDictReq) returns (UpdateDictResp)
+    post /api/sys/dict/update (DictUpdateReq) returns (DictUpdateResp)
 
+    @doc "删除词典"
     @handler DictDelete
-    post /api/sys/dict/delete (DeleteDictReq) returns (DeleteDictResp)
+    post /api/sys/dict/delete (DictDeleteReq) returns (DictDeleteResp)
 }

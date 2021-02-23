@@ -4,49 +4,25 @@ package handler
 import (
 	"net/http"
 
-	memberaddress "go-zero-admin/api/internal/handler/member/address"
-	membergrowthchangehistory "go-zero-admin/api/internal/handler/member/growthchangehistory"
-	memberintegrationchangehistory "go-zero-admin/api/internal/handler/member/integrationchangehistory"
-	memberintegrationconsumesetting "go-zero-admin/api/internal/handler/member/integrationconsumesetting"
-	memberlevel "go-zero-admin/api/internal/handler/member/level"
-	memberloginlog "go-zero-admin/api/internal/handler/member/loginlog"
-	membermember "go-zero-admin/api/internal/handler/member/member"
-	memberrulesetting "go-zero-admin/api/internal/handler/member/rulesetting"
-	memberstatistics "go-zero-admin/api/internal/handler/member/statistics"
-	membertag "go-zero-admin/api/internal/handler/member/tag"
-	membertask "go-zero-admin/api/internal/handler/member/task"
-	ordercart "go-zero-admin/api/internal/handler/order/cart"
-	ordercompayaddress "go-zero-admin/api/internal/handler/order/compayaddress"
-	orderoperatehistory "go-zero-admin/api/internal/handler/order/operatehistory"
-	orderorder "go-zero-admin/api/internal/handler/order/order"
-	orderreturnapply "go-zero-admin/api/internal/handler/order/returnapply"
-	orderreturnreason "go-zero-admin/api/internal/handler/order/returnreason"
-	ordersetting "go-zero-admin/api/internal/handler/order/setting"
-	productbrand "go-zero-admin/api/internal/handler/product/brand"
-	productcategory "go-zero-admin/api/internal/handler/product/category"
-	productcomment "go-zero-admin/api/internal/handler/product/comment"
-	productfreighttemplate "go-zero-admin/api/internal/handler/product/freighttemplate"
-	productmemberprice "go-zero-admin/api/internal/handler/product/memberprice"
-	productproduct "go-zero-admin/api/internal/handler/product/product"
-	productskustock "go-zero-admin/api/internal/handler/product/skustock"
-	smscoupon "go-zero-admin/api/internal/handler/sms/coupon"
-	smscouponhistory "go-zero-admin/api/internal/handler/sms/couponhistory"
-	smsflashpromotion "go-zero-admin/api/internal/handler/sms/flashpromotion"
-	smsflashpromotionlog "go-zero-admin/api/internal/handler/sms/flashpromotionlog"
-	smsflashpromotionsession "go-zero-admin/api/internal/handler/sms/flashpromotionsession"
-	smshomeadvertise "go-zero-admin/api/internal/handler/sms/homeadvertise"
-	smshomebrand "go-zero-admin/api/internal/handler/sms/homebrand"
-	smshomenewproduct "go-zero-admin/api/internal/handler/sms/homenewproduct"
-	smshomerecommendproduct "go-zero-admin/api/internal/handler/sms/homerecommendproduct"
-	smshomerecommendsubject "go-zero-admin/api/internal/handler/sms/homerecommendsubject"
-	sysconfig "go-zero-admin/api/internal/handler/sys/config"
-	sysdept "go-zero-admin/api/internal/handler/sys/dept"
-	sysdict "go-zero-admin/api/internal/handler/sys/dict"
-	syslog "go-zero-admin/api/internal/handler/sys/log"
-	sysmenu "go-zero-admin/api/internal/handler/sys/menu"
-	sysrole "go-zero-admin/api/internal/handler/sys/role"
-	sysuser "go-zero-admin/api/internal/handler/sys/user"
-	"go-zero-admin/api/internal/svc"
+	memberaddress "zdmin/api/internal/handler/member/address"
+	membergrowthchangehistory "zdmin/api/internal/handler/member/growthchangehistory"
+	memberintegrationchangehistory "zdmin/api/internal/handler/member/integrationchangehistory"
+	memberintegrationconsumesetting "zdmin/api/internal/handler/member/integrationconsumesetting"
+	memberlevel "zdmin/api/internal/handler/member/level"
+	memberloginlog "zdmin/api/internal/handler/member/loginlog"
+	membermember "zdmin/api/internal/handler/member/member"
+	memberrulesetting "zdmin/api/internal/handler/member/rulesetting"
+	memberstatistics "zdmin/api/internal/handler/member/statistics"
+	membertag "zdmin/api/internal/handler/member/tag"
+	membertask "zdmin/api/internal/handler/member/task"
+	sysconfig "zdmin/api/internal/handler/sys/config"
+	sysdept "zdmin/api/internal/handler/sys/dept"
+	sysdict "zdmin/api/internal/handler/sys/dict"
+	syslog "zdmin/api/internal/handler/sys/log"
+	sysmenu "zdmin/api/internal/handler/sys/menu"
+	sysrole "zdmin/api/internal/handler/sys/role"
+	sysuser "zdmin/api/internal/handler/sys/user"
+	"zdmin/api/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
 )
@@ -56,48 +32,23 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/user/login",
-				Handler: sysuser.UserLoginHandler(serverCtx),
+				Path:    "/api/sys/config/add",
+				Handler: sysconfig.ConfigAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/sys/user/currentUser",
-				Handler: sysuser.UserInfoHandler(serverCtx),
+				Path:    "/api/sys/config/list",
+				Handler: sysconfig.ConfigListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/user/add",
-				Handler: sysuser.UserAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sys/user/list",
-				Handler: sysuser.UserListHandler(serverCtx),
+				Path:    "/api/sys/config/update",
+				Handler: sysconfig.ConfigUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/user/update",
-				Handler: sysuser.UserUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/user/delete",
-				Handler: sysuser.UserDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/user/updateUserRole",
-				Handler: sysuser.UpdateUserRoleHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/user/reSetPassword",
-				Handler: sysuser.ReSetPasswordHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/user/UpdateUserStatus",
-				Handler: sysuser.UpdateUserStatusHandler(serverCtx),
+				Path:    "/api/sys/config/delete",
+				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -106,33 +57,63 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/role/add",
-				Handler: sysrole.RoleAddHandler(serverCtx),
+				Path:    "/api/sys/dept/add",
+				Handler: sysdept.DeptAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/sys/role/list",
-				Handler: sysrole.RoleListHandler(serverCtx),
+				Path:    "/api/sys/dept/list",
+				Handler: sysdept.DeptListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/role/update",
-				Handler: sysrole.RoleUpdateHandler(serverCtx),
+				Path:    "/api/sys/dept/update",
+				Handler: sysdept.DeptUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/role/delete",
-				Handler: sysrole.RoleDeleteHandler(serverCtx),
+				Path:    "/api/sys/dept/delete",
+				Handler: sysdept.DeptDeleteHandler(serverCtx),
+			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/dict/add",
+				Handler: sysdict.DictAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/sys/dict/list",
+				Handler: sysdict.DictListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/role/roleMenuIds",
-				Handler: sysrole.RoleMenuIdsHandler(serverCtx),
+				Path:    "/api/sys/dict/update",
+				Handler: sysdict.DictUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/role/updateRoleMenu",
-				Handler: sysrole.UpdateRoleMenuHandler(serverCtx),
+				Path:    "/api/sys/dict/delete",
+				Handler: sysdict.DictDeleteHandler(serverCtx),
+			},
+		},
+	)
+
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/sys/loginLog/list",
+				Handler: syslog.LoginLogListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/loginLog/delete",
+				Handler: syslog.LoginLogDeleteHandler(serverCtx),
 			},
 		},
 	)
@@ -166,63 +147,33 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/dict/add",
-				Handler: sysdict.DictAddHandler(serverCtx),
+				Path:    "/api/sys/role/add",
+				Handler: sysrole.RoleAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/sys/dict/list",
-				Handler: sysdict.DictListHandler(serverCtx),
+				Path:    "/api/sys/role/list",
+				Handler: sysrole.RoleListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/dict/update",
-				Handler: sysdict.DictUpdateHandler(serverCtx),
+				Path:    "/api/sys/role/update",
+				Handler: sysrole.RoleUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/dict/delete",
-				Handler: sysdict.DictDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/dept/add",
-				Handler: sysdept.DeptAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sys/dept/list",
-				Handler: sysdept.DeptListHandler(serverCtx),
+				Path:    "/api/sys/role/delete",
+				Handler: sysrole.RoleDeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/dept/update",
-				Handler: sysdept.DeptUpdateHandler(serverCtx),
+				Path:    "/api/sys/role/menuIds",
+				Handler: sysrole.RoleMenuIdsHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/dept/delete",
-				Handler: sysdept.DeptDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sys/loginLog/list",
-				Handler: syslog.LoginLogListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/loginLog/delete",
-				Handler: syslog.LoginLogDeleteHandler(serverCtx),
+				Path:    "/api/sys/role/menuUpdate",
+				Handler: sysrole.RoleMenuUpdateHandler(serverCtx),
 			},
 		},
 	)
@@ -246,623 +197,48 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/config/add",
-				Handler: sysconfig.ConfigAddHandler(serverCtx),
+				Path:    "/api/sys/user/login",
+				Handler: sysuser.UserLoginHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/sys/config/list",
-				Handler: sysconfig.ConfigListHandler(serverCtx),
+				Path:    "/api/sys/user/:id",
+				Handler: sysuser.UserInfoHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sys/config/update",
-				Handler: sysconfig.ConfigUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sys/config/delete",
-				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/cart/add",
-				Handler: ordercart.CartItemAddHandler(serverCtx),
+				Path:    "/api/sys/user/add",
+				Handler: sysuser.UserAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/order/cart/list",
-				Handler: ordercart.CartItemListHandler(serverCtx),
+				Path:    "/api/sys/user/list",
+				Handler: sysuser.UserListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/order/cart/update",
-				Handler: ordercart.CartItemUpdateHandler(serverCtx),
+				Path:    "/api/sys/user/update",
+				Handler: sysuser.UserUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/order/cart/delete",
-				Handler: ordercart.CartItemDeleteHandler(serverCtx),
+				Path:    "/api/sys/user/delete",
+				Handler: sysuser.UserDeleteHandler(serverCtx),
 			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/order/order/add",
-				Handler: orderorder.OrderAddHandler(serverCtx),
+				Path:    "/api/sys/user/reSetPassword",
+				Handler: sysuser.ReSetPasswordHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/order/list",
-				Handler: orderorder.OrderListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/order/update",
-				Handler: orderorder.OrderUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/order/delete",
-				Handler: orderorder.OrderDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/compayaddress/add",
-				Handler: ordercompayaddress.CompayAddressAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/compayaddress/list",
-				Handler: ordercompayaddress.CompayAddressListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/compayaddress/update",
-				Handler: ordercompayaddress.CompayAddressUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/compayaddress/delete",
-				Handler: ordercompayaddress.CompayAddressDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/operatehistory/add",
-				Handler: orderoperatehistory.OperateHistoryAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/operatehistory/list",
-				Handler: orderoperatehistory.OperateHistoryListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/operatehistory/update",
-				Handler: orderoperatehistory.OperateHistoryUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/operatehistory/delete",
-				Handler: orderoperatehistory.OperateHistoryDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/returnapply/add",
-				Handler: orderreturnapply.ReturnApplyAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/returnapply/list",
-				Handler: orderreturnapply.ReturnApplyListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/returnapply/update",
-				Handler: orderreturnapply.ReturnApplyUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/returnapply/delete",
-				Handler: orderreturnapply.ReturnApplyDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/returnreason/add",
-				Handler: orderreturnreason.ReturnResonAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/returnreason/list",
-				Handler: orderreturnreason.ReturnResonListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/returnreason/update",
-				Handler: orderreturnreason.ReturnResonUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/returnreason/delete",
-				Handler: orderreturnreason.ReturnResonDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/setting/add",
-				Handler: ordersetting.OrderSettingAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/order/setting/list",
-				Handler: ordersetting.OrderSettingListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/setting/update",
-				Handler: ordersetting.OrderSettingUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/order/setting/delete",
-				Handler: ordersetting.OrderSettingDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/product/add",
-				Handler: productproduct.ProductAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/product/list",
-				Handler: productproduct.ProductListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/product/update",
-				Handler: productproduct.ProductUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/product/delete",
-				Handler: productproduct.ProductDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/brand/add",
-				Handler: productbrand.ProductBrandAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/brand/list",
-				Handler: productbrand.ProductBrandListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/brand/update",
-				Handler: productbrand.ProductBrandUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/brand/delete",
-				Handler: productbrand.ProductBrandDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/category/add",
-				Handler: productcategory.ProductCategoryAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/category/list",
-				Handler: productcategory.ProductCategoryListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/category/update",
-				Handler: productcategory.ProductCategoryUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/category/delete",
-				Handler: productcategory.ProductCategoryDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/comment/add",
-				Handler: productcomment.ProductCommentAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/comment/list",
-				Handler: productcomment.ProductCommentListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/comment/update",
-				Handler: productcomment.ProductCommentUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/comment/delete",
-				Handler: productcomment.ProductCommentDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/freighttemplate/add",
-				Handler: productfreighttemplate.FreightTemplateAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/freighttemplate/list",
-				Handler: productfreighttemplate.FreightTemplateListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/freighttemplate/update",
-				Handler: productfreighttemplate.FreightTemplateUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/freighttemplate/delete",
-				Handler: productfreighttemplate.FreightTemplateDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/memberprice/add",
-				Handler: productmemberprice.MemberPriceAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/memberprice/list",
-				Handler: productmemberprice.MemberPriceListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/memberprice/update",
-				Handler: productmemberprice.MemberPriceUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/memberprice/delete",
-				Handler: productmemberprice.MemberPriceDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/skustock/add",
-				Handler: productskustock.SkuStockAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/product/skustock/list",
-				Handler: productskustock.SkuStockListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/skustock/update",
-				Handler: productskustock.SkuStockUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/product/skustock/delete",
-				Handler: productskustock.SkuStockDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/coupon/add",
-				Handler: smscoupon.CouponAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/coupon/list",
-				Handler: smscoupon.CouponListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/coupon/update",
-				Handler: smscoupon.CouponUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/coupon/delete",
-				Handler: smscoupon.CouponDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/couponhistory/add",
-				Handler: smscouponhistory.CouponHistoryAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/couponhistory/list",
-				Handler: smscouponhistory.CouponHistoryListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/couponhistory/update",
-				Handler: smscouponhistory.CouponHistoryUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/couponhistory/delete",
-				Handler: smscouponhistory.CouponHistoryDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotion/add",
-				Handler: smsflashpromotion.FlashPromotionAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/flashpromotion/list",
-				Handler: smsflashpromotion.FlashPromotionListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotion/update",
-				Handler: smsflashpromotion.FlashPromotionUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotion/delete",
-				Handler: smsflashpromotion.FlashPromotionDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotionlog/add",
-				Handler: smsflashpromotionlog.FlashPromotionLogAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/flashpromotionlog/list",
-				Handler: smsflashpromotionlog.FlashPromotionLogListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotionlog/update",
-				Handler: smsflashpromotionlog.FlashPromotionLogUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotionlog/delete",
-				Handler: smsflashpromotionlog.FlashPromotionLogDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotionsession/add",
-				Handler: smsflashpromotionsession.FlashPromotionSessionAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/flashpromotionsession/list",
-				Handler: smsflashpromotionsession.FlashPromotionSessionListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotionsession/update",
-				Handler: smsflashpromotionsession.FlashPromotionSessionUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/flashpromotionsession/delete",
-				Handler: smsflashpromotionsession.FlashPromotionSessionDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homeadvertise/add",
-				Handler: smshomeadvertise.HomeAdvertiseAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/homeadvertise/list",
-				Handler: smshomeadvertise.HomeAdvertiseListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homeadvertise/update",
-				Handler: smshomeadvertise.HomeAdvertiseUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homeadvertise/delete",
-				Handler: smshomeadvertise.HomeAdvertiseDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homebrand/add",
-				Handler: smshomebrand.HomeBrandAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/homebrand/list",
-				Handler: smshomebrand.HomeBrandListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homebrand/update",
-				Handler: smshomebrand.HomeBrandUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homebrand/delete",
-				Handler: smshomebrand.HomeBrandDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homenewproduct/add",
-				Handler: smshomenewproduct.HomeNewProductAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/homenewproduct/list",
-				Handler: smshomenewproduct.HomeNewProductListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homenewproduct/update",
-				Handler: smshomenewproduct.HomeNewProductUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homenewproduct/delete",
-				Handler: smshomenewproduct.HomeNewProductDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homerecommendproduct/add",
-				Handler: smshomerecommendproduct.HomeRecommendProductAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/homerecommendproduct/list",
-				Handler: smshomerecommendproduct.HomeRecommendProductListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homerecommendproduct/update",
-				Handler: smshomerecommendproduct.HomeRecommendProductUpdateHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homerecommendproduct/delete",
-				Handler: smshomerecommendproduct.HomeRecommendProductDeleteHandler(serverCtx),
-			},
-		},
-	)
-
-	engine.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/sms/homerecommendsubject/add",
-				Handler: smshomerecommendsubject.HomeRecommendSubjectAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/sms/homerecommendsubject/list",
-				Handler: smshomerecommendsubject.HomeRecommendSubjectListHandler(serverCtx),
-			},
-			{
 				Method:  http.MethodPost,
-				Path:    "/apisms/homerecommendsubject/update",
-				Handler: smshomerecommendsubject.HomeRecommendSubjectUpdateHandler(serverCtx),
+				Path:    "/api/sys/user/roleUpdate",
+				Handler: sysuser.UserRoleUpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/sms/homerecommendsubject/delete",
-				Handler: smshomerecommendsubject.HomeRecommendSubjectDeleteHandler(serverCtx),
+				Path:    "/api/sys/user/statusUpdate",
+				Handler: sysuser.UserStatusUpdateHandler(serverCtx),
 			},
 		},
 	)

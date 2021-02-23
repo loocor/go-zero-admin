@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,25 +24,7 @@ func NewIntegrationConsumeSettingListLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 func (l *IntegrationConsumeSettingListLogic) IntegrationConsumeSettingList(in *ums.IntegrationConsumeSettingListReq) (*ums.IntegrationConsumeSettingListResp, error) {
-	all, _ := l.svcCtx.UmsIntegrationConsumeSettingModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	var list []*ums.IntegrationConsumeSettingListData
-	for _, item := range *all {
-
-		list = append(list, &ums.IntegrationConsumeSettingListData{
-			Id:                 item.Id,
-			DeductionPerAmount: item.DeductionPerAmount,
-			MaxPercentPerOrder: item.MaxPercentPerOrder,
-			UseUnit:            item.UseUnit,
-			CouponStatus:       item.CouponStatus,
-		})
-	}
-
-	fmt.Println(list)
-	return &ums.IntegrationConsumeSettingListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &ums.IntegrationConsumeSettingListResp{}, nil
 }

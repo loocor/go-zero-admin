@@ -32,7 +32,7 @@ message MemberListReq {
   int64 pageSize = 2;
 }
 
-message MemberListData{
+message MemberData{
   int64 Id = 1;
   int64 MemberLevelId = 2;
   string Username = 3;
@@ -56,7 +56,7 @@ message MemberListData{
 
 message MemberListResp {
   int64 total = 1;
-  repeated MemberListData list = 2;
+  repeated MemberData list = 2;
 }
 
 message MemberUpdateReq {
@@ -93,6 +93,75 @@ message MemberDeleteResp {
   string pong = 1;
 }
 
+message MemberAddressAddReq {
+  int64 MemberId = 1;
+  string Name = 2;
+  string PhoneNumber = 3;
+  int64 DefaultStatus = 4;
+  string PostCode = 5;
+  string Province = 6;
+  string City = 7;
+  string Region = 8;
+  string DetailAddress = 9;
+}
+
+message MemberAddressAddResp {
+  int64 Code = 1;
+  string Message = 2;
+}
+
+message MemberAddressListReq  {
+  int64 Current = 1;
+  int64  PageSize = 2;
+}
+
+message MemberAddressData {
+  int64 Id = 1;
+  int64 MemberId = 2;
+  string Name = 3;
+  string PhoneNumber = 4;
+  int64 DefaultStatus = 5;
+  string PostCode = 6;
+  string Province = 7;
+  string City = 8;
+  string Region = 9;
+  string DetailAddress = 10;
+}
+
+message MemberAddressListResp {
+  int64 Current = 1;
+  repeated  MemberAddressData Data = 2;
+  int64 PageSize = 3;
+  bool Success = 4;
+  int64 Total = 5;
+}
+
+message MemberAddressUpdateReq {
+  int64 Id = 1;
+  int64 MemberId = 2;
+  string Name = 3;
+  string PhoneNumber = 4;
+  int64 DefaultStatus = 5;
+  string PostCode = 6;
+  string Province = 7;
+  string City = 8;
+  string Region = 9;
+  string DetailAddress = 10;
+}
+
+message MemberAddressUpdateResp {
+  int64 Code = 1;
+  string Message = 2;
+}
+
+message MemberAddressDeleteReq {
+  int64 Id = 1;
+}
+
+message MemberAddressDeleteResp {
+  int64 Code = 1;
+  string Message = 2;
+}
 
 message GrowthChangeHistoryAddReq {
   int64 MemberId = 2;
@@ -113,7 +182,7 @@ message GrowthChangeHistoryListReq {
   int64 pageSize = 2;
 }
 
-message GrowthChangeHistoryListData{
+message GrowthChangeHistoryData{
   int64 Id = 1;
   int64 MemberId = 2;
   string CreateTime = 3;
@@ -126,7 +195,7 @@ message GrowthChangeHistoryListData{
 
 message GrowthChangeHistoryListResp {
   int64 total = 1;
-  repeated GrowthChangeHistoryListData list = 2;
+  repeated GrowthChangeHistoryData list = 2;
 }
 
 message GrowthChangeHistoryUpdateReq {
@@ -171,7 +240,7 @@ message IntegrationChangeHistoryListReq {
   int64 pageSize = 2;
 }
 
-message IntegrationChangeHistoryListData{
+message IntegrationChangeHistoryData{
   int64 Id = 1;
   int64 MemberId = 2;
   string CreateTime = 3;
@@ -184,7 +253,7 @@ message IntegrationChangeHistoryListData{
 
 message IntegrationChangeHistoryListResp {
   int64 total = 1;
-  repeated IntegrationChangeHistoryListData list = 2;
+  repeated IntegrationChangeHistoryData list = 2;
 }
 
 message IntegrationChangeHistoryUpdateReq {
@@ -226,7 +295,7 @@ message IntegrationConsumeSettingListReq {
   int64 pageSize = 2;
 }
 
-message IntegrationConsumeSettingListData{
+message IntegrationConsumeSettingData{
   int64 Id = 1;
   int64 DeductionPerAmount = 2;
   int64 MaxPercentPerOrder = 3;
@@ -236,7 +305,7 @@ message IntegrationConsumeSettingListData{
 
 message IntegrationConsumeSettingListResp {
   int64 total = 1;
-  repeated IntegrationConsumeSettingListData list = 2;
+  repeated IntegrationConsumeSettingData list = 2;
 }
 
 message IntegrationConsumeSettingUpdateReq {
@@ -265,12 +334,12 @@ message MemberLevelAddReq {
   int64 DefaultStatus = 4;
   int64 FreeFreightPoint = 5;
   int64 CommentGrowthPoint = 6;
-  int64 PriviledgeFreeFreight = 7;
-  int64 PriviledgeSignIn = 8;
-  int64 PriviledgeComment = 9;
-  int64 PriviledgePromotion = 10;
-  int64 PriviledgeMemberPrice = 11;
-  int64 PriviledgeBirthday = 12;
+  int64 PrivilegeFreeFreight = 7;
+  int64 PrivilegeSignIn = 8;
+  int64 PrivilegeComment = 9;
+  int64 PrivilegePromotion = 10;
+  int64 PrivilegeMemberPrice = 11;
+  int64 PrivilegeBirthday = 12;
   string Note = 13;
 }
 
@@ -283,25 +352,25 @@ message MemberLevelListReq {
   int64 pageSize = 2;
 }
 
-message MemberLevelListData{
+message MemberLevelData{
   int64 Id = 1;
   string Name = 2;
   int64 GrowthPoint = 3;
   int64 DefaultStatus = 4;
   int64 FreeFreightPoint = 5;
   int64 CommentGrowthPoint = 6;
-  int64 PriviledgeFreeFreight = 7;
-  int64 PriviledgeSignIn = 8;
-  int64 PriviledgeComment = 9;
-  int64 PriviledgePromotion = 10;
-  int64 PriviledgeMemberPrice = 11;
-  int64 PriviledgeBirthday = 12;
+  int64 PrivilegeFreeFreight = 7;
+  int64 PrivilegeSignIn = 8;
+  int64 PrivilegeComment = 9;
+  int64 PrivilegePromotion = 10;
+  int64 PrivilegeMemberPrice = 11;
+  int64 PrivilegeBirthday = 12;
   string Note = 13;
 }
 
 message MemberLevelListResp {
   int64 total = 1;
-  repeated MemberLevelListData list = 2;
+  repeated MemberLevelData list = 2;
 }
 
 message MemberLevelUpdateReq {
@@ -311,12 +380,12 @@ message MemberLevelUpdateReq {
   int64 DefaultStatus = 4;
   int64 FreeFreightPoint = 5;
   int64 CommentGrowthPoint = 6;
-  int64 PriviledgeFreeFreight = 7;
-  int64 PriviledgeSignIn = 8;
-  int64 PriviledgeComment = 9;
-  int64 PriviledgePromotion = 10;
-  int64 PriviledgeMemberPrice = 11;
-  int64 PriviledgeBirthday = 12;
+  int64 PrivilegeFreeFreight = 7;
+  int64 PrivilegeSignIn = 8;
+  int64 PrivilegeComment = 9;
+  int64 PrivilegePromotion = 10;
+  int64 PrivilegeMemberPrice = 11;
+  int64 PrivilegeBirthday = 12;
   string Note = 13;
 }
 
@@ -350,7 +419,7 @@ message MemberLoginLogListReq {
   int64 pageSize = 2;
 }
 
-message MemberLoginLogListData{
+message MemberLoginLogData{
   int64 Id = 1;
   int64 MemberId = 2;
   string CreateTime = 3;
@@ -362,7 +431,7 @@ message MemberLoginLogListData{
 
 message MemberLoginLogListResp {
   int64 total = 1;
-  repeated MemberLoginLogListData list = 2;
+  repeated MemberLoginLogData list = 2;
 }
 
 message MemberLoginLogUpdateReq {
@@ -387,46 +456,46 @@ message MemberLoginLogDeleteResp {
   string pong = 1;
 }
 
-message MemberMemberTagRelationAddReq {
+message MemberTagRelationAddReq {
   int64 MemberId = 2;
   int64 TagId = 3;
 }
 
-message MemberMemberTagRelationAddResp {
+message MemberTagRelationAddResp {
   string pong = 1;
 }
 
-message MemberMemberTagRelationListReq {
+message MemberTagRelationListReq {
   int64 current = 1;
   int64 pageSize = 2;
 }
 
-message MemberMemberTagRelationListData{
+message MemberMemberTagRelationData{
   int64 Id = 1;
   int64 MemberId = 2;
   int64 TagId = 3;
 }
 
-message MemberMemberTagRelationListResp {
+message MemberTagRelationListResp {
   int64 total = 1;
-  repeated MemberMemberTagRelationListData list = 2;
+  repeated MemberMemberTagRelationData list = 2;
 }
 
-message MemberMemberTagRelationUpdateReq {
+message MemberTagRelationUpdateReq {
   int64 Id = 1;
   int64 MemberId = 2;
   int64 TagId = 3;
 }
 
-message MemberMemberTagRelationUpdateResp {
+message MemberTagRelationUpdateResp {
   string pong = 1;
 }
 
-message MemberMemberTagRelationDeleteReq {
+message MemberTagRelationDeleteReq {
   int64 id = 1;
 }
 
-message MemberMemberTagRelationDeleteResp {
+message MemberTagRelationDeleteResp {
   string pong = 1;
 }
 
@@ -444,7 +513,7 @@ message MemberProductCategoryRelationListReq {
   int64 pageSize = 2;
 }
 
-message MemberProductCategoryRelationListData{
+message MemberProductCategoryRelationData{
   int64 Id = 1;
   int64 MemberId = 2;
   int64 ProductCategoryId = 3;
@@ -452,7 +521,7 @@ message MemberProductCategoryRelationListData{
 
 message MemberProductCategoryRelationListResp {
   int64 total = 1;
-  repeated MemberProductCategoryRelationListData list = 2;
+  repeated MemberProductCategoryRelationData list = 2;
 }
 
 message MemberProductCategoryRelationUpdateReq {
@@ -472,7 +541,6 @@ message MemberProductCategoryRelationDeleteReq {
 message MemberProductCategoryRelationDeleteResp {
   string pong = 1;
 }
-
 
 message MemberReceiveAddressAddReq {
   int64 MemberId = 2;
@@ -495,7 +563,7 @@ message MemberReceiveAddressListReq {
   int64 pageSize = 2;
 }
 
-message MemberReceiveAddressListData{
+message MemberReceiveAddressData{
   int64 Id = 1;
   int64 MemberId = 2;
   string Name = 3;
@@ -510,7 +578,7 @@ message MemberReceiveAddressListData{
 
 message MemberReceiveAddressListResp {
   int64 total = 1;
-  repeated MemberReceiveAddressListData list = 2;
+  repeated MemberReceiveAddressData list = 2;
 }
 
 message MemberReceiveAddressUpdateReq {
@@ -538,7 +606,6 @@ message MemberReceiveAddressDeleteResp {
   string pong = 1;
 }
 
-
 message MemberRuleSettingAddReq {
   int64 ContinueSignDay = 2;
   int64 ContinueSignPoint = 3;
@@ -557,7 +624,7 @@ message MemberRuleSettingListReq {
   int64 pageSize = 2;
 }
 
-message MemberRuleSettingListData{
+message MemberRuleSettingData{
   int64 Id = 1;
   int64 ContinueSignDay = 2;
   int64 ContinueSignPoint = 3;
@@ -569,7 +636,7 @@ message MemberRuleSettingListData{
 
 message MemberRuleSettingListResp {
   int64 total = 1;
-  repeated MemberRuleSettingListData list = 2;
+  repeated MemberRuleSettingData list = 2;
 }
 
 message MemberRuleSettingUpdateReq {
@@ -621,7 +688,7 @@ message MemberStatisticsInfoListReq {
   int64 pageSize = 2;
 }
 
-message MemberStatisticsInfoListData{
+message MemberStatisticsInfoData{
   int64 Id = 1;
   int64 MemberId = 2;
   int64 ConsumeAmount = 3;
@@ -642,7 +709,7 @@ message MemberStatisticsInfoListData{
 
 message MemberStatisticsInfoListResp {
   int64 total = 1;
-  repeated MemberStatisticsInfoListData list = 2;
+  repeated MemberStatisticsInfoData list = 2;
 }
 
 message MemberStatisticsInfoUpdateReq {
@@ -676,7 +743,6 @@ message MemberStatisticsInfoDeleteResp {
   string pong = 1;
 }
 
-
 message MemberTagAddReq {
   string Name = 2;
   int64 FinishOrderCount = 3;
@@ -692,7 +758,7 @@ message MemberTagListReq {
   int64 pageSize = 2;
 }
 
-message MemberTagListData{
+message MemberTagData{
   int64 Id = 1;
   string Name = 2;
   int64 FinishOrderCount = 3;
@@ -701,7 +767,7 @@ message MemberTagListData{
 
 message MemberTagListResp {
   int64 total = 1;
-  repeated MemberTagListData list = 2;
+  repeated MemberTagData list = 2;
 }
 
 message MemberTagUpdateReq {
@@ -723,7 +789,6 @@ message MemberTagDeleteResp {
   string pong = 1;
 }
 
-
 message MemberTaskAddReq {
   string Name = 2;
   int64 Growth = 3;
@@ -740,7 +805,7 @@ message MemberTaskListReq {
   int64 pageSize = 2;
 }
 
-message MemberTaskListData{
+message MemberTaskData{
   int64 Id = 1;
   string Name = 2;
   int64 Growth = 3;
@@ -750,7 +815,7 @@ message MemberTaskListData{
 
 message MemberTaskListResp {
   int64 total = 1;
-  repeated MemberTaskListData list = 2;
+  repeated MemberTaskData list = 2;
 }
 
 message MemberTaskUpdateReq {
@@ -779,6 +844,11 @@ service Ums {
   rpc MemberUpdate(MemberUpdateReq) returns(MemberUpdateResp);
   rpc MemberDelete(MemberDeleteReq) returns(MemberDeleteResp);
 
+  rpc MemberAddressAdd(MemberAddressAddReq) returns(MemberAddressAddResp);
+  rpc MemberAddressList(MemberAddressListReq) returns(MemberAddressListResp);
+  rpc MemberAddressUpdate(MemberAddressUpdateReq) returns(MemberAddressUpdateResp);
+  rpc MemberAddressDelete(MemberAddressDeleteReq) returns(MemberAddressDeleteResp);
+
   rpc GrowthChangeHistoryAdd(GrowthChangeHistoryAddReq) returns(GrowthChangeHistoryAddResp);
   rpc GrowthChangeHistoryList(GrowthChangeHistoryListReq) returns(GrowthChangeHistoryListResp);
   rpc GrowthChangeHistoryUpdate(GrowthChangeHistoryUpdateReq) returns(GrowthChangeHistoryUpdateResp);
@@ -804,21 +874,6 @@ service Ums {
   rpc MemberLoginLogUpdate(MemberLoginLogUpdateReq) returns(MemberLoginLogUpdateResp);
   rpc MemberLoginLogDelete(MemberLoginLogDeleteReq) returns(MemberLoginLogDeleteResp);
 
-  rpc MemberMemberTagRelationAdd(MemberMemberTagRelationAddReq) returns(MemberMemberTagRelationAddResp);
-  rpc MemberMemberTagRelationList(MemberMemberTagRelationListReq) returns(MemberMemberTagRelationListResp);
-  rpc MemberMemberTagRelationUpdate(MemberMemberTagRelationUpdateReq) returns(MemberMemberTagRelationUpdateResp);
-  rpc MemberMemberTagRelationDelete(MemberMemberTagRelationDeleteReq) returns(MemberMemberTagRelationDeleteResp);
-
-  rpc MemberProductCategoryRelationAdd(MemberProductCategoryRelationAddReq) returns(MemberProductCategoryRelationAddResp);
-  rpc MemberProductCategoryRelationList(MemberProductCategoryRelationListReq) returns(MemberProductCategoryRelationListResp);
-  rpc MemberProductCategoryRelationUpdate(MemberProductCategoryRelationUpdateReq) returns(MemberProductCategoryRelationUpdateResp);
-  rpc MemberProductCategoryRelationDelete(MemberProductCategoryRelationDeleteReq) returns(MemberProductCategoryRelationDeleteResp);
-
-  rpc MemberReceiveAddressAdd(MemberReceiveAddressAddReq) returns(MemberReceiveAddressAddResp);
-  rpc MemberReceiveAddressList(MemberReceiveAddressListReq) returns(MemberReceiveAddressListResp);
-  rpc MemberReceiveAddressUpdate(MemberReceiveAddressUpdateReq) returns(MemberReceiveAddressUpdateResp);
-  rpc MemberReceiveAddressDelete(MemberReceiveAddressDeleteReq) returns(MemberReceiveAddressDeleteResp);
-
   rpc MemberRuleSettingAdd(MemberRuleSettingAddReq) returns(MemberRuleSettingAddResp);
   rpc MemberRuleSettingList(MemberRuleSettingListReq) returns(MemberRuleSettingListResp);
   rpc MemberRuleSettingUpdate(MemberRuleSettingUpdateReq) returns(MemberRuleSettingUpdateResp);
@@ -838,4 +893,19 @@ service Ums {
   rpc MemberTaskList(MemberTaskListReq) returns(MemberTaskListResp);
   rpc MemberTaskUpdate(MemberTaskUpdateReq) returns(MemberTaskUpdateResp);
   rpc MemberTaskDelete(MemberTaskDeleteReq) returns(MemberTaskDeleteResp);
+
+  rpc MemberTagRelationAdd(MemberTagRelationAddReq) returns(MemberTagRelationAddResp);
+  rpc MemberTagRelationList(MemberTagRelationListReq) returns(MemberTagRelationListResp);
+  rpc MemberTagRelationUpdate(MemberTagRelationUpdateReq) returns(MemberTagRelationUpdateResp);
+  rpc MemberTagRelationDelete(MemberTagRelationDeleteReq) returns(MemberTagRelationDeleteResp);
+
+  rpc MemberProductCategoryRelationAdd(MemberProductCategoryRelationAddReq) returns(MemberProductCategoryRelationAddResp);
+  rpc MemberProductCategoryRelationList(MemberProductCategoryRelationListReq) returns(MemberProductCategoryRelationListResp);
+  rpc MemberProductCategoryRelationUpdate(MemberProductCategoryRelationUpdateReq) returns(MemberProductCategoryRelationUpdateResp);
+  rpc MemberProductCategoryRelationDelete(MemberProductCategoryRelationDeleteReq) returns(MemberProductCategoryRelationDeleteResp);
+
+  rpc MemberReceiveAddressAdd(MemberReceiveAddressAddReq) returns(MemberReceiveAddressAddResp);
+  rpc MemberReceiveAddressList(MemberReceiveAddressListReq) returns(MemberReceiveAddressListResp);
+  rpc MemberReceiveAddressUpdate(MemberReceiveAddressUpdateReq) returns(MemberReceiveAddressUpdateResp);
+  rpc MemberReceiveAddressDelete(MemberReceiveAddressDeleteReq) returns(MemberReceiveAddressDeleteResp);
 }

@@ -1,12 +1,12 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Admin growth history"
+    desc: "Admin growth history management"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    addGrowthChangeHistoryReq struct {
+    GrowthChangeHistoryAddReq struct {
         MemberId int64 `json:"member_id"`
         CreateTime string `json:"create_time"`
         ChangeType int64 `json:"change_type"`    // 改变类型: 0->增加; 1->减少
@@ -16,15 +16,17 @@ type (
         SourceType int64 `json:"source_type"`    // 积分来源: 0->购物; 1->管理员修改
     }
 
-    addGrowthChangeHistoryResp struct {
+    GrowthChangeHistoryAddResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    ListGrowthChangeHistoryReq struct {
+    GrowthChangeHistoryListReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
 
-    ListtGrowthChangeHistoryData struct {
+    GrowthChangeHistoryData struct {
         Id int64 `json:"id"`
         MemberId int64 `json:"member_id"`
         CreateTime string `json:"create_time"`
@@ -35,15 +37,15 @@ type (
         SourceType int64 `json:"source_type"`    // 积分来源: 0->购物; 1->管理员修改
     }
 
-    ListGrowthChangeHistoryResp struct {
+    GrowthChangeHistoryListResp struct {
         Current int64 `json:"current"`
-        Data []*ListtGrowthChangeHistoryData `json:"data"`
+        Data []*GrowthChangeHistoryData `json:"data"`
         PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
 
-    UpdateGrowthChangeHistoryReq struct {
+    GrowthChangeHistoryUpdateReq struct {
         Id int64 `json:"id"`
         MemberId int64 `json:"member_id"`
         CreateTime string `json:"create_time"`
@@ -54,14 +56,18 @@ type (
         SourceType int64 `json:"source_type"`    // 积分来源: 0->购物; 1->管理员修改
     }
 
-    UpdateGrowthChangeHistoryResp struct {
+    GrowthChangeHistoryUpdateResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    DeleteGrowthChangeHistoryReq struct {
+    GrowthChangeHistoryDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteGrowthChangeHistoryResp struct {
+    GrowthChangeHistoryDeleteResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 )
 
@@ -69,15 +75,19 @@ type (
     group: member/growthchangehistory
 )
 service admin-api {
+    @doc "新增成长历史"
     @handler GrowthChangeHistoryAdd
-    post /api/member/growthchangehistory/add (addGrowthChangeHistoryReq) returns (addGrowthChangeHistoryResp)
+    post /api/member/growthchangehistory/add (GrowthChangeHistoryAddReq) returns (GrowthChangeHistoryAddResp)
 
+    @doc "成长历史列表"
     @handler GrowthChangeHistoryList
-    get /api/member/growthchangehistory/list (ListGrowthChangeHistoryReq) returns (ListGrowthChangeHistoryResp)
+    get /api/member/growthchangehistory/list (GrowthChangeHistoryListReq) returns (GrowthChangeHistoryListResp)
 
+    @doc "更新成长历史"
     @handler GrowthChangeHistoryUpdate
-    post /api/member/growthchangehistory/update (UpdateGrowthChangeHistoryReq) returns (UpdateGrowthChangeHistoryResp)
+    post /api/member/growthchangehistory/update (GrowthChangeHistoryUpdateReq) returns (GrowthChangeHistoryUpdateResp)
 
+    @doc "删除成长历史"
     @handler GrowthChangeHistoryDelete
-    post /api/member/growthchangehistory/delete (DeleteGrowthChangeHistoryReq) returns (DeleteGrowthChangeHistoryResp)
+    post /api/member/growthchangehistory/delete (GrowthChangeHistoryDeleteReq) returns (GrowthChangeHistoryDeleteResp)
 }

@@ -1,55 +1,61 @@
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    addMemberTagReq struct {
+    MemberTagAddReq struct {
         Name string `json:"name"`
         FinishOrderCount int64 `json:"finish_order_count"`     // 自动打标签完成订单数量
         FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
 
-    addMemberTagResp struct {
+    MemberTagAddResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    ListMemberTagReq struct {
+    MemberTagListReq struct {
         Current int64 `form:"current"`
         PageSize int64 `form:"pageSize"`
     }
 
-    ListtMemberTagData struct {
+    MemberTagData struct {
         Id int64 `json:"id"`
         Name string `json:"name"`
         FinishOrderCount int64 `json:"finish_order_count"`     // 自动打标签完成订单数量
         FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
 
-    ListMemberTagResp struct {
+    MemberTagListResp struct {
         Current int64 `json:"current"`
-        Data []*ListtMemberTagData `json:"data"`
+        Data []*MemberTagData `json:"data"`
         PageSize int64 `json:"pageSize"`
         Success bool `json:"success"`
         Total int64 `json:"total"`
     }
 
-    UpdateMemberTagReq struct {
+    MemberTagUpdateReq struct {
         Id int64 `json:"id"`
         Name string `json:"name"`
         FinishOrderCount int64 `json:"finish_order_count"`     // 自动打标签完成订单数量
         FinishOrderAmount float64 `json:"finish_order_amount"` // 自动打标签完成订单金额
     }
 
-    UpdateMemberTagResp struct {
+    MemberTagUpdateResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 
-    DeleteMemberTagReq struct {
+    MemberTagDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteMemberTagResp struct {
+    MemberTagDeleteResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
     }
 )
 
@@ -57,15 +63,19 @@ type (
     group: member/tag
 )
 service admin-api {
+    @doc "新增会员标签"
     @handler MemberTagAdd
-    post /api/member/tag/add (addMemberTagReq) returns (addMemberTagResp)
+    post /api/member/tag/add (MemberTagAddReq) returns (MemberTagAddResp)
 
+    @doc "会员标签列表"
     @handler MemberTagList
-    get /api/member/tag/list (ListMemberTagReq) returns (ListMemberTagResp)
+    get /api/member/tag/list (MemberTagListReq) returns (MemberTagListResp)
 
+    @doc "更新会员标签"
     @handler MemberTagUpdate
-    post /api/member/tag/update (UpdateMemberTagReq) returns (UpdateMemberTagResp)
+    post /api/member/tag/update (MemberTagUpdateReq) returns (MemberTagUpdateResp)
 
+    @doc "删除会员标签"
     @handler MemberTagDelete
-    post /api/member/tag/delete (DeleteMemberTagReq) returns (DeleteMemberTagResp)
+    post /api/member/tag/delete (MemberTagDeleteReq) returns (MemberTagDeleteResp)
 }

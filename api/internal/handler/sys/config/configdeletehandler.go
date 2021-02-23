@@ -3,16 +3,16 @@ package handler
 import (
 	"net/http"
 
-	"go-zero-admin/api/internal/logic/sys/config"
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/logic/sys/config"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/rest/httpx"
 )
 
 func ConfigDeleteHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.DeleteConfigReq
+		var req types.ConfigDeleteReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return

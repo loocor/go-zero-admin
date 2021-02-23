@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/service/sys/sysclient"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,45 +23,8 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserListL
 	}
 }
 
-func (l *UserListLogic) UserList(req types.ListUserReq) (*types.ListUserResp, error) {
-	resp, err := l.svcCtx.Sys.UserList(
-		l.ctx, &sysclient.UserListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *UserListLogic) UserList(req types.UserListReq) (*types.UserListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	var list []*types.ListUserData
-
-	for _, item := range resp.List {
-		list = append(
-			list, &types.ListUserData{
-				Id:             item.Id,
-				Name:           item.Name,
-				NickName:       item.NickName,
-				Password:       item.Password,
-				Salt:           item.Salt,
-				Email:          item.Email,
-				Mobile:         item.Mobile,
-				DeptId:         item.DeptId,
-				CreateBy:       item.CreateBy,
-				CreateTime:     item.CreateTime,
-				LastUpdateBy:   item.LastUpdateBy,
-				LastUpdateTime: item.LastUpdateTime,
-				DelFlag:        item.DelFlag,
-			},
-		)
-	}
-
-	return &types.ListUserResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.UserListResp{}, nil
 }

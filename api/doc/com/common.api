@@ -1,0 +1,39 @@
+syntax = "v1"
+
+info(
+    title: "Admin Common"
+    desc: "admin common type library"
+    author: "Loocor"
+    email: "loocor@gmail.com"
+    version: "1.0.0"
+)
+
+type (
+    CommonData struct {
+        Id int64 `json:"id, optional"`                      // 编号
+        CreateBy string `json:"createBy, optional"`         // 创建人
+        UpdateBy string `json:"updateBy, optional"`         // 更新人
+        DeleteBy string `json:"deleteBy, optional"`         // 删除人
+        CreateTime int64 `json:"createTime, optional"`      // 创建时间，go-zero 会自动计算
+        UpdateTime int64 `json:"updateTime, optional"`      // 更新时间，go-zero 会自动计算
+        DeleteTime int64 `json:"deleteTime, optional"`      // 删除时间
+        DelFlag int64 `json:"delFlag, default=0"`           // 是否删除 -1: 已删除 0: 正常
+    }
+
+    CommonResp struct {
+        Code int64 `json:"code"`
+        Message string `json:"message"`
+    }
+
+    CommonListReq struct {
+        Current int64 `form:"current"`                      // 前分页号码
+        PageSize int64 `form:"pageSize"`                    // 分页大小
+    }
+
+    CommonListResp struct {
+        Current int64 `json:"current"`                      // 当前分页号码
+        PageSize int64 `json:"pageSize"`                    // 分页大小
+        Success bool `json:"success"`                       // 返回状态
+        Total int64 `json:"total"`                          // 总计数量
+    }
+)

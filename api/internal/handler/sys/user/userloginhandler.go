@@ -3,16 +3,23 @@ package handler
 import (
 	"net/http"
 
+	"zdmin/api/internal/logic/sys/user"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
+
 	"github.com/tal-tech/go-zero/rest/httpx"
-	"go-zero-admin/api/internal/logic/sys/user"
-	"go-zero-admin/api/internal/svc"
 )
 
 func UserLoginHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		var req types.UserLoginReq
+		if err := httpx.Parse(r, &req); err != nil {
+			httpx.Error(w, err)
+			return
+		}
 
 		l := logic.NewUserLoginLogic(r.Context(), ctx)
-		resp, err := l.UserLogin()
+		resp, err := l.UserLogin(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,28 +23,8 @@ func NewMemberLevelUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *MemberLevelUpdateLogic) MemberLevelUpdate(req types.UpdateMemberLevelReq) (*types.UpdateMemberLevelResp, error) {
-	_, err := l.svcCtx.Ums.MemberLevelUpdate(
-		l.ctx, &umsclient.MemberLevelUpdateReq{
-			Id:                    req.Id,
-			Name:                  req.Name,
-			GrowthPoint:           req.GrowthPoint,
-			DefaultStatus:         req.DefaultStatus,
-			FreeFreightPoint:      int64(req.FreeFreightPoint),
-			CommentGrowthPoint:    req.CommentGrowthPoint,
-			PriviledgeFreeFreight: req.PriviledgeFreeFreight,
-			PriviledgeSignIn:      req.PriviledgeSignIn,
-			PriviledgeComment:     req.PriviledgeComment,
-			PriviledgePromotion:   req.PriviledgePromotion,
-			PriviledgeMemberPrice: req.PriviledgeMemberPrice,
-			PriviledgeBirthday:    req.PriviledgeBirthday,
-			Note:                  req.Note,
-		},
-	)
+func (l *MemberLevelUpdateLogic) MemberLevelUpdate(req types.MemberLevelUpdateReq) (*types.MemberLevelUpdateResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.UpdateMemberLevelResp{}, nil
+	return &types.MemberLevelUpdateResp{}, nil
 }

@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,25 +24,7 @@ func NewMemberTaskListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Me
 }
 
 func (l *MemberTaskListLogic) MemberTaskList(in *ums.MemberTaskListReq) (*ums.MemberTaskListResp, error) {
-	all, _ := l.svcCtx.UmsMemberTaskModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	var list []*ums.MemberTaskListData
-	for _, item := range *all {
-
-		list = append(list, &ums.MemberTaskListData{
-			Id:          item.Id,
-			Name:        item.Name,
-			Growth:      item.Growth,
-			Integration: item.Integration,
-			Type:        item.Type,
-		})
-	}
-
-	fmt.Println(list)
-	return &ums.MemberTaskListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &ums.MemberTaskListResp{}, nil
 }

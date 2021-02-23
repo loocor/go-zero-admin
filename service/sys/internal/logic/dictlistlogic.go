@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,34 +24,7 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictList
 }
 
 func (l *DictListLogic) DictList(in *sys.DictListReq) (*sys.DictListResp, error) {
-	all, err := l.svcCtx.DictModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-	var list []*sys.DictListData
-	for _, dict := range *all {
-		fmt.Println(dict)
-		list = append(list, &sys.DictListData{
-			Id:             dict.Id,
-			Value:          dict.Value,
-			Label:          dict.Label,
-			Type:           dict.Type,
-			Description:    dict.Description,
-			Sort:           int64(dict.Sort),
-			Remarks:        dict.Remarks,
-			CreateBy:       dict.CreateBy,
-			CreateTime:     dict.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   dict.LastUpdateBy,
-			LastUpdateTime: dict.LastUpdateTime.Format("2006-01-02 15:04:05"),
-			DelFlag:        dict.DelFlag,
-		})
-	}
-
-	return &sys.DictListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &sys.DictListResp{}, nil
 }

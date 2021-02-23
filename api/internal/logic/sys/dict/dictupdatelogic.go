@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,23 +23,8 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictUpd
 	}
 }
 
-func (l *DictUpdateLogic) DictUpdate(req types.UpdateDictReq) (*types.UpdateDictResp, error) {
-	_, err := l.svcCtx.Sys.DictUpdate(
-		l.ctx, &sysclient.DictUpdateReq{
-			Id:           req.Id,
-			Value:        req.Value,
-			Label:        req.Label,
-			Type:         req.Type,
-			Description:  req.Description,
-			Sort:         int64(req.Sort),
-			Remarks:      req.Remarks,
-			LastUpdateBy: "admin", // todo 从 token 里面拿
-		},
-	)
+func (l *DictUpdateLogic) DictUpdate(req types.DictUpdateReq) (*types.DictUpdateResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.UpdateDictResp{}, nil
+	return &types.DictUpdateResp{}, nil
 }

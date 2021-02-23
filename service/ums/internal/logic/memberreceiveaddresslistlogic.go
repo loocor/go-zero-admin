@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,30 +24,7 @@ func NewMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 func (l *MemberReceiveAddressListLogic) MemberReceiveAddressList(in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
-	all, _ := l.svcCtx.UmsMemberReceiveAddressModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	var list []*ums.MemberReceiveAddressListData
-	for _, item := range *all {
-
-		list = append(list, &ums.MemberReceiveAddressListData{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
-			Name:          item.Name,
-			PhoneNumber:   item.PhoneNumber,
-			DefaultStatus: item.DefaultStatus,
-			PostCode:      item.PostCode,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
-		})
-	}
-
-	fmt.Println(list)
-	return &ums.MemberReceiveAddressListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &ums.MemberReceiveAddressListResp{}, nil
 }

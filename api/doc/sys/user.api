@@ -1,86 +1,84 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Admin User"
+    desc: "admin user management"
+    author: "Loocor"
+    email: "loocor@gmail.com"
 )
 
 type (
-    loginResp struct {
+    UserData struct {
+        Name string `json:"name"`                                   // 用户名
+        NickName string `json:"nickName, optional"`                 // 昵称
+        Avatar string `json:"avatar, optional"`                     // 头像
+        Password string `json:"password"`                           // 密码
+        Salt string `json:"salt"`                                   // 加密盐
+        Email string `json:"email, optional"`                       // 邮箱
+        Mobile string `json:"mobile"`                               // 手机号
+        Status int64 `json:"status, default=1"`                     // 状态 0: 禁用, 1: 正常
+        DeptId int64 `json:"deptId, optional"`                      // 机构ID
+        CommonData
+    }
+
+    UserLoginReq struct {
+    }
+
+    UserLoginResp struct {
         Status string `json:"status"`
         CurrentAuthority string `json:"currentAuthority"`
     }
 
-    userInfoResp struct {
+    UserInfoReq struct {
+        ID int64 `json:"id"`
+    }
+
+    UserInfoResp struct {
         Avatar string `json:"avatar"`
         Name string `json:"name"`
     }
 
-    addUserReq struct {
-        Email string `json:"email"`
-        Mobile string `json:"mobile"`
-        Name string `json:"name"`
-        NickName string `json:"nick_name"`
-        DeptId string `json:"dept_id"`
+    UserAddReq struct {
+        UserData
     }
 
-    addUserResp struct {
+    UserAddResp struct {
+        CommonResp
     }
 
-    ListUserReq struct {
-        current int64 `form:"current"`
-        pageSize int64 `form:"pageSize"`
+    UserListReq struct {
+        Current int64 `form:"current"`
+        PageSize int64 `form:"pageSize"`
     }
 
-    ListUserData struct {
-        Id int64 `json:"id"`                               // 编号
-        Name string `json:"name"`                          // 用户名
-        NickName string `json:"nick_name"`                 // 昵称
-        Avatar string `json:"avatar"`                      // 头像
-        Password string `json:"password"`                  // 密码
-        Salt string `json:"salt"`                          // 加密盐
-        Email string `json:"email"`                        // 邮箱
-        Mobile string `json:"mobile"`                      // 手机号
-        Status int64 `json:"status"`                       // 状态  0: 禁用 1: 正常
-        DeptId int64 `json:"dept_id"`                      // 机构ID
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1: 已删除  0: 正常
+    UserListResp struct {
+        Data []*UserData `json:"data"`
+        CommonListResp
     }
 
-    ListUserResp struct {
-        Current int64 `json:"current"`
-        Data []*ListUserData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+    UserUpdateReq struct {
+        UserData
     }
 
-    UpdateUserReq struct {
-        Id int64 `json:"id"`
-        Email string `json:"email"`
-        Mobile string `json:"mobile"`
-        Name string `json:"name"`
-        NickName string `json:"nick_name"`
-        DeptId int64 `json:"dept_id"`
+    UserUpdateResp struct {
+        CommonResp
     }
 
-    UpdateUserResp struct {
-    }
-
-    DeleteUserReq struct {
+    UserDeleteReq struct {
         ID int64 `json:"id"`
     }
 
-    DeleteUserResp struct {
+    UserDeleteResp struct {
+        CommonResp
     }
 
-    UpdateUserRoleReq struct {
+    UserRoleUpdateReq struct {
     }
 
-    UpdateUserRoleResp struct {
+    UserRoleUpdateResp struct {
+        CommonResp
     }
 
     ReSetPasswordReq struct {
@@ -88,14 +86,16 @@ type (
     }
 
     ReSetPasswordResp struct {
+        CommonResp
     }
 
-    UserStatusReq struct {
+    UserStatusUpdateReq struct {
         Id int64 `json:"id"`
-        Status int64 `json:"status"`                       // 状态  0: 禁用 1: 正常
+        Status int64 `json:"status"`
     }
 
-    UserStatusResp struct {
+    UserStatusUpdateResp struct {
+        CommonResp
     }
 )
 
@@ -103,31 +103,39 @@ type (
     group: sys/user
 )
 service admin-api {
+    @doc "用户登录"
     @handler UserLogin
-    post /api/sys/user/login () returns (loginResp)
+    post /api/sys/user/login (UserLoginReq) returns (UserLoginResp)
 
+    @doc "用户信息"
     @handler UserInfo
-    get /api/sys/user/currentUser () returns (userInfoResp)
+    get /api/sys/user/:id (UserInfoReq) returns (UserInfoResp)
 
+    @doc "新增用户"
     @handler UserAdd
-    post /api/sys/user/add (addUserReq) returns (addUserResp)
+    post /api/sys/user/add (UserAddReq) returns (UserAddResp)
 
+    @doc "用户列表"
     @handler UserList
-    get /api/sys/user/list (ListUserReq) returns (ListUserResp)
+    get /api/sys/user/list (UserListReq) returns (UserListResp)
 
+    @doc "更新用户"
     @handler UserUpdate
-    post /api/sys/user/update (UpdateUserReq) returns (UpdateUserResp)
+    post /api/sys/user/update (UserUpdateReq) returns (UserUpdateResp)
 
+    @doc "删除用户"
     @handler UserDelete
-    post /api/sys/user/delete (DeleteUserReq) returns (DeleteUserResp)
+    post /api/sys/user/delete (UserDeleteReq) returns (UserDeleteResp)
 
-    @handler UpdateUserRole
-    post /api/sys/user/updateUserRole (UpdateUserRoleReq) returns (UpdateUserRoleResp)
-
+    @doc "重置用户密码"
     @handler ReSetPassword
     post /api/sys/user/reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
 
-    @handler UpdateUserStatus
-    post /api/sys/user/UpdateUserStatus (UserStatusReq) returns (UserStatusResp)
-}
+    @doc "更新用户角色"
+    @handler UserRoleUpdate
+    post /api/sys/user/roleUpdate (UserRoleUpdateReq) returns (UserRoleUpdateResp)
 
+    @doc "更新用户状态"
+    @handler UserStatusUpdate
+    post /api/sys/user/statusUpdate (UserStatusUpdateReq) returns (UserStatusUpdateResp)
+}

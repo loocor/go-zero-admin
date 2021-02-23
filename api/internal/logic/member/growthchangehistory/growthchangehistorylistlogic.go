@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,43 +23,8 @@ func NewGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.ListGrowthChangeHistoryReq) (*types.ListGrowthChangeHistoryResp, error) {
-	resp, err := l.svcCtx.Ums.GrowthChangeHistoryList(
-		l.ctx, &umsclient.GrowthChangeHistoryListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *GrowthChangeHistoryListLogic) GrowthChangeHistoryList(req types.GrowthChangeHistoryListReq) (*types.GrowthChangeHistoryListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	for _, data := range resp.List {
-		fmt.Println(data)
-	}
-	var list []*types.ListtGrowthChangeHistoryData
-
-	for _, item := range resp.List {
-		list = append(
-			list, &types.ListtGrowthChangeHistoryData{
-				Id:          item.Id,
-				MemberId:    item.MemberId,
-				CreateTime:  item.CreateTime,
-				ChangeType:  item.ChangeType,
-				ChangeCount: item.ChangeCount,
-				OperateMan:  item.OperateMan,
-				OperateNote: item.OperateNote,
-				SourceType:  item.SourceType,
-			},
-		)
-	}
-
-	return &types.ListGrowthChangeHistoryResp{
-		Current:  req.Current,
-		Data:     nil,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.GrowthChangeHistoryListResp{}, nil
 }

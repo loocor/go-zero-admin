@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/service/sys/sysclient"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,44 +23,8 @@ func NewConfigListLogic(ctx context.Context, svcCtx *svc.ServiceContext) ConfigL
 	}
 }
 
-func (l *ConfigListLogic) ConfigList(req types.ListConfigReq) (*types.ListConfigResp, error) {
-	resp, err := l.svcCtx.Sys.ConfigList(
-		l.ctx, &sysclient.ConfigListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *ConfigListLogic) ConfigList(req types.ConfigListReq) (*types.ConfigListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	var list []*types.ListConfigData
-
-	for _, config := range resp.List {
-		list = append(
-			list, &types.ListConfigData{
-				Id:             config.Id,
-				Value:          config.Value,
-				Label:          config.Label,
-				Type:           config.Type,
-				Description:    config.Description,
-				Sort:           config.Sort,
-				CreateBy:       config.CreateBy,
-				CreateTime:     config.CreateTime,
-				LastUpdateBy:   config.LastUpdateBy,
-				LastUpdateTime: config.LastUpdateTime,
-				Remarks:        config.Remarks,
-				DelFlag:        config.DelFlag,
-			},
-		)
-	}
-
-	return &types.ListConfigResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.ConfigListResp{}, nil
 }

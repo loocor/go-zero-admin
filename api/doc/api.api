@@ -1,0 +1,31 @@
+syntax = "v1"
+
+import "com/common.api"
+
+import "sys/config.api"
+import "sys/dept.api"
+import "sys/dict.api"
+import "sys/loginlog.api"
+import "sys/menu.api"
+import "sys/role.api"
+import "sys/syslog.api"
+import "sys/user.api"
+
+import "ums/member.api"
+import "ums/member_address.api"
+import "ums/member_growth_change_history.api"
+import "ums/member_integration_change_history.api"
+import "ums/member_integration_consume_setting.api"
+import "ums/member_level.api"
+import "ums/member_login_log.api"
+import "ums/member_rule_setting.api"
+import "ums/member_statistics_info.api"
+import "ums/member_tag.api"
+import "ums/member_task.api"
+
+info(
+	title: "Zdmin"
+	desc: "Admin based on go-zero"
+	author: "Loocor"
+	email: "loocor@gmail.com"
+)

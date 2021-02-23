@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/sys"
-
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,15 +24,7 @@ func NewRoleAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAddLo
 }
 
 func (l *RoleAddLogic) RoleAdd(in *sys.RoleAddReq) (*sys.RoleAddResp, error) {
-	_, _ = l.svcCtx.RoleModel.Insert(
-		sysmodel.SysRole{
-			Name:           in.Name,
-			Remark:         in.Remark,
-			CreateBy:       in.CreateBy,
-			LastUpdateBy:   in.CreateBy,
-			LastUpdateTime: time.Now(),
-			DelFlag:        0,
-		})
+	// todo: add your logic here and delete this line
 
 	return &sys.RoleAddResp{}, nil
 }

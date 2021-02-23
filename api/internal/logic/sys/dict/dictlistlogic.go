@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/service/sys/sysclient"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,44 +23,8 @@ func NewDictListLogic(ctx context.Context, svcCtx *svc.ServiceContext) DictListL
 	}
 }
 
-func (l *DictListLogic) DictList(req types.ListDictReq) (*types.ListDictResp, error) {
-	resp, err := l.svcCtx.Sys.DictList(
-		l.ctx, &sysclient.DictListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *DictListLogic) DictList(req types.DictListReq) (*types.DictListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	var list []*types.ListDictData
-
-	for _, dict := range resp.List {
-		list = append(
-			list, &types.ListDictData{
-				dict.Id,
-				dict.Value,
-				dict.Label,
-				dict.Type,
-				dict.Description,
-				0,
-				dict.CreateBy,
-				dict.CreateTime,
-				dict.LastUpdateBy,
-				dict.LastUpdateTime,
-				dict.Remarks,
-				dict.DelFlag,
-			},
-		)
-	}
-
-	return &types.ListDictResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.DictListResp{}, nil
 }

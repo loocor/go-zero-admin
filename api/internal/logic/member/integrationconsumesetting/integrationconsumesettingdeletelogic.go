@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,15 +23,8 @@ func NewIntegrationConsumeSettingDeleteLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(req types.DeleteIntegrationConsumeSettingReq) (
-	*types.DeleteIntegrationConsumeSettingResp,
-	error,
-) {
-	_, _ = l.svcCtx.Ums.IntegrationConsumeSettingDelete(
-		l.ctx, &umsclient.IntegrationConsumeSettingDeleteReq{
-			Id: req.Id,
-		},
-	)
+func (l *IntegrationConsumeSettingDeleteLogic) IntegrationConsumeSettingDelete(req types.IntegrationConsumeSettingDeleteReq) (*types.IntegrationConsumeSettingDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	return &types.DeleteIntegrationConsumeSettingResp{}, nil
+	return &types.IntegrationConsumeSettingDeleteResp{}, nil
 }

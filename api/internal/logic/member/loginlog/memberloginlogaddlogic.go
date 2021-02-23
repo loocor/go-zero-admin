@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,21 +23,8 @@ func NewMemberLoginLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(req types.AddMemberLoginLogReq) (*types.AddMemberLoginLogResp, error) {
-	_, err := l.svcCtx.Ums.MemberLoginLogAdd(
-		l.ctx, &umsclient.MemberLoginLogAddReq{
-			MemberId:   req.MemberId,
-			CreateTime: req.CreateTime,
-			Ip:         req.Ip,
-			City:       req.City,
-			LoginType:  req.LoginType,
-			Province:   req.Province,
-		},
-	)
+func (l *MemberLoginLogAddLogic) MemberLoginLogAdd(req types.MemberLoginLogAddReq) (*types.MemberLoginLogAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.AddMemberLoginLogResp{}, nil
+	return &types.MemberLoginLogAddResp{}, nil
 }

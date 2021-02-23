@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,16 +24,7 @@ func NewMemberTagUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 }
 
 func (l *MemberTagUpdateLogic) MemberTagUpdate(in *ums.MemberTagUpdateReq) (*ums.MemberTagUpdateResp, error) {
-	err := l.svcCtx.UmsMemberTagModel.Update(
-		umsmodel.UmsMemberTag{
-			Id:                in.Id,
-			Name:              in.Name,
-			FinishOrderCount:  in.FinishOrderCount,
-			FinishOrderAmount: float64(in.FinishOrderAmount),
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.MemberTagUpdateResp{}, nil
 }

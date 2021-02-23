@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,28 +24,7 @@ func NewMemberStatisticsInfoAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 func (l *MemberStatisticsInfoAddLogic) MemberStatisticsInfoAdd(in *ums.MemberStatisticsInfoAddReq) (*ums.MemberStatisticsInfoAddResp, error) {
-	RecentOrderTime, _ := time.Parse("2006-01-02 15:04:05", in.RecentOrderTime)
-	_, err := l.svcCtx.UmsMemberStatisticsInfoModel.Insert(
-		umsmodel.UmsMemberStatisticsInfo{
-			MemberId:            in.MemberId,
-			ConsumeAmount:       float64(in.ConsumeAmount),
-			OrderCount:          in.OrderCount,
-			CouponCount:         in.CouponCount,
-			CommentCount:        in.CommentCount,
-			ReturnOrderCount:    in.ReturnOrderCount,
-			LoginCount:          in.LoginCount,
-			AttendCount:         in.AttendCount,
-			FansCount:           in.FansCount,
-			CollectProductCount: in.CollectProductCount,
-			CollectSubjectCount: in.CollectSubjectCount,
-			CollectTopicCount:   in.CollectTopicCount,
-			CollectCommentCount: in.CollectCommentCount,
-			InviteFriendCount:   in.InviteFriendCount,
-			RecentOrderTime:     RecentOrderTime,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.MemberStatisticsInfoAddResp{}, nil
 }

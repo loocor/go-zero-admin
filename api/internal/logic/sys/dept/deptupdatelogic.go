@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,20 +23,8 @@ func NewDeptUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeptUpd
 	}
 }
 
-func (l *DeptUpdateLogic) DeptUpdate(req types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
-	_, err := l.svcCtx.Sys.DeptUpdate(
-		l.ctx, &sysclient.DeptUpdateReq{
-			Id:           req.Id,
-			Name:         req.Name,
-			ParentId:     req.ParentId,
-			OrderNum:     req.OrderNum,
-			LastUpdateBy: "admin", // todo 从 token 里面拿
-		},
-	)
+func (l *DeptUpdateLogic) DeptUpdate(req types.DeptUpdateReq) (*types.DeptUpdateResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.UpdateDeptResp{}, nil
+	return &types.DeptUpdateResp{}, nil
 }

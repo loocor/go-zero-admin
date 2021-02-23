@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,16 +23,8 @@ func NewSysLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) SysLo
 	}
 }
 
-func (l *SysLogDeleteLogic) SysLogDelete(req types.DeleteSysLogReq) (*types.DeleteSysLogResp, error) {
-	_, err := l.svcCtx.Sys.SysLogDelete(
-		l.ctx, &sysclient.SysLogDeleteReq{
-			Id: req.Id,
-		},
-	)
+func (l *SysLogDeleteLogic) SysLogDelete(req types.SysLogDeleteReq) (*types.SysLogDeleteResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.DeleteSysLogResp{}, nil
+	return &types.SysLogDeleteResp{}, nil
 }

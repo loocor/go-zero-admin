@@ -1,77 +1,74 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Admin Config"
+    desc: "admin config management"
+    author: "Loocor"
+    email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
-    addDeptReq struct {
+    DeptData struct {
         Name string `json:"name"`                          // 机构名称
         ParentId int64 `json:"parent_id"`                  // 上级机构ID, 一级机构为0
         OrderNum int64 `json:"order_num"`                  // 排序
+        CommonData
     }
 
-    addDeptResp struct {
+    DeptAddReq struct {
+        DeptData
     }
 
-    ListDeptReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+    DeptAddResp struct {
+        CommonResp
     }
 
-    ListDeptData struct {
-        Id int64 `json:"id"`                               // 编号
-        Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id"`                  // 上级机构ID, 一级机构为0
-        OrderNum int64 `json:"order_num"`                  // 排序
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
-        DelFlag int64 `json:"del_flag"`                    // 是否删除  -1: 已删除  0: 正常
+    DeptListReq struct {
+        CommonListReq
     }
 
-    ListDeptResp struct {
-        Current int64 `json:"current"`
-        Data []*ListDeptData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+    DeptListResp struct {
+        Data []*DeptData `json:"data"`
+        CommonListResp
     }
 
-    UpdateDeptReq struct {
-        Id int64 `json:"id"`                               // 编号
-        Name string `json:"name"`                          // 机构名称
-        ParentId int64 `json:"parent_id"`                  // 上级机构ID, 一级机构为0
-        OrderNum int64 `json:"order_num"`                  // 排序
+    DeptUpdateReq struct {
+        DeptData
     }
 
-    UpdateDeptResp struct {
+    DeptUpdateResp struct {
+        CommonResp
     }
 
-    DeleteDeptReq struct {
+    DeptDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteDeptResp struct {
+    DeptDeleteResp struct {
+        CommonResp
     }
 )
-
 
 @server(
     group: sys/dept
 )
 service admin-api {
+    @doc "新增机构"
     @handler DeptAdd
-    post /api/sys/dept/add (addDeptReq) returns (addDeptResp)
+    post /api/sys/dept/add (DeptAddReq) returns (DeptAddResp)
 
+    @doc "机构列表"
     @handler DeptList
-    get /api/sys/dept/list (ListDeptReq) returns (ListDeptResp)
+    get /api/sys/dept/list (DeptListReq) returns (DeptListResp)
 
+    @doc "更新机构"
     @handler DeptUpdate
-    post /api/sys/dept/update (UpdateDeptReq) returns (UpdateDeptResp)
+    post /api/sys/dept/update (DeptUpdateReq) returns (DeptUpdateResp)
 
+    @doc "删除机构"
     @handler DeptDelete
-    post /api/sys/dept/delete (DeleteDeptReq) returns (DeleteDeptResp)
+    post /api/sys/dept/delete (DeptDeleteReq) returns (DeptDeleteResp)
 }

@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/service/ums/umsclient"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,22 +23,8 @@ func NewGrowthChangeHistoryAddLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(req types.AddGrowthChangeHistoryReq) (*types.AddGrowthChangeHistoryResp, error) {
-	_, err := l.svcCtx.Ums.GrowthChangeHistoryAdd(
-		l.ctx, &umsclient.GrowthChangeHistoryAddReq{
-			MemberId:    req.MemberId,
-			CreateTime:  req.CreateTime,
-			ChangeType:  req.ChangeType,
-			ChangeCount: req.ChangeCount,
-			OperateMan:  req.OperateMan,
-			OperateNote: req.OperateNote,
-			SourceType:  req.SourceType,
-		},
-	)
+func (l *GrowthChangeHistoryAddLogic) GrowthChangeHistoryAdd(req types.GrowthChangeHistoryAddReq) (*types.GrowthChangeHistoryAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.AddGrowthChangeHistoryResp{}, nil
+	return &types.GrowthChangeHistoryAddResp{}, nil
 }

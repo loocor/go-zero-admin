@@ -2,10 +2,11 @@ package logic
 
 import (
 	"context"
-	"fmt"
+
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
+
 	"github.com/tal-tech/go-zero/core/logx"
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
 )
 
 type UserListLogic struct {
@@ -23,35 +24,7 @@ func NewUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserList
 }
 
 func (l *UserListLogic) UserList(in *sys.UserListReq) (*sys.UserListResp, error) {
+	// todo: add your logic here and delete this line
 
-	all, _ := l.svcCtx.UserModel.FindAll(in.Current, in.PageSize)
-	_, _ = l.svcCtx.UserModel.Count()
-
-	var list []*sys.UserListData
-	for _, user := range *all {
-
-		list = append(list, &sys.UserListData{
-			Id:             user.Id,
-			Name:           user.Name,
-			NickName:       user.NickName,
-			Avatar:         user.Avatar,
-			Password:       user.Password,
-			Salt:           user.Salt,
-			Email:          user.Email,
-			Mobile:         user.Mobile,
-			DeptId:         user.DeptId,
-			Status:         user.Status,
-			CreateBy:       user.CreateBy,
-			CreateTime:     user.CreateTime.Format("2006-01-02 15:04:05"),
-			LastUpdateBy:   user.LastUpdateBy,
-			LastUpdateTime: user.LastUpdateTime.Format("2006-01-02 15:04:05"),
-			DelFlag:        user.DelFlag,
-		})
-	}
-
-	fmt.Println(list)
-	return &sys.UserListResp{
-		Total: 10,
-		List:  list,
-	}, nil
+	return &sys.UserListResp{}, nil
 }

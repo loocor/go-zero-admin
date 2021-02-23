@@ -1,43 +1,40 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
 info(
-    title: "go zero admin"
-    desc: "go zero admin"
-    author: "koobe"
-    email: "koobe.liu@uaf.com.cn"
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
+    author: "Loocor"
+    email: "loocor@gmail.com"
+    version: "1.0.0"
 )
 
 type (
-    ListSysLogReq struct {
-        Current int64 `form:"current"`
-        PageSize int64 `form:"pageSize"`
+    SysLogData struct {
+        UserName string `json:"user_name"`                      // 用户名
+        Operation string `json:"operation"`                     // 用户操作
+        Method string `json:"method"`                           // 请求方法
+        Params string `json:"params"`                           // 请求参数
+        Time int64 `json:"time"`                                // 执行时长(毫秒)
+        Ip string `json:"ip"`                                   // IP地址
     }
 
-    ListSysLogData struct {
-        Id int64 `json:"id"`                               // 编号
-        UserName string `json:"user_name"`                 // 用户名
-        Operation string `json:"operation"`                // 用户操作
-        Method string `json:"method"`                      // 请求方法
-        Params string `json:"params"`                      // 请求参数
-        Time int64 `json:"time"`                           // 执行时长(毫秒)
-        Ip string `json:"ip"`                              // IP地址
-        CreateBy string `json:"create_by"`                 // 创建人
-        CreateTime string `json:"create_time"`             // 创建时间
-        LastUpdateBy string `json:"last_update_by"`        // 更新人
-        LastUpdateTime string `json:"last_update_time"`    // 更新时间
+    SysLogListReq struct {
+        CommonListReq
     }
 
-    ListSysLogResp struct {
-        Current int64 `json:"current"`
-        Data []*ListSysLogData `json:"data"`
-        PageSize int64 `json:"pageSize"`
-        Success bool `json:"success"`
-        Total int64 `json:"total"`
+    SysLogListResp struct {
+        Data []*SysLogData `json:"data"`
+        CommonListResp
     }
 
-    DeleteSysLogReq struct {
+    SysLogDeleteReq struct {
         Id int64 `json:"id"`
     }
 
-    DeleteSysLogResp struct {
+    SysLogDeleteResp struct {
+        CommonResp
     }
 )
 
@@ -45,10 +42,12 @@ type (
     group: sys/log
 )
 service admin-api {
+    @doc "系统日志列表"
     @handler SysLogList
-    get /api/sys/sysLog/list (ListSysLogReq) returns (ListSysLogResp)
+    get /api/sys/sysLog/list (SysLogListReq) returns (SysLogListResp)
 
+    @doc "删除系统日志"
     @handler SysLogDelete
-    post /api/sys/sysLog/delete (DeleteSysLogReq) returns (DeleteSysLogResp)
+    post /api/sys/sysLog/delete (SysLogDeleteReq) returns (SysLogDeleteResp)
 }
 

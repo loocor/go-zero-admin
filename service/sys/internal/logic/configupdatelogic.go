@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/sys"
-
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,21 +24,7 @@ func NewConfigUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Conf
 }
 
 func (l *ConfigUpdateLogic) ConfigUpdate(in *sys.ConfigUpdateReq) (*sys.ConfigUpdateResp, error) {
-	err := l.svcCtx.ConfigModel.Update(
-		sysmodel.SysConfig{
-			Id:             in.Id,
-			Value:          in.Value,
-			Label:          in.Label,
-			Type:           in.Type,
-			Description:    in.Description,
-			Sort:           float64(in.Sort),
-			LastUpdateBy:   in.LastUpdateBy,
-			LastUpdateTime: time.Now(),
-			Remarks:        in.Remarks,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &sys.ConfigUpdateResp{}, nil
 }

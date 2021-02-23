@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/ums/umsclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,22 +23,8 @@ func NewIntegrationConsumeSettingAddLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-func (l *IntegrationConsumeSettingAddLogic) IntegrationConsumeSettingAdd(req types.AddIntegrationConsumeSettingReq) (
-	*types.AddIntegrationConsumeSettingResp,
-	error,
-) {
-	_, err := l.svcCtx.Ums.IntegrationConsumeSettingAdd(
-		l.ctx, &umsclient.IntegrationConsumeSettingAddReq{
-			DeductionPerAmount: req.DeductionPerAmount,
-			MaxPercentPerOrder: req.MaxPercentPerOrder,
-			UseUnit:            req.UseUnit,
-			CouponStatus:       req.CouponStatus,
-		},
-	)
+func (l *IntegrationConsumeSettingAddLogic) IntegrationConsumeSettingAdd(req types.IntegrationConsumeSettingAddReq) (*types.IntegrationConsumeSettingAddResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.AddIntegrationConsumeSettingResp{}, nil
+	return &types.IntegrationConsumeSettingAddResp{}, nil
 }

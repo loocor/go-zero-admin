@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/sys"
-
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,23 +24,7 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 }
 
 func (l *DictUpdateLogic) DictUpdate(in *sys.DictUpdateReq) (*sys.DictUpdateResp, error) {
-	err := l.svcCtx.DictModel.Update(
-		sysmodel.SysDict{
-			Id:             in.Id,
-			Value:          in.Value,
-			Label:          in.Label,
-			Type:           in.Type,
-			Description:    in.Description,
-			Sort:           float64(in.Sort),
-			LastUpdateBy:   in.LastUpdateBy,
-			LastUpdateTime: time.Now(),
-			Remarks:        in.Remarks,
-			DelFlag:        0,
-		})
-
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &sys.DictUpdateResp{}, nil
 }

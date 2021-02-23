@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/model/ums"
-
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -26,17 +24,7 @@ func NewIntegrationConsumeSettingUpdateLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 func (l *IntegrationConsumeSettingUpdateLogic) IntegrationConsumeSettingUpdate(in *ums.IntegrationConsumeSettingUpdateReq) (*ums.IntegrationConsumeSettingUpdateResp, error) {
-	err := l.svcCtx.UmsIntegrationConsumeSettingModel.Update(
-		umsmodel.UmsIntegrationConsumeSetting{
-			Id:                 in.Id,
-			DeductionPerAmount: in.DeductionPerAmount,
-			MaxPercentPerOrder: in.MaxPercentPerOrder,
-			UseUnit:            in.UseUnit,
-			CouponStatus:       in.CouponStatus,
-		})
-	if err != nil {
-		return nil, err
-	}
+	// todo: add your logic here and delete this line
 
 	return &ums.IntegrationConsumeSettingUpdateResp{}, nil
 }

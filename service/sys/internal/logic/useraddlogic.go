@@ -2,12 +2,9 @@ package logic
 
 import (
 	"context"
-	"time"
 
-	"go-zero-admin/model/sys"
-
-	"go-zero-admin/service/sys/internal/svc"
-	"go-zero-admin/service/sys/sys"
+	"zdmin/service/sys/internal/svc"
+	"zdmin/service/sys/sys"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -27,23 +24,7 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 }
 
 func (l *UserAddLogic) UserAdd(in *sys.UserAddReq) (*sys.UserAddResp, error) {
-
-	_, _ = l.svcCtx.UserModel.Insert(
-		sysmodel.SysUser{
-			Name:           in.Name,
-			NickName:       in.NickName,
-			Avatar:         in.Avatar,
-			Password:       "123456",
-			Salt:           "123456",
-			Email:          in.Email,
-			Mobile:         in.Mobile,
-			Status:         1,
-			DeptId:         in.DeptId,
-			CreateBy:       "admin",
-			LastUpdateBy:   in.CreateBy,
-			LastUpdateTime: time.Now(),
-			DelFlag:        0,
-		})
+	// todo: add your logic here and delete this line
 
 	return &sys.UserAddResp{}, nil
 }

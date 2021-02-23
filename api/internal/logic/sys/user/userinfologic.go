@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,14 +23,8 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserInfoL
 	}
 }
 
-func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
-	resp, err := l.svcCtx.Sys.UserInfo(l.ctx, &sysclient.InfoReq{})
+func (l *UserInfoLogic) UserInfo(req types.UserInfoReq) (*types.UserInfoResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-	return &types.UserInfoResp{
-		Avatar: resp.Avatar,
-		Name:   resp.Name,
-	}, nil
+	return &types.UserInfoResp{}, nil
 }

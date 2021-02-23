@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"go-zero-admin/service/ums/internal/logic"
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/logic"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 )
 
 type UmsServer struct {
@@ -39,6 +39,26 @@ func (s *UmsServer) MemberUpdate(ctx context.Context, in *ums.MemberUpdateReq) (
 func (s *UmsServer) MemberDelete(ctx context.Context, in *ums.MemberDeleteReq) (*ums.MemberDeleteResp, error) {
 	l := logic.NewMemberDeleteLogic(ctx, s.svcCtx)
 	return l.MemberDelete(in)
+}
+
+func (s *UmsServer) MemberAddressAdd(ctx context.Context, in *ums.MemberAddressAddReq) (*ums.MemberAddressAddResp, error) {
+	l := logic.NewMemberAddressAddLogic(ctx, s.svcCtx)
+	return l.MemberAddressAdd(in)
+}
+
+func (s *UmsServer) MemberAddressList(ctx context.Context, in *ums.MemberAddressListReq) (*ums.MemberAddressListResp, error) {
+	l := logic.NewMemberAddressListLogic(ctx, s.svcCtx)
+	return l.MemberAddressList(in)
+}
+
+func (s *UmsServer) MemberAddressUpdate(ctx context.Context, in *ums.MemberAddressUpdateReq) (*ums.MemberAddressUpdateResp, error) {
+	l := logic.NewMemberAddressUpdateLogic(ctx, s.svcCtx)
+	return l.MemberAddressUpdate(in)
+}
+
+func (s *UmsServer) MemberAddressDelete(ctx context.Context, in *ums.MemberAddressDeleteReq) (*ums.MemberAddressDeleteResp, error) {
+	l := logic.NewMemberAddressDeleteLogic(ctx, s.svcCtx)
+	return l.MemberAddressDelete(in)
 }
 
 func (s *UmsServer) GrowthChangeHistoryAdd(ctx context.Context, in *ums.GrowthChangeHistoryAddReq) (*ums.GrowthChangeHistoryAddResp, error) {
@@ -141,66 +161,6 @@ func (s *UmsServer) MemberLoginLogDelete(ctx context.Context, in *ums.MemberLogi
 	return l.MemberLoginLogDelete(in)
 }
 
-func (s *UmsServer) MemberMemberTagRelationAdd(ctx context.Context, in *ums.MemberMemberTagRelationAddReq) (*ums.MemberMemberTagRelationAddResp, error) {
-	l := logic.NewMemberMemberTagRelationAddLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationAdd(in)
-}
-
-func (s *UmsServer) MemberMemberTagRelationList(ctx context.Context, in *ums.MemberMemberTagRelationListReq) (*ums.MemberMemberTagRelationListResp, error) {
-	l := logic.NewMemberMemberTagRelationListLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationList(in)
-}
-
-func (s *UmsServer) MemberMemberTagRelationUpdate(ctx context.Context, in *ums.MemberMemberTagRelationUpdateReq) (*ums.MemberMemberTagRelationUpdateResp, error) {
-	l := logic.NewMemberMemberTagRelationUpdateLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationUpdate(in)
-}
-
-func (s *UmsServer) MemberMemberTagRelationDelete(ctx context.Context, in *ums.MemberMemberTagRelationDeleteReq) (*ums.MemberMemberTagRelationDeleteResp, error) {
-	l := logic.NewMemberMemberTagRelationDeleteLogic(ctx, s.svcCtx)
-	return l.MemberMemberTagRelationDelete(in)
-}
-
-func (s *UmsServer) MemberProductCategoryRelationAdd(ctx context.Context, in *ums.MemberProductCategoryRelationAddReq) (*ums.MemberProductCategoryRelationAddResp, error) {
-	l := logic.NewMemberProductCategoryRelationAddLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationAdd(in)
-}
-
-func (s *UmsServer) MemberProductCategoryRelationList(ctx context.Context, in *ums.MemberProductCategoryRelationListReq) (*ums.MemberProductCategoryRelationListResp, error) {
-	l := logic.NewMemberProductCategoryRelationListLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationList(in)
-}
-
-func (s *UmsServer) MemberProductCategoryRelationUpdate(ctx context.Context, in *ums.MemberProductCategoryRelationUpdateReq) (*ums.MemberProductCategoryRelationUpdateResp, error) {
-	l := logic.NewMemberProductCategoryRelationUpdateLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationUpdate(in)
-}
-
-func (s *UmsServer) MemberProductCategoryRelationDelete(ctx context.Context, in *ums.MemberProductCategoryRelationDeleteReq) (*ums.MemberProductCategoryRelationDeleteResp, error) {
-	l := logic.NewMemberProductCategoryRelationDeleteLogic(ctx, s.svcCtx)
-	return l.MemberProductCategoryRelationDelete(in)
-}
-
-func (s *UmsServer) MemberReceiveAddressAdd(ctx context.Context, in *ums.MemberReceiveAddressAddReq) (*ums.MemberReceiveAddressAddResp, error) {
-	l := logic.NewMemberReceiveAddressAddLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressAdd(in)
-}
-
-func (s *UmsServer) MemberReceiveAddressList(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
-	l := logic.NewMemberReceiveAddressListLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressList(in)
-}
-
-func (s *UmsServer) MemberReceiveAddressUpdate(ctx context.Context, in *ums.MemberReceiveAddressUpdateReq) (*ums.MemberReceiveAddressUpdateResp, error) {
-	l := logic.NewMemberReceiveAddressUpdateLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressUpdate(in)
-}
-
-func (s *UmsServer) MemberReceiveAddressDelete(ctx context.Context, in *ums.MemberReceiveAddressDeleteReq) (*ums.MemberReceiveAddressDeleteResp, error) {
-	l := logic.NewMemberReceiveAddressDeleteLogic(ctx, s.svcCtx)
-	return l.MemberReceiveAddressDelete(in)
-}
-
 func (s *UmsServer) MemberRuleSettingAdd(ctx context.Context, in *ums.MemberRuleSettingAddReq) (*ums.MemberRuleSettingAddResp, error) {
 	l := logic.NewMemberRuleSettingAddLogic(ctx, s.svcCtx)
 	return l.MemberRuleSettingAdd(in)
@@ -279,4 +239,64 @@ func (s *UmsServer) MemberTaskUpdate(ctx context.Context, in *ums.MemberTaskUpda
 func (s *UmsServer) MemberTaskDelete(ctx context.Context, in *ums.MemberTaskDeleteReq) (*ums.MemberTaskDeleteResp, error) {
 	l := logic.NewMemberTaskDeleteLogic(ctx, s.svcCtx)
 	return l.MemberTaskDelete(in)
+}
+
+func (s *UmsServer) MemberTagRelationAdd(ctx context.Context, in *ums.MemberTagRelationAddReq) (*ums.MemberTagRelationAddResp, error) {
+	l := logic.NewMemberTagRelationAddLogic(ctx, s.svcCtx)
+	return l.MemberTagRelationAdd(in)
+}
+
+func (s *UmsServer) MemberTagRelationList(ctx context.Context, in *ums.MemberTagRelationListReq) (*ums.MemberTagRelationListResp, error) {
+	l := logic.NewMemberTagRelationListLogic(ctx, s.svcCtx)
+	return l.MemberTagRelationList(in)
+}
+
+func (s *UmsServer) MemberTagRelationUpdate(ctx context.Context, in *ums.MemberTagRelationUpdateReq) (*ums.MemberTagRelationUpdateResp, error) {
+	l := logic.NewMemberTagRelationUpdateLogic(ctx, s.svcCtx)
+	return l.MemberTagRelationUpdate(in)
+}
+
+func (s *UmsServer) MemberTagRelationDelete(ctx context.Context, in *ums.MemberTagRelationDeleteReq) (*ums.MemberTagRelationDeleteResp, error) {
+	l := logic.NewMemberTagRelationDeleteLogic(ctx, s.svcCtx)
+	return l.MemberTagRelationDelete(in)
+}
+
+func (s *UmsServer) MemberProductCategoryRelationAdd(ctx context.Context, in *ums.MemberProductCategoryRelationAddReq) (*ums.MemberProductCategoryRelationAddResp, error) {
+	l := logic.NewMemberProductCategoryRelationAddLogic(ctx, s.svcCtx)
+	return l.MemberProductCategoryRelationAdd(in)
+}
+
+func (s *UmsServer) MemberProductCategoryRelationList(ctx context.Context, in *ums.MemberProductCategoryRelationListReq) (*ums.MemberProductCategoryRelationListResp, error) {
+	l := logic.NewMemberProductCategoryRelationListLogic(ctx, s.svcCtx)
+	return l.MemberProductCategoryRelationList(in)
+}
+
+func (s *UmsServer) MemberProductCategoryRelationUpdate(ctx context.Context, in *ums.MemberProductCategoryRelationUpdateReq) (*ums.MemberProductCategoryRelationUpdateResp, error) {
+	l := logic.NewMemberProductCategoryRelationUpdateLogic(ctx, s.svcCtx)
+	return l.MemberProductCategoryRelationUpdate(in)
+}
+
+func (s *UmsServer) MemberProductCategoryRelationDelete(ctx context.Context, in *ums.MemberProductCategoryRelationDeleteReq) (*ums.MemberProductCategoryRelationDeleteResp, error) {
+	l := logic.NewMemberProductCategoryRelationDeleteLogic(ctx, s.svcCtx)
+	return l.MemberProductCategoryRelationDelete(in)
+}
+
+func (s *UmsServer) MemberReceiveAddressAdd(ctx context.Context, in *ums.MemberReceiveAddressAddReq) (*ums.MemberReceiveAddressAddResp, error) {
+	l := logic.NewMemberReceiveAddressAddLogic(ctx, s.svcCtx)
+	return l.MemberReceiveAddressAdd(in)
+}
+
+func (s *UmsServer) MemberReceiveAddressList(ctx context.Context, in *ums.MemberReceiveAddressListReq) (*ums.MemberReceiveAddressListResp, error) {
+	l := logic.NewMemberReceiveAddressListLogic(ctx, s.svcCtx)
+	return l.MemberReceiveAddressList(in)
+}
+
+func (s *UmsServer) MemberReceiveAddressUpdate(ctx context.Context, in *ums.MemberReceiveAddressUpdateReq) (*ums.MemberReceiveAddressUpdateResp, error) {
+	l := logic.NewMemberReceiveAddressUpdateLogic(ctx, s.svcCtx)
+	return l.MemberReceiveAddressUpdate(in)
+}
+
+func (s *UmsServer) MemberReceiveAddressDelete(ctx context.Context, in *ums.MemberReceiveAddressDeleteReq) (*ums.MemberReceiveAddressDeleteResp, error) {
+	l := logic.NewMemberReceiveAddressDeleteLogic(ctx, s.svcCtx)
+	return l.MemberReceiveAddressDelete(in)
 }

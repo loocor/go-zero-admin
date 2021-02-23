@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/service/sys/sysclient"
-
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,14 +23,8 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserLogi
 	}
 }
 
-func (l *UserLoginLogic) UserLogin() (*types.LoginResp, error) {
-	resp, err := l.svcCtx.Sys.Login(l.ctx, &sysclient.LoginReq{})
+func (l *UserLoginLogic) UserLogin(req types.UserLoginReq) (*types.UserLoginResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-	return &types.LoginResp{
-		Status:           resp.Status,
-		CurrentAuthority: resp.CurrentAuthority,
-	}, nil
+	return &types.UserLoginResp{}, nil
 }

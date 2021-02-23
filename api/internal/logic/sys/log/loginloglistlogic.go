@@ -3,9 +3,8 @@ package logic
 import (
 	"context"
 
-	"go-zero-admin/api/internal/svc"
-	"go-zero-admin/api/internal/types"
-	"go-zero-admin/service/sys/sysclient"
+	"zdmin/api/internal/svc"
+	"zdmin/api/internal/types"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -24,40 +23,8 @@ func NewLoginLogListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Login
 	}
 }
 
-func (l *LoginLogListLogic) LoginLogList(req types.ListLoginLogReq) (*types.ListLoginLogResp, error) {
-	resp, err := l.svcCtx.Sys.LoginLogList(
-		l.ctx, &sysclient.LoginLogListReq{
-			Current:  req.Current,
-			PageSize: req.PageSize,
-		},
-	)
+func (l *LoginLogListLogic) LoginLogList(req types.LoginLogListReq) (*types.LoginLogListResp, error) {
+	// todo: add your logic here and delete this line
 
-	if err != nil {
-		return nil, err
-	}
-
-	var list []*types.ListLoginLogData
-
-	for _, log := range resp.List {
-		list = append(
-			list, &types.ListLoginLogData{
-				Id:             log.Id,
-				UserName:       log.UserName,
-				Status:         log.Status,
-				Ip:             log.Ip,
-				CreateBy:       log.CreateBy,
-				CreateTime:     log.CreateTime,
-				LastUpdateBy:   log.LastUpdateBy,
-				LastUpdateTime: log.LastUpdateTime,
-			},
-		)
-	}
-
-	return &types.ListLoginLogResp{
-		Current:  req.Current,
-		Data:     list,
-		PageSize: req.PageSize,
-		Success:  true,
-		Total:    resp.Total,
-	}, nil
+	return &types.LoginLogListResp{}, nil
 }

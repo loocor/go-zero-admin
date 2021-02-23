@@ -2,10 +2,9 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
-	"go-zero-admin/service/ums/internal/svc"
-	"go-zero-admin/service/ums/ums"
+	"zdmin/service/ums/internal/svc"
+	"zdmin/service/ums/ums"
 
 	"github.com/tal-tech/go-zero/core/logx"
 )
@@ -25,27 +24,7 @@ func NewMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 func (l *MemberRuleSettingListLogic) MemberRuleSettingList(in *ums.MemberRuleSettingListReq) (*ums.MemberRuleSettingListResp, error) {
-	all, _ := l.svcCtx.UmsMemberRuleSettingModel.FindAll(in.Current, in.PageSize)
-	//count, _ := l.svcCtx.UserModel.Count()
+	// todo: add your logic here and delete this line
 
-	var list []*ums.MemberRuleSettingListData
-	for _, item := range *all {
-
-		list = append(list, &ums.MemberRuleSettingListData{
-			Id:                item.Id,
-			ContinueSignDay:   item.ContinueSignDay,
-			ContinueSignPoint: item.ContinueSignPoint,
-			ConsumePerPoint:   int64(item.ConsumePerPoint),
-			LowOrderAmount:    int64(item.LowOrderAmount),
-			MaxPointPerOrder:  item.MaxPointPerOrder,
-			Type:              item.Type,
-		})
-	}
-
-	fmt.Println(list)
-	return &ums.MemberRuleSettingListResp{
-		Total: 10,
-		List:  list,
-	}, nil
-
+	return &ums.MemberRuleSettingListResp{}, nil
 }
