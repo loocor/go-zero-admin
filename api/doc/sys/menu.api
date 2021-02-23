@@ -57,6 +57,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: sys/menu
 )
 service admin-api {

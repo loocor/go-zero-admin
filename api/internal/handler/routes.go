@@ -15,6 +15,7 @@ import (
 	memberstatistics "zdmin/api/internal/handler/member/statistics"
 	membertag "zdmin/api/internal/handler/member/tag"
 	membertask "zdmin/api/internal/handler/member/task"
+	sysauth "zdmin/api/internal/handler/sys/auth"
 	sysconfig "zdmin/api/internal/handler/sys/config"
 	sysdept "zdmin/api/internal/handler/sys/dept"
 	sysdict "zdmin/api/internal/handler/sys/dict"
@@ -28,6 +29,16 @@ import (
 )
 
 func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
+	engine.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/sys/auth",
+				Handler: sysauth.AuthHandler(serverCtx),
+			},
+		},
+	)
+
 	engine.AddRoutes(
 		[]rest.Route{
 			{
@@ -51,6 +62,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysconfig.ConfigDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -76,6 +88,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysdept.DeptDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -101,6 +114,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysdict.DictDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -116,6 +130,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: syslog.LoginLogDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -141,6 +156,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysmenu.MenuDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -176,6 +192,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysrole.RoleMenuUpdateHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -191,6 +208,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: syslog.SysLogDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -241,6 +259,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysuser.UserStatusUpdateHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -266,6 +285,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membermember.MemberDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -291,6 +311,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberaddress.MemberAddressDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -316,6 +337,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membergrowthchangehistory.GrowthChangeHistoryDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -341,6 +363,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberintegrationchangehistory.IntegrationChangeHistoryDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -366,6 +389,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberintegrationconsumesetting.IntegrationConsumeSettingDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -391,6 +415,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberlevel.MemberLevelDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -416,6 +441,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberloginlog.MemberLoginLogDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -441,6 +467,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberrulesetting.MemberRuleSettingDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -466,6 +493,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: memberstatistics.MemberStatisticsInfoDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -491,6 +519,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membertag.MemberTagDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	engine.AddRoutes(
@@ -516,5 +545,6 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: membertask.MemberTaskDeleteHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }

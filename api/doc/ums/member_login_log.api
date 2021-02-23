@@ -55,6 +55,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: member/loginlog
 )
 service admin-api {

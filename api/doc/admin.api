@@ -1,5 +1,6 @@
 syntax = "v1"
 
+import "com/auth.api"
 import "com/common.api"
 
 import "sys/config.api"

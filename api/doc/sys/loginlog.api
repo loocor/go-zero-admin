@@ -37,6 +37,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: sys/log
 )
 service admin-api {

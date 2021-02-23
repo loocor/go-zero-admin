@@ -54,6 +54,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: member/task
 )
 service admin-api {

@@ -66,6 +66,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: sys/role
 )
 service admin-api {

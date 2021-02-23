@@ -10,7 +10,7 @@
 -  进到 `api/` 目录执行: 
 
 ```bash
-goctl api go -api ./doc/api.api  -dir .
+goctl api go -api ./doc/admin.api  -dir .
 ```
 
 ## 3、创建 RPC

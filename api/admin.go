@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"zdmin/api/internal/config"
 	"zdmin/api/internal/handler"
@@ -10,6 +11,8 @@ import (
 
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/rest"
+	"github.com/tal-tech/go-zero/rest/httpx"
+	"google.golang.org/grpc/status"
 )
 
 var configFile = flag.String("f", "etc/admin-api.yaml", "the config file")

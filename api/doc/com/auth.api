@@ -1,0 +1,32 @@
+syntax = "v1"
+
+// import {CommonResp, CommonListReq, CommonListResp, CommonData} from "com/common.api"
+
+info(
+    title: "Zdmin"
+    desc: "Admin based on go-zero"
+    author: "Loocor"
+    email: "loocor@gmail.com"
+    version: "1.0.0"
+)
+
+type (
+    TokenReq struct {
+        UserId int64 `json:"userId"`
+        Password string `json:"password"`
+    }
+
+    TokenResp struct {
+        Token JwtToken `json:"token"`
+        CommonResp
+    }
+)
+
+@server(
+    group: sys/auth
+)
+service admin-api {
+    @doc "JWT 鉴权"
+    @handler AuthHandler
+    post /api/sys/auth (TokenReq) returns (TokenResp)
+}

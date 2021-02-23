@@ -69,6 +69,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: member/member
 )
 service admin-api {

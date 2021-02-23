@@ -36,4 +36,10 @@ type (
         Success bool `json:"success"`                       // 返回状态
         Total int64 `json:"total"`                          // 总计数量
     }
+
+    JwtToken {
+        AccessToken string `json:"accessToken"`
+        AccessExpire int64 `json:"accessExpire"`
+        RefreshAfter int64 `json:"refreshAfter"`
+    }
 )

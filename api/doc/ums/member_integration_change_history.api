@@ -56,6 +56,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: member/integrationchangehistory
 )
 service admin-api {

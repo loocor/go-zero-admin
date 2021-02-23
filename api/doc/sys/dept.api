@@ -53,6 +53,7 @@ type (
 )
 
 @server(
+    jwt: Auth
     group: sys/dept
 )
 service admin-api {

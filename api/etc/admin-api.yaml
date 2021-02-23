@@ -6,6 +6,11 @@ Auth:
   AccessSecret: BoqyLvtteYmxhZjbYCD7EPe9epTUuUmZ    # JWT Token Keys
   AccessExpire: 3600                                # 60 Minutes
 
+CacheRedis:
+  Host: 127.0.0.1:6379
+  Type: node
+  Weight: 500
+
 Prometheus:
   Host: 127.0.0.1
   Port: 9080
